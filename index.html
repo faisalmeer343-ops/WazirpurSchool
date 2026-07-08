@@ -48,6 +48,7 @@
             color: var(--text-primary);
             min-height: 100vh;
             line-height: 1.6;
+            font-size: 12px;
         }
 
         /* ============================================================
@@ -111,7 +112,7 @@
             backdrop-filter: blur(4px);
         }
         .top-bar .logo-area .logo-box .line1 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 800;
             color: #ffffff;
             letter-spacing: 2px;
@@ -304,7 +305,7 @@
         }
 
         /* ============================================================
-           FORM ROWS
+           FORM ROWS - Balanced Grid Layouts
            ============================================================ */
         .form-row {
             display: flex;
@@ -319,7 +320,7 @@
         }
         .form-row label {
             font-weight: 600;
-            font-size: 11px;
+            font-size: 12px;
             color: var(--accent-primary);
             min-width: 60px;
         }
@@ -355,6 +356,79 @@
             color: var(--text-muted);
         }
 
+        /* --- BALANCED GRID for Admission & Employee Forms --- */
+        .admission-form-grid,
+        .employee-form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px 16px;
+        }
+        .admission-form-grid .full-width,
+        .employee-form-grid .full-width {
+            grid-column: 1 / -1;
+        }
+        .admission-form-grid label,
+        .employee-form-grid label {
+            font-weight: 600;
+            font-size: 12px;
+            color: var(--accent-primary);
+            display: block;
+            margin-bottom: 2px;
+        }
+        .admission-form-grid input,
+        .admission-form-grid select,
+        .admission-form-grid textarea,
+        .employee-form-grid input,
+        .employee-form-grid select,
+        .employee-form-grid textarea {
+            width: 100%;
+            padding: 6px 12px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            color: var(--text-primary);
+            transition: var(--transition);
+            font-family: var(--font-main);
+        }
+        .admission-form-grid input:focus,
+        .admission-form-grid select:focus,
+        .admission-form-grid textarea:focus,
+        .employee-form-grid input:focus,
+        .employee-form-grid select:focus,
+        .employee-form-grid textarea:focus {
+            outline: none;
+            border-color: var(--accent-secondary);
+            box-shadow: 0 0 0 3px rgba(0, 153, 204, 0.10);
+        }
+        .admission-form-grid .fee-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 6px 12px;
+            background: var(--bg-primary);
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            grid-column: 1 / -1;
+        }
+        .admission-form-grid .fee-details-grid .total-box {
+            grid-column: 1 / -1;
+            background: var(--accent-primary);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .admission-form-grid .fee-details-grid .total-box .total-label {
+            font-weight: 700;
+        }
+        .admission-form-grid .fee-details-grid .total-box .total-amount {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
         /* ============================================================
            BUTTONS
            ============================================================ */
@@ -363,7 +437,7 @@
             border: none;
             border-radius: var(--radius-sm);
             font-weight: 600;
-            font-size: 11px;
+            font-size: 12px;
             cursor: pointer;
             transition: var(--transition);
             display: inline-flex;
@@ -434,11 +508,11 @@
         }
         .btn-sm {
             padding: 4px 12px;
-            font-size: 10px;
+            font-size: 11px;
         }
         .btn-xs {
             padding: 2px 8px;
-            font-size: 9px;
+            font-size: 10px;
         }
         .btn-secondary {
             background: var(--border-color);
@@ -462,7 +536,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 11px;
+            font-size: 12px;
             min-width: 550px;
         }
         table th {
@@ -474,8 +548,8 @@
             top: 0;
             z-index: 5;
             white-space: nowrap;
-            font-weight: 600;
-            font-size: 10px;
+            font-weight: 700;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             border: 1px solid var(--bg-sidebar);
@@ -487,12 +561,17 @@
             vertical-align: middle;
             color: var(--text-secondary);
             background: #ffffff;
+            font-weight: 500;
         }
         table tr:nth-child(even) td {
             background: var(--bg-primary);
         }
         table tr:hover td {
             background: rgba(0, 153, 204, 0.04);
+            color: var(--text-primary);
+        }
+        table td strong {
+            font-weight: 700;
             color: var(--text-primary);
         }
 
@@ -502,7 +581,7 @@
         .badge-status {
             padding: 2px 12px;
             border-radius: 20px;
-            font-size: 9px;
+            font-size: 10px;
             font-weight: 700;
             display: inline-block;
         }
@@ -523,7 +602,7 @@
             color: var(--accent-primary);
             padding: 1px 8px;
             border-radius: 12px;
-            font-size: 8px;
+            font-size: 9px;
             display: inline-block;
             margin: 1px;
             border: 1px solid rgba(0, 102, 179, 0.08);
@@ -557,7 +636,7 @@
             margin-bottom: 2px;
         }
         .stat-card .label {
-            font-size: 9px;
+            font-size: 10px;
             color: var(--text-muted);
             font-weight: 600;
             text-transform: uppercase;
@@ -589,7 +668,7 @@
             align-items: center;
             padding: 5px 12px;
             border-bottom: 1px solid var(--border-color);
-            font-size: 11px;
+            font-size: 12px;
             transition: var(--transition);
             cursor: pointer;
             color: var(--text-secondary);
@@ -608,7 +687,7 @@
             color: #fff;
             padding: 1px 8px;
             border-radius: 12px;
-            font-size: 8px;
+            font-size: 9px;
             font-weight: 700;
             margin-right: 8px;
         }
@@ -620,7 +699,7 @@
             cursor: pointer;
         }
         .listbox .student-item .student-name {
-            font-weight: 500;
+            font-weight: 600;
         }
 
         /* ============================================================
@@ -644,7 +723,7 @@
         }
         .select-all-row label {
             font-weight: 600;
-            font-size: 11px;
+            font-size: 12px;
             cursor: pointer;
             color: var(--text-secondary);
         }
@@ -749,7 +828,7 @@
         }
 
         /* ============================================================
-           NEW - EXPENDITURE TABLE STYLES
+           EXPENDITURE TABLE STYLES
            ============================================================ */
         .expenditure-row {
             background: #ffffff;
@@ -771,7 +850,7 @@
             padding: 4px 8px;
             border: 1px solid var(--border-color);
             border-radius: var(--radius-sm);
-            font-size: 11px;
+            font-size: 12px;
             flex: 1;
             min-width: 80px;
         }
@@ -787,7 +866,7 @@
         }
 
         /* ============================================================
-           NEW - PROMOTION CARD STYLES
+           PROMOTION CARD STYLES
            ============================================================ */
         .promotion-item {
             display: flex;
@@ -804,7 +883,7 @@
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
-            font-size: 11px;
+            font-size: 12px;
             flex: 1;
         }
         .promotion-item .p-info strong {
@@ -823,49 +902,6 @@
         .promotion-item .p-status.pending {
             background: rgba(230, 122, 0, 0.10);
             color: var(--accent-orange);
-        }
-
-        /* ============================================================
-           NEW - ATTENDANCE GRID FOR STUDENTS & EMPLOYEES
-           ============================================================ */
-        .attendance-grid {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 1px;
-            background: var(--border-color);
-            border-radius: var(--radius-sm);
-            overflow: hidden;
-            margin-top: 6px;
-        }
-        .attendance-grid .cell {
-            background: #ffffff;
-            padding: 6px 10px;
-            font-size: 11px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-        }
-        .attendance-grid .cell.header {
-            background: var(--bg-sidebar);
-            color: #ffffff;
-            font-weight: 700;
-            font-size: 10px;
-        }
-        .attendance-grid .cell select {
-            width: 100%;
-            border: none;
-            background: transparent;
-            font-size: 11px;
-            outline: none;
-            padding: 2px;
-            text-align: center;
-            cursor: pointer;
-            color: var(--text-primary);
-        }
-        .attendance-grid .cell select:focus {
-            background: rgba(0, 153, 204, 0.04);
-            border-radius: 4px;
         }
 
         /* ============================================================
@@ -913,7 +949,7 @@
             color: var(--text-primary);
         }
         .phone-card .info .details {
-            font-size: 10px;
+            font-size: 11px;
             color: var(--text-muted);
         }
         .phone-card .phone-number {
@@ -943,7 +979,7 @@
             padding: 6px 12px;
             border: 1px solid var(--border-color);
             border-radius: var(--radius-sm);
-            font-size: 11px;
+            font-size: 12px;
             background: #ffffff;
             color: var(--text-primary);
             transition: var(--transition);
@@ -967,7 +1003,7 @@
             border-radius: var(--radius);
             padding: 16px 20px;
             font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 11px;
+            font-size: 12px;
             white-space: pre-wrap;
             max-height: 420px;
             overflow: auto;
@@ -1003,7 +1039,7 @@
             border: none;
             border-radius: var(--radius-sm);
             font-weight: 600;
-            font-size: 11px;
+            font-size: 12px;
             cursor: pointer;
             transition: var(--transition);
         }
@@ -1119,7 +1155,7 @@
         .voucher-box .info-box table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 11px;
+            font-size: 12px;
             min-width: auto;
         }
         .voucher-box .info-box table td {
@@ -1149,7 +1185,7 @@
         .voucher-box .fee-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 11px;
+            font-size: 12px;
             margin: 6px 0;
             border: 1px solid var(--accent-primary);
             min-width: auto;
@@ -1160,7 +1196,7 @@
         }
         .voucher-box .fee-table thead th {
             padding: 4px 8px;
-            font-size: 9px;
+            font-size: 10px;
             letter-spacing: 1px;
             text-align: left;
             border: 1px solid var(--accent-primary);
@@ -1206,7 +1242,7 @@
             padding: 4px 10px;
             background: #e3f2fd;
             border-left: 3px solid var(--accent-primary);
-            font-size: 10px;
+            font-size: 11px;
             color: #555;
             border-radius: 4px;
         }
@@ -1459,7 +1495,7 @@
         }
         .id-card .id-details {
             margin: 6px 0;
-            font-size: 11px;
+            font-size: 12px;
             line-height: 1.5;
             text-align: left;
         }
@@ -1499,7 +1535,7 @@
             background: #ffffff;
             padding: 6px 10px;
             text-align: center;
-            font-size: 11px;
+            font-size: 12px;
             min-height: 32px;
             display: flex;
             align-items: center;
@@ -1510,13 +1546,13 @@
             background: var(--bg-sidebar);
             color: #ffffff;
             font-weight: 700;
-            font-size: 10px;
+            font-size: 11px;
         }
         .staff-attendance-grid .cell select {
             width: 100%;
             border: none;
             background: transparent;
-            font-size: 11px;
+            font-size: 12px;
             outline: none;
             padding: 2px;
             text-align: center;
@@ -1572,11 +1608,9 @@
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
             }
-            .admission-form-grid {
-                grid-template-columns: 1fr;
-            }
-            .edit-student-grid {
-                grid-template-columns: 1fr;
+            .admission-form-grid,
+            .employee-form-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
         @media (max-width: 576px) {
@@ -1620,10 +1654,14 @@
             .voucher-box .fee-table {
                 font-size: 9px;
             }
+            .admission-form-grid,
+            .employee-form-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* ============================================================
-           PRINT STYLES
+           PRINT STYLES - BOLD FONTS
            ============================================================ */
         @media print {
             .top-bar,
@@ -1654,6 +1692,18 @@
                 padding: 0 !important;
                 margin: 0 !important;
             }
+            body {
+                font-size: 12px !important;
+                font-weight: 500 !important;
+            }
+            table td {
+                font-weight: 500 !important;
+                font-size: 12px !important;
+            }
+            table th {
+                font-weight: 700 !important;
+                font-size: 11px !important;
+            }
             .voucher-box {
                 border: 3px double var(--accent-primary) !important;
                 box-shadow: none !important;
@@ -1662,6 +1712,7 @@
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 page-break-after: avoid !important;
+                font-size: 12px !important;
             }
             .voucher-box .v-header .badge {
                 background: var(--accent-primary) !important;
@@ -1698,12 +1749,27 @@
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 page-break-after: avoid !important;
+                font-size: 12px !important;
             }
             .id-card {
                 border: 3px double var(--accent-primary) !important;
                 box-shadow: none !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
+            }
+            .doc-body {
+                font-size: 12px !important;
+                font-weight: 500 !important;
+            }
+            .doc-body .field .label {
+                font-weight: 700 !important;
+            }
+            .doc-body .field .value {
+                font-weight: 500 !important;
+            }
+            .report-box {
+                font-size: 12px !important;
+                font-weight: 500 !important;
             }
             @page {
                 margin: 10mm;
@@ -1766,7 +1832,6 @@
             <button data-tab="certificates"><span class="emoji">📜</span> Certificates <span class="key">F10</span></button>
             <button data-tab="id-cards"><span class="emoji">🪪</span> ID Cards <span class="key">F11</span></button>
 
-            <!-- NEW: Promotion Tab -->
             <div class="section-label">📚 Academics</div>
             <button data-tab="promotion"><span class="emoji">📈</span> Promotion <span class="key">F12</span></button>
 
@@ -1774,11 +1839,9 @@
             <button data-tab="employees"><span class="emoji">👨‍🏫</span> Employees <span class="key">F13</span></button>
             <button data-tab="payroll"><span class="emoji">💳</span> Payroll <span class="key">Ctrl+P</span></button>
 
-            <!-- Updated: Attendance Tab (Students + Employees) -->
             <div class="section-label">📋 Attendance</div>
             <button data-tab="attendance"><span class="emoji">✅</span> Attendance <span class="key">F14</span></button>
 
-            <!-- NEW: Expenditure Tab -->
             <div class="section-label">🏦 Accounts</div>
             <button data-tab="expenditure"><span class="emoji">💰</span> Expenditure <span class="key">F15</span></button>
             
@@ -1792,7 +1855,7 @@
         <div class="content">
 
             <!-- ============================================================
-            DASHBOARD (Existing)
+            DASHBOARD
             ============================================================ -->
             <div class="tab active" id="tab-dashboard">
                 <div class="card">
@@ -1822,7 +1885,7 @@
             </div>
 
             <!-- ============================================================
-            STUDENTS (Existing)
+            STUDENTS
             ============================================================ -->
             <div class="tab" id="tab-students">
                 <div class="card">
@@ -1857,15 +1920,15 @@
             </div>
 
             <!-- ============================================================
-            ADMISSION (Existing)
+            ADMISSION - Balanced Rows
             ============================================================ -->
             <div class="tab" id="tab-admission">
                 <div class="card">
                     <div class="card-title"><span class="prompt">▶</span> Student Admission Form</div>
                     <div class="admission-form-grid">
-                        <div class="full-width"><label>Name *</label><input id="admName" placeholder="Full name"></div>
-                        <div class="full-width"><label>Father *</label><input id="admFather" placeholder="Father's name"></div>
-                        <div class="full-width"><label>Guardian</label><input id="admGuardian" placeholder="Guardian's name"></div>
+                        <div><label>Name *</label><input id="admName" placeholder="Full name"></div>
+                        <div><label>Father *</label><input id="admFather" placeholder="Father's name"></div>
+                        <div><label>Guardian</label><input id="admGuardian" placeholder="Guardian's name"></div>
                         <div><label>DOB</label><input id="admDob" type="date"></div>
                         <div><label>Gender</label><select id="admGender"><option value="Male">Male</option><option value="Female">Female</option></select></div>
                         <div><label>Religion</label><input id="admReligion" placeholder="Religion"></div>
@@ -1884,20 +1947,18 @@
                         <div><label>Discount %</label><input id="admDiscount" type="number" value="0"></div>
                         <div><label>Lab Fee</label><input id="admLabFee" type="number" value="0"></div>
 
-                        <div class="full-width" style="background:var(--bg-primary);border:1px solid var(--border-color);border-radius:var(--radius);padding:12px;">
-                            <h4 style="color:var(--accent-primary);margin-bottom:8px;">💰 Fee Details</h4>
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                                <div><label>Admission Fee</label><input id="admFee" type="number" value="0" oninput="calculateAdmissionTotal()"></div>
-                                <div><label>Monthly Fee</label><input id="monthlyFee" type="number" value="0" oninput="calculateAdmissionTotal()"></div>
-                                <div><label>Exam Fee</label><input id="examFee" type="number" value="0" oninput="calculateAdmissionTotal()"></div>
-                                <div><label>Other Fee</label><input id="otherFee" type="number" value="0" oninput="calculateAdmissionTotal()"></div>
-                                <div style="grid-column:1/-1;background:var(--accent-primary);color:#fff;padding:6px 14px;border-radius:var(--radius-sm);display:flex;justify-content:space-between;align-items:center;">
-                                    <span style="font-weight:700;">💰 TOTAL FEE</span>
-                                    <span id="totalFeeDisplay" style="font-size:18px;font-weight:800;">Rs. 0</span>
-                                </div>
-                                <div><label>Received Fee</label><input id="recFee" type="number" value="0" oninput="calculateAdmissionTotal()"></div>
-                                <div><label>Balance</label><input id="balanceFee" type="number" value="0" readonly style="background:var(--bg-primary);color:var(--accent-red);font-weight:700;"></div>
+                        <div class="full-width fee-details-grid">
+                            <h4 style="color:var(--accent-primary);margin-bottom:4px;grid-column:1/-1;">💰 Fee Details</h4>
+                            <div><label>Admission Fee</label><input id="admFee" type="number" value="0" oninput="calculateAdmissionTotal()"></div>
+                            <div><label>Monthly Fee</label><input id="monthlyFee" type="number" value="0" oninput="calculateAdmissionTotal()"></div>
+                            <div><label>Exam Fee</label><input id="examFee" type="number" value="0" oninput="calculateAdmissionTotal()"></div>
+                            <div><label>Other Fee</label><input id="otherFee" type="number" value="0" oninput="calculateAdmissionTotal()"></div>
+                            <div class="total-box">
+                                <span class="total-label">💰 TOTAL FEE</span>
+                                <span class="total-amount" id="totalFeeDisplay">Rs. 0</span>
                             </div>
+                            <div><label>Received Fee</label><input id="recFee" type="number" value="0" oninput="calculateAdmissionTotal()"></div>
+                            <div><label>Balance</label><input id="balanceFee" type="number" value="0" readonly style="background:var(--bg-primary);color:var(--accent-red);font-weight:700;"></div>
                         </div>
 
                         <div class="full-width">
@@ -1919,7 +1980,7 @@
             </div>
 
             <!-- ============================================================
-            SAVED ADMISSIONS (Existing)
+            SAVED ADMISSIONS
             ============================================================ -->
             <div class="tab" id="tab-saved-admissions">
                 <div class="card">
@@ -1943,7 +2004,7 @@
             </div>
 
             <!-- ============================================================
-            DIRECTORY (Existing)
+            DIRECTORY
             ============================================================ -->
             <div class="tab" id="tab-directory">
                 <div class="card">
@@ -1959,7 +2020,7 @@
             </div>
 
             <!-- ============================================================
-            VOUCHER (Existing)
+            VOUCHER
             ============================================================ -->
             <div class="tab" id="tab-voucher">
                 <div style="display:flex;flex-wrap:wrap;gap:16px;">
@@ -2015,7 +2076,7 @@
             </div>
 
             <!-- ============================================================
-            DUE FEE (Existing)
+            DUE FEE
             ============================================================ -->
             <div class="tab" id="tab-duefee">
                 <div class="card">
@@ -2033,7 +2094,7 @@
             </div>
 
             <!-- ============================================================
-            HISTORY (Existing)
+            HISTORY
             ============================================================ -->
             <div class="tab" id="tab-history">
                 <div class="card">
@@ -2052,11 +2113,11 @@
             </div>
 
             <!-- ============================================================
-            RESULT (Existing)
+            RESULT - Added Position Row
             ============================================================ -->
             <div class="tab" id="tab-result">
                 <div class="card">
-                    <div class="card-title"><span class="prompt">▶</span> Result / Marksheet</div>
+                    <div class="card-title"><span class="prompt">▶</span> Result / Marksheet <span class="badge">with Position</span></div>
                     <div class="form-row">
                         <label>Student:</label><select id="resultStudent"><option value="">Select Student</option></select>
                         <label>Exam:</label><select id="resultExam"><option>Monthly</option><option>Mid-Term</option><option>Annual</option><option>Test</option></select>
@@ -2077,6 +2138,7 @@
                         <span>%: <strong id="resultPercentage">0.0%</strong></span>
                         <span>Grade: <strong id="resultGrade">F</strong></span>
                         <span>Status: <strong id="resultPassingStatus">Fail</strong></span>
+                        <span>Position: <strong id="resultPosition">-</strong></span>
                     </div>
                     <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;">
                         <button class="btn btn-success" onclick="saveResult()">💾 Save</button>
@@ -2087,15 +2149,15 @@
                 <div class="card">
                     <div class="card-title"><span class="prompt">▶</span> Saved Results <span class="badge" id="resultCount">0</span></div>
                     <div class="table-wrap" style="max-height:180px;">
-                        <table><thead><tr><th>ID</th><th>Name</th><th>Exam</th><th>Seat No</th><th>Obtained</th><th>%</th><th>Grade</th><th>Actions</th></tr></thead><tbody id="resultBody">
-                                <tr><td colspan="8" style="padding:12px;color:var(--text-muted);">No results saved</td></tr>
+                        <table><thead><tr><th>ID</th><th>Name</th><th>Exam</th><th>Seat No</th><th>Obtained</th><th>%</th><th>Grade</th><th>Position</th><th>Actions</th></tr></thead><tbody id="resultBody">
+                                <tr><td colspan="9" style="padding:12px;color:var(--text-muted);">No results saved</td></tr>
                         </tbody></table>
                     </div>
                 </div>
             </div>
 
             <!-- ============================================================
-            CERTIFICATES (Existing)
+            CERTIFICATES
             ============================================================ -->
             <div class="tab" id="tab-certificates">
                 <div class="card">
@@ -2128,7 +2190,7 @@
             </div>
 
             <!-- ============================================================
-            ID CARDS (Existing)
+            ID CARDS
             ============================================================ -->
             <div class="tab" id="tab-id-cards">
                 <div class="card">
@@ -2152,7 +2214,7 @@
             </div>
 
             <!-- ============================================================
-            ★ NEW: PROMOTION TAB
+            PROMOTION TAB
             ============================================================ -->
             <div class="tab" id="tab-promotion">
                 <div class="card">
@@ -2200,12 +2262,12 @@
             </div>
 
             <!-- ============================================================
-            EMPLOYEES (Existing)
+            EMPLOYEES - Balanced Rows
             ============================================================ -->
             <div class="tab" id="tab-employees">
                 <div class="card">
                     <div class="card-title"><span class="prompt">▶</span> Employees</div>
-                    <div class="admission-form-grid">
+                    <div class="employee-form-grid">
                         <div class="full-width"><label>Name *</label><input id="empName" placeholder="Full name"></div>
                         <div><label>Gender:</label><select id="empGender"><option>Male</option><option>Female</option></select></div>
                         <div><label>DOB</label><input id="empDob" type="date"></div>
@@ -2232,7 +2294,7 @@
             </div>
 
             <!-- ============================================================
-            PAYROLL (Existing)
+            PAYROLL
             ============================================================ -->
             <div class="tab" id="tab-payroll">
                 <div class="card">
@@ -2271,27 +2333,40 @@
             </div>
 
             <!-- ============================================================
-            ★ UPDATED: ATTENDANCE TAB (Students + Employees)
+            ATTENDANCE TAB - Student attendance like Employee attendance
             ============================================================ -->
             <div class="tab" id="tab-attendance">
                 <div class="card">
                     <div class="card-title"><span class="prompt">▶</span> Student Attendance</div>
                     <div class="form-row">
                         <label>Date:</label><input id="attDate" type="date">
-                        <label>Class:</label><select id="attClass"><option>All</option><option>Playgroup</option><option>Nursery</option><option>Prep</option><option>1st</option><option>2nd</option><option>3rd</option><option>4th</option><option>5th</option><option>6th</option><option>7th</option><option>8th</option><option>9th</option><option>10th</option></select>
-                        <button class="btn btn-success" onclick="markAllPresent()">✅ All Present</button>
-                        <button class="btn btn-danger" onclick="markAllAbsent()">❌ All Absent</button>
-                        <button class="btn btn-primary" onclick="saveStudentAttendance()">💾 Save</button>
-                        <button class="btn btn-info" onclick="loadStudentAttendanceList()">📋 List</button>
+                        <label>Class:</label>
+                        <select id="attClass">
+                            <option>All</option>
+                            <option>Playgroup</option><option>Nursery</option><option>Prep</option>
+                            <option>1st</option><option>2nd</option><option>3rd</option>
+                            <option>4th</option><option>5th</option><option>6th</option>
+                            <option>7th</option><option>8th</option><option>9th</option><option>10th</option>
+                        </select>
+                        <label>Section:</label>
+                        <select id="attSection">
+                            <option value="All">All</option>
+                            <option>A</option><option>B</option><option>C</option><option>D</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="loadStudentAttendanceList()">📋 Load</button>
+                        <button class="btn btn-success" onclick="saveStudentAttendance()">💾 Save</button>
                         <button class="btn btn-pdf" onclick="printStudentAttendance()">🖨️ Print</button>
                     </div>
-                    <div class="table-wrap" style="max-height:250px;">
-                        <table><thead><tr><th>#</th><th>ID</th><th>Name</th><th>Class</th><th>Present ✅</th></tr></thead><tbody id="studentAttendanceBody">
-                                <tr><td colspan="5" style="padding:12px;color:var(--text-muted);">No attendance records</td></tr>
-                        </tbody></table>
+                    <div style="overflow-x:auto;margin-top:6px;">
+                        <table>
+                            <thead><tr><th>#</th><th>Student ID</th><th>Name (Father)</th><th>Class</th><th>Section</th><th>Status</th></tr></thead>
+                            <tbody id="studentAttendanceBody">
+                                <tr><td colspan="6" style="padding:12px;color:var(--text-muted);">No students found</td></tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div id="studentAttendanceSummary" style="margin-top:8px;background:var(--bg-primary);border:1px solid var(--border-color);padding:8px 14px;border-radius:var(--radius-sm);font-size:12px;color:var(--text-secondary);">
-                        📅 Select date & class | 👨‍🎓 Total: 0 | ✅ Present: 0 | ❌ Absent: 0 | 📊 0%
+                        📅 Select date & class | 👨‍🎓 Total: 0 | ✅ Present: 0 | ❌ Absent: 0 | ⏳ Late: 0
                     </div>
                 </div>
 
@@ -2318,7 +2393,7 @@
             </div>
 
             <!-- ============================================================
-            ★ NEW: EXPENDITURE TAB
+            EXPENDITURE TAB - With Save Button
             ============================================================ -->
             <div class="tab" id="tab-expenditure">
                 <div class="card">
@@ -2331,7 +2406,8 @@
                         <label>Filter:</label>
                         <input id="expSearch" placeholder="Search items..." onkeyup="renderExpenditure()" style="max-width:200px;">
                         <button class="btn btn-success" onclick="addExpenditureRow()">➕ Add Row</button>
-                        <button class="btn btn-primary" onclick="renderExpenditure()">🔄 Refresh</button>
+                        <button class="btn btn-primary" onclick="saveExpenditureData()">💾 Save</button>
+                        <button class="btn btn-info" onclick="renderExpenditure()">🔄 Refresh</button>
                         <button class="btn btn-pdf" onclick="printExpenditure()">🖨️ Print</button>
                     </div>
                     <div id="expenditureContainer" style="margin-top:8px;">
@@ -2345,7 +2421,7 @@
             </div>
 
             <!-- ============================================================
-            ACCOUNTS (Existing)
+            ACCOUNTS
             ============================================================ -->
             <div class="tab" id="tab-accounts">
                 <div class="card">
@@ -2385,7 +2461,7 @@
             </div>
 
             <!-- ============================================================
-            REPORTS (Existing)
+            REPORTS
             ============================================================ -->
             <div class="tab" id="tab-reports">
                 <div class="card">
@@ -2410,7 +2486,7 @@
             </div>
 
             <!-- ============================================================
-            BACKUP (Existing)
+            BACKUP
             ============================================================ -->
             <div class="tab" id="tab-backup">
                 <div style="display:flex;justify-content:center;padding:20px 0;">
@@ -2432,7 +2508,7 @@
     </div>
 
     <!-- ============================================================
-    MODALS (Existing)
+    MODALS
     ============================================================ -->
     <div class="modal" id="addStudentModal">
         <div class="modal-content">
@@ -2792,7 +2868,7 @@
         }
 
         // ================================================================
-        // DASHBOARD (Existing - Updated to include expenditure)
+        // DASHBOARD
         // ================================================================
         function updateDashboardToLatest() {
             let latestMonth = currentMonth,
@@ -2832,7 +2908,6 @@
                 }
             });
 
-            // Add expenditure to total outcome
             let totalExpenditure = 0;
             expenditureRecords.forEach(exp => {
                 totalExpenditure += exp.amount || 0;
@@ -2885,7 +2960,7 @@
         }
 
         // ================================================================
-        // STUDENTS (Existing)
+        // STUDENTS
         // ================================================================
         function loadStudents() {
             const tbody = document.getElementById('studentsBody');
@@ -3022,7 +3097,7 @@
         }
 
         // ================================================================
-        // ADD STUDENT MODAL (Existing)
+        // ADD STUDENT MODAL
         // ================================================================
         function openAddStudentModal() {
             ['modalName', 'modalFather', 'modalPhone', 'modalAddress'].forEach(id => document.getElementById(id).value =
@@ -3086,7 +3161,7 @@
         }
 
         // ================================================================
-        // EDIT STUDENT (Existing)
+        // EDIT STUDENT
         // ================================================================
         function openEditStudentModal(studentId) {
             const s = getStudent(studentId);
@@ -3133,7 +3208,7 @@
         }
 
         // ================================================================
-        // ADMISSION FORM (Existing)
+        // ADMISSION FORM
         // ================================================================
         function calculateAdmissionTotal() {
             const admissionFee = parseFloat(document.getElementById('admFee').value) || 0;
@@ -3276,7 +3351,7 @@
             printWindow.document.write(`
             <html><head><title>Admission Form</title>
             <style>
-              body{font-family:Georgia,'Times New Roman',Times,serif;padding:30px;max-width:800px;margin:auto;background:#fff;}
+              body{font-family:Georgia,'Times New Roman',Times,serif;padding:30px;max-width:800px;margin:auto;background:#fff;font-size:12px;}
               .doc-classic{border:3px double #0066b3;border-radius:6px;padding:25px;}
               .doc-logo{text-align:center;border-bottom:3px double #0066b3;padding-bottom:10px;margin-bottom:14px;}
               .doc-logo .logo-row{display:flex;align-items:center;justify-content:center;gap:12px;}
@@ -3289,7 +3364,7 @@
               .doc-body{font-size:12px;line-height:1.8;}
               .doc-body .field{display:flex;padding:2px 0;border-bottom:1px dashed #ddd;}
               .doc-body .field .label{font-weight:700;min-width:130px;color:#0066b3;}
-              .doc-body .field .value{flex:1;border-bottom:1px solid #ccc;padding:0 6px;}
+              .doc-body .field .value{flex:1;border-bottom:1px solid #ccc;padding:0 6px;font-weight:500;}
               .doc-body .photo-container{text-align:right;margin-bottom:8px;}
               .doc-footer{margin-top:12px;padding-top:8px;border-top:2px solid #0066b3;text-align:center;color:#888;font-size:10px;letter-spacing:1px;}
               @media print{body{padding:10px;}}
@@ -3340,7 +3415,7 @@
         }
 
         // ================================================================
-        // SAVED ADMISSIONS (Existing)
+        // SAVED ADMISSIONS
         // ================================================================
         function renderSavedAdmissions() {
             const container = document.getElementById('savedAdmissionsContainer');
@@ -3407,7 +3482,7 @@
             printWindow.document.write(`
             <html><head><title>Admission Form - ${a.name}</title>
             <style>
-              body{font-family:Georgia,'Times New Roman',Times,serif;padding:30px;max-width:800px;margin:auto;background:#fff;}
+              body{font-family:Georgia,'Times New Roman',Times,serif;padding:30px;max-width:800px;margin:auto;background:#fff;font-size:12px;}
               .doc-classic{border:3px double #0066b3;border-radius:6px;padding:25px;}
               .doc-logo{text-align:center;border-bottom:3px double #0066b3;padding-bottom:10px;margin-bottom:14px;}
               .doc-logo .logo-row{display:flex;align-items:center;justify-content:center;gap:12px;}
@@ -3420,7 +3495,7 @@
               .doc-body{font-size:12px;line-height:1.8;}
               .doc-body .field{display:flex;padding:2px 0;border-bottom:1px dashed #ddd;}
               .doc-body .field .label{font-weight:700;min-width:130px;color:#0066b3;}
-              .doc-body .field .value{flex:1;border-bottom:1px solid #ccc;padding:0 6px;}
+              .doc-body .field .value{flex:1;border-bottom:1px solid #ccc;padding:0 6px;font-weight:500;}
               .doc-footer{margin-top:12px;padding-top:8px;border-top:2px solid #0066b3;text-align:center;color:#888;font-size:10px;letter-spacing:1px;}
               @media print{body{padding:10px;}}
             </style>
@@ -3490,7 +3565,7 @@
             const container = document.getElementById('savedAdmissionsContainer');
             const items = container.querySelectorAll('.saved-admission-item');
             if (!items.length) { showToast('⚠️ No records to print!', true); return; }
-            let html = `<div style="font-family:Georgia,'Times New Roman',Times,serif;padding:20px;max-width:100%;background:#fff;">
+            let html = `<div style="font-family:Georgia,'Times New Roman',Times,serif;padding:20px;max-width:100%;background:#fff;font-size:12px;">
             <div style="text-align:center;border-bottom:3px double #0066b3;padding-bottom:10px;margin-bottom:14px;">
               <div style="display:flex;align-items:center;justify-content:center;gap:12px;">
                 <img src="school-logo.png" alt="Logo" style="height:40px;width:40px;border-radius:50%;object-fit:contain;border:2px solid #0066b3;padding:2px;">
@@ -3503,7 +3578,7 @@
               <h2 style="color:#c8960c;font-size:14px;margin-top:4px;">Saved Admission Records</h2>
               <p style="color:#666;font-size:11px;">Generated: ${new Date().toLocaleString()} | Total: ${items.length}</p>
             </div>
-            <table style="width:100%;border-collapse:collapse;font-size:11px;border:1px solid #0066b3;">
+            <table style="width:100%;border-collapse:collapse;font-size:12px;border:1px solid #0066b3;">
               <thead><tr style="background:#0066b3;color:#c8960c;">
                 <th style="padding:4px 8px;border:1px solid #0066b3;">ID</th>
                 <th style="padding:4px 8px;border:1px solid #0066b3;">Name (Father)</th>
@@ -3543,7 +3618,7 @@
             </div>`;
             const win = window.open('', '_blank');
             win.document.write(`<html><head><title>Saved Admissions</title><style>
-              body { font-family: Georgia, 'Times New Roman', Times, serif; padding: 20px; background: #fff; }
+              body { font-family: Georgia, 'Times New Roman', Times, serif; padding: 20px; background: #fff; font-size: 12px; }
               @media print { body { padding: 10px; } }
             </style></head><body>${html}</body></html>`);
             win.document.close();
@@ -3551,7 +3626,7 @@
         }
 
         // ================================================================
-        // DIRECTORY (Existing)
+        // DIRECTORY
         // ================================================================
         function renderDirectory() {
             const container = document.getElementById('directoryContainer');
@@ -3612,7 +3687,7 @@
         }
 
         // ================================================================
-        // VOUCHER FUNCTIONS (Existing)
+        // VOUCHER FUNCTIONS
         // ================================================================
         function toggleSelectAll() {
             const checked = document.getElementById('selectAllCheckbox').checked;
@@ -3775,8 +3850,8 @@
                     <div class="verify-text"><strong>🔍 Verify</strong><div>ID: ${s.id}</div></div>
                   </div>
                   <div class="payment-details">
-                    <div class="phone">0321-5577608</div>
-                    <div>Easypesa • JazzCash • Bank</div>
+                    <div class="phone">Easypesa 0321-5577608</div>
+                    <div>Soneri Bank 20016698537</div>
                   </div>
                 </div>
                 <div class="v-footer">⭐ Success with Wisdom • This is a computer-generated voucher</div>
@@ -3797,7 +3872,7 @@
             const remarks = document.getElementById('voucherRemarks').value.trim();
 
             let html = `<html><head><title>Class Vouchers</title><style>
-              body{font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#fff;}
+              body{font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#fff;font-size:12px;}
               .voucher-box{max-width:520px;margin:15px auto;background:#fff;border:3px double #0066b3;border-radius:6px;padding:18px;box-shadow:0 4px 20px rgba(0,0,0,0.06);position:relative;page-break-after:avoid;}
               .watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-18deg);font-size:32px;font-weight:900;color:rgba(0,102,179,0.03);letter-spacing:4px;pointer-events:none;text-align:center;line-height:1.2;text-transform:uppercase;white-space:pre-line;}
               .watermark small{font-size:12px;letter-spacing:4px;display:block;color:rgba(200,150,12,0.02);}
@@ -3809,14 +3884,14 @@
               .v-header .subtitle{font-size:9px;color:#666;letter-spacing:2px;}
               .v-header .badge{margin-top:4px;background:#0066b3;color:#c8960c;display:inline-block;padding:2px 20px;font-size:10px;letter-spacing:3px;font-weight:700;border-radius:4px;}
               .info-box{border:2px solid #0066b3;padding:10px 12px;border-radius:6px;background:#f8fafc;margin:8px 0;}
-              .info-box table{width:100%;border-collapse:collapse;font-size:11px;}
+              .info-box table{width:100%;border-collapse:collapse;font-size:12px;}
               .info-box table td{padding:2px 4px;border-bottom:1px solid #e8ecf0;border:none;color:#1a1a1a;text-align:left;}
               .info-box table td.label{font-weight:700;color:#0066b3;width:30%;}
               .info-box table td.value{font-weight:600;}
               .student-photo-small{width:50px;height:50px;border-radius:50%;object-fit:cover;border:2px solid #0066b3;float:right;margin:0 0 8px 12px;}
-              .fee-table{width:100%;border-collapse:collapse;font-size:11px;margin:6px 0;border:1px solid #0066b3;}
+              .fee-table{width:100%;border-collapse:collapse;font-size:12px;margin:6px 0;border:1px solid #0066b3;}
               .fee-table thead tr{background:#0066b3;color:#fff;}
-              .fee-table thead th{padding:4px 8px;font-size:9px;letter-spacing:1px;text-align:left;border:1px solid #0066b3;}
+              .fee-table thead th{padding:4px 8px;font-size:10px;letter-spacing:1px;text-align:left;border:1px solid #0066b3;}
               .fee-table thead th:last-child{text-align:right;}
               .fee-table tbody td{padding:3px 8px;border-bottom:1px solid #ddd;border:1px solid #ddd;color:#1a1a1a;text-align:left;}
               .fee-table tbody td:last-child{text-align:right;font-weight:600;}
@@ -3948,7 +4023,7 @@
             const voucherHTML = document.getElementById('voucherDisplay').innerHTML;
             const win = window.open('', '_blank');
             win.document.write(`<html><head><title>Fee Voucher</title><style>
-              body{font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#fff;}
+              body{font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#fff;font-size:12px;}
               .voucher-box{max-width:520px;margin:15px auto;background:#fff;border:3px double #0066b3;border-radius:6px;padding:18px;box-shadow:0 4px 20px rgba(0,0,0,0.06);position:relative;}
               .watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-18deg);font-size:32px;font-weight:900;color:rgba(0,102,179,0.03);letter-spacing:4px;pointer-events:none;text-align:center;line-height:1.2;text-transform:uppercase;white-space:pre-line;}
               .watermark small{font-size:12px;letter-spacing:4px;display:block;color:rgba(200,150,12,0.02);}
@@ -3960,14 +4035,14 @@
               .v-header .subtitle{font-size:9px;color:#666;letter-spacing:2px;}
               .v-header .badge{margin-top:4px;background:#0066b3;color:#c8960c;display:inline-block;padding:2px 20px;font-size:10px;letter-spacing:3px;font-weight:700;border-radius:4px;}
               .info-box{border:2px solid #0066b3;padding:10px 12px;border-radius:6px;background:#f8fafc;margin:8px 0;}
-              .info-box table{width:100%;border-collapse:collapse;font-size:11px;}
+              .info-box table{width:100%;border-collapse:collapse;font-size:12px;}
               .info-box table td{padding:2px 4px;border-bottom:1px solid #e8ecf0;border:none;color:#1a1a1a;text-align:left;}
               .info-box table td.label{font-weight:700;color:#0066b3;width:30%;}
               .info-box table td.value{font-weight:600;}
               .student-photo-small{width:50px;height:50px;border-radius:50%;object-fit:cover;border:2px solid #0066b3;float:right;margin:0 0 8px 12px;}
-              .fee-table{width:100%;border-collapse:collapse;font-size:11px;margin:6px 0;border:1px solid #0066b3;}
+              .fee-table{width:100%;border-collapse:collapse;font-size:12px;margin:6px 0;border:1px solid #0066b3;}
               .fee-table thead tr{background:#0066b3;color:#fff;}
-              .fee-table thead th{padding:4px 8px;font-size:9px;letter-spacing:1px;text-align:left;border:1px solid #0066b3;}
+              .fee-table thead th{padding:4px 8px;font-size:10px;letter-spacing:1px;text-align:left;border:1px solid #0066b3;}
               .fee-table thead th:last-child{text-align:right;}
               .fee-table tbody td{padding:3px 8px;border-bottom:1px solid #ddd;border:1px solid #ddd;color:#1a1a1a;text-align:left;}
               .fee-table tbody td:last-child{text-align:right;font-weight:600;}
@@ -4215,7 +4290,7 @@
         }
 
         // ================================================================
-        // DUE FEE (Existing)
+        // DUE FEE
         // ================================================================
         function generateDueReport() {
             const month = document.getElementById('dueMonth').value;
@@ -4253,7 +4328,7 @@
             const content = document.getElementById('dueReportOutput').textContent;
             const win = window.open('', '_blank');
             win.document.write(`<html><head><title>Due Fee Report</title><style>
-              body { font-family: 'Courier New', monospace; padding: 30px; background: #fff; white-space: pre-wrap; }
+              body { font-family: 'Courier New', monospace; padding: 30px; background: #fff; white-space: pre-wrap; font-size: 12px; }
               @media print { body { padding: 15px; } }
             </style></head><body>${content}</body></html>`);
             win.document.close();
@@ -4261,7 +4336,7 @@
         }
 
         // ================================================================
-        // HISTORY (Existing)
+        // HISTORY
         // ================================================================
         function populateHistoryStudents() {
             const sel = document.getElementById('hStudent');
@@ -4313,7 +4388,7 @@
         }
 
         // ================================================================
-        // REPORTS (Existing)
+        // REPORTS
         // ================================================================
         function generateReport() {
             const type = document.getElementById('reportType').value;
@@ -4518,7 +4593,7 @@
             else if (type === 'full') title = 'Complete Statement';
             else if (type === 'admissions') title = 'Admissions Report';
             const html =
-                `<div style="font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#fff;"><div style="text-align:center;border-bottom:3px double #0066b3;padding-bottom:8px;margin-bottom:12px;"><div style="display:flex;align-items:center;justify-content:center;gap:12px;"><img src="school-logo.png" style="height:40px;width:40px;border-radius:50%;object-fit:contain;border:2px solid #0066b3;padding:2px;"><div><div style="font-size:18px;font-weight:900;color:#0066b3;letter-spacing:4px;"> ELAF LYCEUM </div><div style="font-size:11px;color:#0066b3;letter-spacing:3px;font-weight:700;">WAZIRPUR SHIGAR</div><div style="font-size:9px;color:#666;letter-spacing:2px;font-style:italic;">⭐ Success with Wisdom ⭐</div></div></div><h2 style="color:#c8960c;font-size:14px;margin-top:4px;">${title}</h2><p style="color:#666;font-size:11px;">Generated: ${new Date().toLocaleString()}</p></div><pre style="font-family:'Courier New',monospace;font-size:11px;white-space:pre-wrap;line-height:1.4;background:#f5f7fa;padding:12px;border-radius:6px;border:1px solid #ddd;">${content}</pre><div style="text-align:center;color:#888;font-size:10px;margin-top:12px;border-top:2px solid #0066b3;padding-top:6px;">⭐ Success with Wisdom!</div></div>`;
+                `<div style="font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#fff;font-size:12px;"><div style="text-align:center;border-bottom:3px double #0066b3;padding-bottom:8px;margin-bottom:12px;"><div style="display:flex;align-items:center;justify-content:center;gap:12px;"><img src="school-logo.png" style="height:40px;width:40px;border-radius:50%;object-fit:contain;border:2px solid #0066b3;padding:2px;"><div><div style="font-size:18px;font-weight:900;color:#0066b3;letter-spacing:4px;"> ELAF LYCEUM </div><div style="font-size:11px;color:#0066b3;letter-spacing:3px;font-weight:700;">WAZIRPUR SHIGAR</div><div style="font-size:9px;color:#666;letter-spacing:2px;font-style:italic;">⭐ Success with Wisdom ⭐</div></div></div><h2 style="color:#c8960c;font-size:14px;margin-top:4px;">${title}</h2><p style="color:#666;font-size:11px;">Generated: ${new Date().toLocaleString()}</p></div><pre style="font-family:'Courier New',monospace;font-size:12px;white-space:pre-wrap;line-height:1.4;background:#f5f7fa;padding:12px;border-radius:6px;border:1px solid #ddd;">${content}</pre><div style="text-align:center;color:#888;font-size:10px;margin-top:12px;border-top:2px solid #0066b3;padding-top:6px;">⭐ Success with Wisdom!</div></div>`;
             const element = document.createElement('div');
             element.innerHTML = html;
             document.body.appendChild(element);
@@ -4532,7 +4607,7 @@
         }
 
         // ================================================================
-        // BACKUP (Existing)
+        // BACKUP
         // ================================================================
         function updateBackupStats() {
             document.getElementById('backupStats').innerHTML =
@@ -4624,7 +4699,7 @@
         }
 
         // ================================================================
-        // RESULT / MARKSHEET (Existing)
+        // RESULT / MARKSHEET - WITH POSITION
         // ================================================================
         function populateResultStudents() {
             const sel = document.getElementById('resultStudent');
@@ -4676,6 +4751,7 @@
                 '❌ Fail';
             document.getElementById('resultPassingStatus').style.color = allPass && percentage >= passingMarks ?
                 'var(--accent-green)' : 'var(--accent-red)';
+            document.getElementById('resultPosition').textContent = '-';
         }
 
         function addSubjectField() {
@@ -4725,10 +4801,10 @@
             else if (percentage >= 60) grade = 'C';
             else if (percentage >= 50) grade = 'D';
             else grade = 'F';
-            const existingIndex = resultRecords.findIndex(r =>
-                r.student_id === studentId && r.exam === exam && r.date === date
-            );
-            const result = {
+
+            let position = '-';
+            const examResults = resultRecords.filter(r => r.exam === exam);
+            const tempResult = {
                 student_id: studentId,
                 student_name: student.name,
                 father: student.father,
@@ -4746,6 +4822,46 @@
                 status: percentage >= passingMarks ? 'Pass' : 'Fail',
                 saved_date: getTodayDate()
             };
+            const existingIndex = examResults.findIndex(r => r.student_id === studentId && r.exam === exam);
+            const allResultsForRank = [...examResults];
+            if (existingIndex >= 0) {
+                const existing = examResults[existingIndex];
+                const idx = allResultsForRank.indexOf(existing);
+                if (idx >= 0) allResultsForRank[idx] = tempResult;
+            } else {
+                allResultsForRank.push(tempResult);
+            }
+            const sortedForRank = allResultsForRank.sort((a, b) => b.obtained_marks - a.obtained_marks);
+            const pos = sortedForRank.findIndex(r => r.student_id === studentId);
+            if (pos >= 0) {
+                const posNum = pos + 1;
+                if (posNum === 1) position = '1st';
+                else if (posNum === 2) position = '2nd';
+                else if (posNum === 3) position = '3rd';
+                else if (posNum === 4) position = '4th';
+                else position = posNum + 'th';
+            }
+
+            const result = {
+                student_id: studentId,
+                student_name: student.name,
+                father: student.father,
+                class: student.class,
+                section: student.section || 'A',
+                exam,
+                date,
+                seat_no: seatNo,
+                passing_marks: passingMarks,
+                subjects,
+                total_marks: totalMarks,
+                obtained_marks: obtainedMarks,
+                percentage: percentage,
+                grade: grade,
+                status: percentage >= passingMarks ? 'Pass' : 'Fail',
+                saved_date: getTodayDate(),
+                position: position
+            };
+
             if (existingIndex >= 0) {
                 resultRecords[existingIndex] = result;
                 showToast('✅ Result updated!');
@@ -4755,6 +4871,7 @@
             }
             saveData();
             loadResults();
+            document.getElementById('resultPosition').textContent = position;
         }
 
         function loadResults() {
@@ -4762,7 +4879,7 @@
             tbody.innerHTML = '';
             if (!resultRecords.length) {
                 tbody.innerHTML =
-                    `<tr><td colspan="8" style="padding:10px;color:var(--text-muted);">No results saved</td></tr>`;
+                    `<tr><td colspan="9" style="padding:10px;color:var(--text-muted);">No results saved</td></tr>`;
                 document.getElementById('resultCount').textContent = '0';
                 return;
             }
@@ -4777,6 +4894,7 @@
                 <td>${r.obtained_marks}/${r.total_marks}</td>
                 <td>${r.percentage.toFixed(1)}%</td>
                 <td><span class="badge-status ${r.status === 'Pass' ? 'badge-paid' : 'badge-pending'}">${r.grade}</span></td>
+                <td>${r.position || '-'}</td>
                 <td>
                   <button class="btn btn-info btn-xs" onclick="viewResult(${index})">📄</button>
                   <button class="btn btn-warning btn-xs" onclick="editResultById(${index})">✏️</button>
@@ -4809,6 +4927,7 @@
             msg += `Percentage: ${r.percentage.toFixed(1)}%\n`;
             msg += `Grade: ${r.grade}\n`;
             msg += `Status: ${r.status || (r.percentage >= (r.passing_marks || 33) ? 'Pass' : 'Fail')}\n`;
+            msg += `Position: ${r.position || '-'}\n`;
             msg += '\n═══════════════════════════════════════\n⭐ Success with Wisdom!';
             alert(msg);
         }
@@ -4894,8 +5013,36 @@
             else grade = 'F';
             const status = percentage >= passingMarks ? 'Pass' : 'Fail';
             const photoHTML = student.photo ? `<img src="${student.photo}" style="width:70px;height:70px;border-radius:50%;border:2px solid #0066b3;object-fit:cover;float:right;margin:0 0 10px 15px;">` : '';
+
+            let position = '-';
+            const examResults = resultRecords.filter(r => r.exam === exam);
+            const tempResult = {
+                student_id: studentId,
+                student_name: student.name,
+                obtained_marks: obtainedMarks
+            };
+            const existingIndex = examResults.findIndex(r => r.student_id === studentId && r.exam === exam);
+            const allResultsForRank = [...examResults];
+            if (existingIndex >= 0) {
+                const existing = examResults[existingIndex];
+                const idx = allResultsForRank.indexOf(existing);
+                if (idx >= 0) allResultsForRank[idx] = { ...existing, obtained_marks: obtainedMarks };
+            } else {
+                allResultsForRank.push({ ...tempResult, obtained_marks: obtainedMarks });
+            }
+            const sortedForRank = allResultsForRank.sort((a, b) => b.obtained_marks - a.obtained_marks);
+            const pos = sortedForRank.findIndex(r => r.student_id === studentId);
+            if (pos >= 0) {
+                const posNum = pos + 1;
+                if (posNum === 1) position = '1st';
+                else if (posNum === 2) position = '2nd';
+                else if (posNum === 3) position = '3rd';
+                else if (posNum === 4) position = '4th';
+                else position = posNum + 'th';
+            }
+
             let html = `
-              <div style="font-family:Georgia,'Times New Roman',Times,serif;max-width:700px;margin:auto;background:#fff;border:3px double #0066b3;border-radius:6px;padding:20px;">
+              <div style="font-family:Georgia,'Times New Roman',Times,serif;max-width:700px;margin:auto;background:#fff;border:3px double #0066b3;border-radius:6px;padding:20px;font-size:12px;">
                 <div style="text-align:center;border-bottom:3px double #0066b3;padding-bottom:8px;margin-bottom:12px;">
                   <div style="display:flex;align-items:center;justify-content:center;gap:12px;">
                     <img src="school-logo.png" style="height:40px;width:40px;border-radius:50%;object-fit:contain;border:2px solid #0066b3;padding:2px;">
@@ -4918,7 +5065,7 @@
                   <div><strong>Seat No:</strong> ${seatNo}</div>
                   <div><strong>Passing %:</strong> ${passingMarks}%</div>
                 </div>
-                <table style="width:100%;border-collapse:collapse;font-size:11px;margin:6px 0;border:1px solid #0066b3;">
+                <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0;border:1px solid #0066b3;">
                   <thead><tr style="background:#0066b3;color:#c8960c;">
                     <th style="padding:4px 8px;border:1px solid #0066b3;">Subject</th>
                     <th style="padding:4px 8px;border:1px solid #0066b3;">Total</th>
@@ -4938,11 +5085,12 @@
             }
             html += `
                   </tbody></table>
-                <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;padding:8px;background:#f5f7fa;border:1px solid #ddd;border-radius:6px;margin-top:8px;text-align:center;font-size:12px;">
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:6px;padding:8px;background:#f5f7fa;border:1px solid #ddd;border-radius:6px;margin-top:8px;text-align:center;font-size:12px;">
                   <div><strong>Total:</strong> ${totalMarks}</div>
                   <div><strong>Obtained:</strong> ${obtainedMarks}</div>
                   <div><strong>%:</strong> ${percentage.toFixed(1)}%</div>
                   <div><strong>Grade:</strong> ${grade}</div>
+                  <div><strong>Position:</strong> ${position}</div>
                   <div style="grid-column:1/-1;font-size:14px;font-weight:700;color:${status === 'Pass' ? '#1a8a4a' : '#d32f2f'};padding:4px;border:2px solid ${status === 'Pass' ? '#1a8a4a' : '#d32f2f'};border-radius:4px;">Status: ${status}</div>
                 </div>
                 <div style="margin-top:10px;padding-top:6px;border-top:2px solid #0066b3;text-align:center;color:#888;font-size:9px;letter-spacing:1px;">⭐ Success with Wisdom! | Generated: ${new Date().toLocaleString()}</div>
@@ -4951,7 +5099,7 @@
             const win = window.open('', '_blank');
             win.document.write(`<html><head><title>Marksheet - ${student.name}</title>
               <style>
-                body { font-family: Georgia, 'Times New Roman', Times, serif; padding: 15px; background: #f5f7fa; }
+                body { font-family: Georgia, 'Times New Roman', Times, serif; padding: 15px; background: #f5f7fa; font-size: 12px; }
                 @media print { body { background: #fff; padding: 10px; } }
               </style>
             </head><body>${html}</body></html>`);
@@ -4960,7 +5108,7 @@
         }
 
         // ================================================================
-        // CERTIFICATES (Existing)
+        // CERTIFICATES
         // ================================================================
         function populateCertificateStudents() {
             const lcSel = document.getElementById('lcStudent');
@@ -5079,7 +5227,7 @@
             }
             const win = window.open('', '_blank');
             win.document.write(`<html><head><title>School Leaving Certificate</title><style>
-              body{font-family:Georgia,'Times New Roman',Times,serif;padding:20px;background:#fff;}
+              body{font-family:Georgia,'Times New Roman',Times,serif;padding:20px;background:#fff;font-size:12px;}
               .doc-classic{border:3px double #0066b3;border-radius:6px;padding:20px;max-width:750px;margin:auto;box-shadow:0 4px 20px rgba(0,0,0,0.04);}
               .doc-logo{text-align:center;border-bottom:3px double #0066b3;padding-bottom:8px;margin-bottom:12px;}
               .doc-logo .logo-row{display:flex;align-items:center;justify-content:center;gap:12px;}
@@ -5092,7 +5240,7 @@
               .doc-body{font-size:12px;line-height:1.8;}
               .doc-body .field{display:flex;padding:2px 0;border-bottom:1px dashed #ddd;}
               .doc-body .field .label{font-weight:700;min-width:140px;color:#0066b3;}
-              .doc-body .field .value{flex:1;border-bottom:1px solid #ccc;padding:0 6px;}
+              .doc-body .field .value{flex:1;border-bottom:1px solid #ccc;padding:0 6px;font-weight:500;}
               .doc-body .student-photo-doc{width:70px;height:70px;border-radius:50%;object-fit:cover;border:2px solid #0066b3;float:right;margin:0 0 10px 15px;}
               .doc-footer{margin-top:12px;padding-top:8px;border-top:2px solid #0066b3;text-align:center;color:#888;font-size:10px;letter-spacing:1px;}
               .doc-footer .signature{text-align:center;margin-top:6px;}
@@ -5158,7 +5306,7 @@
             }
             const win = window.open('', '_blank');
             win.document.write(`<html><head><title>Character Certificate</title><style>
-              body{font-family:Georgia,'Times New Roman',Times,serif;padding:20px;background:#fff;}
+              body{font-family:Georgia,'Times New Roman',Times,serif;padding:20px;background:#fff;font-size:12px;}
               .doc-classic{border:3px double #0066b3;border-radius:6px;padding:20px;max-width:750px;margin:auto;}
               .doc-logo .logo-row{display:flex;align-items:center;justify-content:center;gap:12px;}
               .doc-logo .logo-row img{height:50px;width:50px;border-radius:50%;object-fit:contain;border:2px solid #0066b3;padding:3px;}
@@ -5230,7 +5378,7 @@
             }
             const win = window.open('', '_blank');
             win.document.write(`<html><head><title>Experience Certificate</title><style>
-              body{font-family:Georgia,'Times New Roman',Times,serif;padding:20px;background:#fff;}
+              body{font-family:Georgia,'Times New Roman',Times,serif;padding:20px;background:#fff;font-size:12px;}
               .doc-classic{border:3px double #0066b3;border-radius:6px;padding:20px;max-width:750px;margin:auto;}
               .doc-logo .logo-row{display:flex;align-items:center;justify-content:center;gap:12px;}
               .doc-logo .logo-row img{height:50px;width:50px;border-radius:50%;object-fit:contain;border:2px solid #0066b3;padding:3px;}
@@ -5240,7 +5388,7 @@
         }
 
         // ================================================================
-        // ID CARDS (Existing)
+        // ID CARDS
         // ================================================================
         function populateIDStudents() {
             const sel = document.getElementById('idStudent');
@@ -5300,7 +5448,7 @@
             }
             const win = window.open('', '_blank');
             win.document.write(`<html><head><title>Student ID Card</title><style>
-              body{font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#f5f7fa;display:flex;justify-content:center;align-items:center;min-height:100vh;}
+              body{font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#f5f7fa;display:flex;justify-content:center;align-items:center;min-height:100vh;font-size:12px;}
               .id-card{max-width:320px;margin:auto;background:#fff;border:3px double #0066b3;border-radius:6px;padding:16px;text-align:center;}
               .id-card .id-header .logo-row{display:flex;align-items:center;justify-content:center;gap:8px;}
               .id-card .id-header .logo-row img{height:32px;width:32px;border-radius:50%;object-fit:contain;border:2px solid #0066b3;padding:2px;}
@@ -5309,7 +5457,7 @@
               .id-card .id-header .school-motto{font-size:7px;color:#666;letter-spacing:1px;font-style:italic;}
               .id-card .id-header .card-type{font-size:9px;color:#c8960c;letter-spacing:1px;font-weight:700;margin-top:2px;}
               .id-card .id-photo{width:80px;height:80px;border-radius:50%;border:2px solid #0066b3;margin:6px auto;object-fit:cover;background:#f5f7fa;}
-              .id-card .id-details{margin:6px 0;font-size:11px;line-height:1.5;text-align:left;}
+              .id-card .id-details{margin:6px 0;font-size:12px;line-height:1.5;text-align:left;}
               .id-card .id-details .row{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dashed #ddd;}
               .id-card .id-details .row .lbl{font-weight:700;color:#0066b3;}
               .id-card .id-footer{margin-top:6px;padding-top:4px;border-top:2px solid #0066b3;font-size:7px;color:#888;letter-spacing:1px;}
@@ -5360,7 +5508,7 @@
             }
             const win = window.open('', '_blank');
             win.document.write(`<html><head><title>Teacher ID Card</title><style>
-              body{font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#f5f7fa;display:flex;justify-content:center;align-items:center;min-height:100vh;}
+              body{font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#f5f7fa;display:flex;justify-content:center;align-items:center;min-height:100vh;font-size:12px;}
               .id-card{max-width:320px;margin:auto;background:#fff;border:3px double #0066b3;border-radius:6px;padding:16px;text-align:center;}
               .id-card .id-header .logo-row{display:flex;align-items:center;justify-content:center;gap:8px;}
               .id-card .id-header .logo-row img{height:32px;width:32px;border-radius:50%;object-fit:contain;border:2px solid #0066b3;padding:2px;}
@@ -5369,7 +5517,7 @@
               .id-card .id-header .school-motto{font-size:7px;color:#666;letter-spacing:1px;font-style:italic;}
               .id-card .id-header .card-type{font-size:9px;color:#c8960c;letter-spacing:1px;font-weight:700;margin-top:2px;}
               .id-card .id-photo{width:80px;height:80px;border-radius:50%;border:2px solid #0066b3;margin:6px auto;object-fit:cover;background:#f5f7fa;display:flex;align-items:center;justify-content:center;font-size:32px;color:#0066b3;}
-              .id-card .id-details{margin:6px 0;font-size:11px;line-height:1.5;text-align:left;}
+              .id-card .id-details{margin:6px 0;font-size:12px;line-height:1.5;text-align:left;}
               .id-card .id-details .row{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dashed #ddd;}
               .id-card .id-details .row .lbl{font-weight:700;color:#0066b3;}
               .id-card .id-footer{margin-top:6px;padding-top:4px;border-top:2px solid #0066b3;font-size:7px;color:#888;letter-spacing:1px;}
@@ -5380,7 +5528,7 @@
         }
 
         // ================================================================
-        // ★ NEW: PROMOTION FUNCTIONS
+        // PROMOTION FUNCTIONS
         // ================================================================
         function loadPromotionStudents() {
             const fromClass = document.getElementById('promoFromClass').value;
@@ -5403,7 +5551,6 @@
                 return;
             }
 
-            // Check promotion history for each student
             let promotedCount = 0;
             let html = `<div style="margin-top:6px;max-height:300px;overflow-y:auto;border:1px solid var(--border-color);border-radius:var(--radius-sm);">`;
             filtered.forEach((s, index) => {
@@ -5442,14 +5589,12 @@
             if (!toClass) { showToast('⚠️ Please select a target class!', true); return; }
             if (toClass === s.class) { showToast('⚠️ Student is already in this class!', true); return; }
 
-            // Check if already promoted
             if (promotions.some(p => p.student_id === s.id && p.to_class === toClass)) {
                 showToast('⚠️ Student already promoted to this class!', true);
                 return;
             }
 
             if (confirm(`Promote ${s.name} (${s.id}) from ${s.class} to ${toClass}?`)) {
-                // Add promotion record
                 promotions.push({
                     student_id: s.id,
                     student_name: s.name,
@@ -5460,10 +5605,7 @@
                     date: getTodayDate(),
                     status: 'Promoted'
                 });
-
-                // Update student class
                 s.class = toClass;
-
                 saveData();
                 loadPromotionStudents();
                 loadStudents();
@@ -5483,7 +5625,6 @@
             let filtered = students.filter(s => s.class === fromClass);
             if (section !== 'All') filtered = filtered.filter(s => s.section === section);
 
-            // Filter out already promoted students
             const toPromote = filtered.filter(s => !promotions.some(p => p.student_id === s.id && p.to_class === toClass));
 
             if (!toPromote.length) {
@@ -5525,7 +5666,6 @@
             const promo = promotions[promoIndex];
             if (!confirm(`Undo promotion for ${s.name} (${s.id}) from ${promo.to_class} back to ${promo.from_class}?`)) return;
 
-            // Restore original class
             s.class = promo.from_class;
             promotions.splice(promoIndex, 1);
 
@@ -5561,7 +5701,7 @@
         }
 
         // ================================================================
-        // EMPLOYEES (Existing)
+        // EMPLOYEES
         // ================================================================
         function saveEmployee() {
             const name = document.getElementById('empName').value.trim();
@@ -5662,7 +5802,7 @@
             const e = employees[empIndex];
             if (!e) return;
             let html = `
-              <div style="font-family:Georgia,'Times New Roman',Times,serif;padding:20px;max-width:650px;margin:auto;background:#fff;border:3px double #0066b3;border-radius:6px;">
+              <div style="font-family:Georgia,'Times New Roman',Times,serif;padding:20px;max-width:650px;margin:auto;background:#fff;border:3px double #0066b3;border-radius:6px;font-size:12px;">
                 <div style="text-align:center;border-bottom:3px double #0066b3;padding-bottom:8px;margin-bottom:12px;">
                   <div style="display:flex;align-items:center;justify-content:center;gap:12px;">
                     <img src="school-logo.png" style="height:40px;width:40px;border-radius:50%;object-fit:contain;border:2px solid #0066b3;padding:2px;">
@@ -5692,7 +5832,7 @@
             `;
             const win = window.open('', '_blank');
             win.document.write(`<html><head><title>Employee Profile - ${e.name}</title><style>
-              body{font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#f5f7fa;}
+              body{font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#f5f7fa;font-size:12px;}
               @media print{body{background:#fff;padding:10px;}}
             </style></head><body>${html}</body></html>`);
             win.document.close();
@@ -5700,7 +5840,7 @@
         }
 
         // ================================================================
-        // PAYROLL (Existing)
+        // PAYROLL
         // ================================================================
         function populatePayrollEmployees() {
             const sel = document.getElementById('payrollEmployee');
@@ -5775,7 +5915,7 @@
                     `<tr><td style="padding:3px 8px;border:1px solid #ddd;">${a.name}</td><td style="padding:3px 8px;border:1px solid #ddd;text-align:right;font-weight:600;">${formatCurrency(a.amount)}</td></tr>`;
             });
             display.innerHTML = `
-              <div style="max-width:550px;margin:auto;background:#fff;border:3px double #0066b3;border-radius:6px;padding:18px;font-family:Georgia,'Times New Roman',Times,serif;">
+              <div style="max-width:550px;margin:auto;background:#fff;border:3px double #0066b3;border-radius:6px;padding:18px;font-family:Georgia,'Times New Roman',Times,serif;font-size:12px;">
                 <div style="text-align:center;border-bottom:3px double #0066b3;padding-bottom:8px;margin-bottom:10px;">
                   <div style="display:flex;align-items:center;justify-content:center;gap:10px;">
                     <img src="school-logo.png" style="height:36px;width:36px;border-radius:50%;object-fit:contain;border:2px solid #0066b3;padding:2px;">
@@ -5788,17 +5928,17 @@
                   <h2 style="color:#c8960c;font-size:13px;margin-top:4px;">PAY SLIP</h2>
                   <div style="font-size:10px;color:#666;letter-spacing:1px;">${month} ${year}</div>
                 </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 14px;font-size:11px;padding:4px 0;border-bottom:1px dashed #ddd;margin-bottom:8px;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 14px;font-size:12px;padding:4px 0;border-bottom:1px dashed #ddd;margin-bottom:8px;">
                   <div><strong>ID:</strong> ${employee.id}</div>
                   <div><strong>Name:</strong> ${employee.name}</div>
                   <div><strong>Designation:</strong> ${employee.designation || 'Teacher'}</div>
                   <div><strong>Department:</strong> ${employee.department || 'Teaching'}</div>
                   <div><strong>Working Days:</strong> ${workingDays}</div>
                 </div>
-                <table style="width:100%;border-collapse:collapse;font-size:11px;margin:6px 0;border:1px solid #0066b3;">
+                <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0;border:1px solid #0066b3;">
                   <thead><tr style="background:#0066b3;color:#c8960c;">
-                    <th style="padding:3px 8px;border:1px solid #0066b3;text-align:left;font-size:9px;letter-spacing:1px;">Particulars</th>
-                    <th style="padding:3px 8px;border:1px solid #0066b3;text-align:left;font-size:9px;letter-spacing:1px;">Amount (Rs.)</th>
+                    <th style="padding:3px 8px;border:1px solid #0066b3;text-align:left;font-size:10px;letter-spacing:1px;">Particulars</th>
+                    <th style="padding:3px 8px;border:1px solid #0066b3;text-align:left;font-size:10px;letter-spacing:1px;">Amount (Rs.)</th>
                   </tr></thead>
                   <tbody>
                     <tr><td style="padding:3px 8px;border:1px solid #ddd;">Basic Pay</td><td style="padding:3px 8px;border:1px solid #ddd;text-align:left;font-weight:600;">${formatCurrency(basicPay)}</td></tr>
@@ -5825,7 +5965,7 @@
             }
             const win = window.open('', '_blank');
             win.document.write(`<html><head><title>Pay Slip</title><style>
-              body{font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#f5f7fa;}
+              body{font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#f5f7fa;font-size:12px;}
               @media print{body{background:#fff;padding:10px;}}
             </style></head><body>${content}</body></html>`);
             win.document.close();
@@ -5899,64 +6039,75 @@
         }
 
         // ================================================================
-        // ★ UPDATED: STUDENT ATTENDANCE FUNCTIONS
+        // STUDENT ATTENDANCE FUNCTIONS - Like Employee Attendance
         // ================================================================
         function loadStudentAttendanceList() {
             const date = document.getElementById('attDate').value;
             const cls = document.getElementById('attClass').value;
+            const section = document.getElementById('attSection').value;
             const tbody = document.getElementById('studentAttendanceBody');
             tbody.innerHTML = '';
-            let filtered = students.filter(s => cls === 'All' || s.class === cls);
+
+            let filtered = students.filter(s => {
+                if (cls !== 'All' && s.class !== cls) return false;
+                if (section !== 'All' && s.section !== section) return false;
+                return true;
+            });
+
             let attendanceForDate = studentAttendanceRecords.filter(r => r.date === date);
             let presentCount = 0,
-                absentCount = 0;
+                absentCount = 0,
+                lateCount = 0;
+
             if (!filtered.length) {
                 tbody.innerHTML =
-                    `<tr><td colspan="5" style="padding:10px;color:var(--text-muted);">No students found for this class</td></tr>`;
+                    `<tr><td colspan="6" style="padding:12px;color:var(--text-muted);">No students found</td></tr>`;
                 document.getElementById('studentAttendanceSummary').innerHTML =
-                    `📅 ${date} | 👨‍🎓 Total: 0 | ✅ Present: 0 | ❌ Absent: 0 | 📊 0%`;
+                    `📅 ${date} | 👨‍🎓 Total: 0 | ✅ Present: 0 | ❌ Absent: 0 | ⏳ Late: 0`;
                 return;
             }
+
             filtered.forEach((s, index) => {
                 const record = attendanceForDate.find(r => r.student_id === s.id);
-                const present = record ? record.present : false;
-                if (present) presentCount++;
-                else absentCount++;
+                const status = record ? record.status : 'Present';
+                if (status === 'Present') presentCount++;
+                else if (status === 'Absent') absentCount++;
+                else if (status === 'Late') lateCount++;
+
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                <td>${index + 1}</td>
-                <td><strong>${s.id}</strong></td>
-                <td>${s.name} (${s.father})</td>
-                <td>${s.class} (${s.section || 'A'})</td>
-                <td><input type="checkbox" class="student-att-checkbox" data-id="${s.id}" ${present ? 'checked' : ''}></td>`;
+                  <td>${index + 1}</td>
+                  <td><strong>${s.id}</strong></td>
+                  <td>${s.name} (${s.father})</td>
+                  <td>${s.class}</td>
+                  <td>${s.section || 'A'}</td>
+                  <td>
+                    <select class="student-att-status" data-id="${s.id}">
+                      <option value="Present" ${status === 'Present' ? 'selected' : ''}>✅ Present</option>
+                      <option value="Absent" ${status === 'Absent' ? 'selected' : ''}>❌ Absent</option>
+                      <option value="Late" ${status === 'Late' ? 'selected' : ''}>⏳ Late</option>
+                    </select>
+                  </td>
+                `;
                 tbody.appendChild(tr);
             });
+
             const total = filtered.length;
-            const percentage = total > 0 ? Math.round((presentCount / total) * 100) : 0;
             document.getElementById('studentAttendanceSummary').innerHTML =
-                `📅 ${date} | 👨‍🎓 Total: ${total} | ✅ Present: ${presentCount} | ❌ Absent: ${absentCount} | 📊 ${percentage}%`;
-        }
-
-        function markAllPresent() {
-            document.querySelectorAll('#studentAttendanceBody .student-att-checkbox').forEach(cb => cb.checked = true);
-            showToast('✅ All marked present');
-        }
-
-        function markAllAbsent() {
-            document.querySelectorAll('#studentAttendanceBody .student-att-checkbox').forEach(cb => cb.checked = false);
-            showToast('❌ All marked absent');
+                `📅 ${date} | 👨‍🎓 Total: ${total} | ✅ Present: ${presentCount} | ❌ Absent: ${absentCount} | ⏳ Late: ${lateCount}`;
         }
 
         function saveStudentAttendance() {
             const date = document.getElementById('attDate').value;
-            const cls = document.getElementById('attClass').value;
             if (!date) { showToast('⚠️ Please select a date!', true); return; }
-            const checkboxes = document.querySelectorAll('#studentAttendanceBody .student-att-checkbox');
-            let savedCount = 0;
-            studentAttendanceRecords = studentAttendanceRecords.filter(r => !(r.date === date && (r.class === cls || cls ===
-                'All')));
-            checkboxes.forEach(cb => {
-                const studentId = cb.dataset.id;
+
+            const statusSelects = document.querySelectorAll('#studentAttendanceBody .student-att-status');
+            if (!statusSelects.length) { showToast('⚠️ No students to save!', true); return; }
+
+            studentAttendanceRecords = studentAttendanceRecords.filter(r => r.date !== date);
+
+            statusSelects.forEach(sel => {
+                const studentId = sel.dataset.id;
                 const student = getStudent(studentId);
                 if (student) {
                     studentAttendanceRecords.push({
@@ -5966,14 +6117,13 @@
                         class: student.class,
                         section: student.section || 'A',
                         date: date,
-                        present: cb.checked,
-                        class_filter: cls
+                        status: sel.value
                     });
-                    savedCount++;
                 }
             });
+
             saveData();
-            showToast(`✅ Student attendance saved for ${savedCount} students!`);
+            showToast(`✅ Student attendance saved for ${statusSelects.length} students!`);
             loadStudentAttendanceList();
         }
 
@@ -5981,7 +6131,7 @@
             const tbody = document.getElementById('studentAttendanceBody');
             const summary = document.getElementById('studentAttendanceSummary').textContent;
             let html = `
-              <div style="font-family:Georgia,'Times New Roman',Times,serif;padding:15px;max-width:100%;background:#fff;">
+              <div style="font-family:Georgia,'Times New Roman',Times,serif;padding:15px;max-width:100%;background:#fff;font-size:12px;">
                 <div style="text-align:center;border-bottom:3px double #0066b3;padding-bottom:8px;margin-bottom:12px;">
                   <div style="display:flex;align-items:center;justify-content:center;gap:12px;">
                     <img src="school-logo.png" style="height:36px;width:36px;border-radius:50%;object-fit:contain;border:2px solid #0066b3;padding:2px;">
@@ -5994,21 +6144,31 @@
                   <h2 style="color:#c8960c;font-size:13px;margin-top:4px;">Student Attendance Report</h2>
                   <p style="color:#666;font-size:11px;">${summary}</p>
                 </div>
-                <table style="width:100%;border-collapse:collapse;font-size:10px;border:1px solid #0066b3;">
+                <table style="width:100%;border-collapse:collapse;font-size:12px;border:1px solid #0066b3;">
                   <thead><tr style="background:#0066b3;color:#c8960c;">
                     <th style="padding:4px 8px;border:1px solid #0066b3;">#</th>
-                    <th style="padding:4px 8px;border:1px solid #0066b3;">ID</th>
+                    <th style="padding:4px 8px;border:1px solid #0066b3;">Student ID</th>
                     <th style="padding:4px 8px;border:1px solid #0066b3;">Name (Father)</th>
                     <th style="padding:4px 8px;border:1px solid #0066b3;">Class</th>
-                    <th style="padding:4px 8px;border:1px solid #0066b3;">Present ✅</th>
+                    <th style="padding:4px 8px;border:1px solid #0066b3;">Section</th>
+                    <th style="padding:4px 8px;border:1px solid #0066b3;">Status</th>
                   </tr></thead><tbody>`;
             const rows = tbody.querySelectorAll('tr');
             rows.forEach(row => {
                 if (row.cells.length > 1) {
                     html += `<tr>`;
                     for (let i = 0; i < row.cells.length; i++) {
+                        const cellContent = row.cells[i].innerHTML;
+                        let displayContent = cellContent;
+                        if (i === 5) {
+                            const selectMatch = cellContent.match(/<select[^>]*>([\s\S]*?)<\/select>/);
+                            if (selectMatch) {
+                                const options = selectMatch[1].match(/<option[^>]*selected[^>]*>([^<]*)<\/option>/);
+                                if (options) displayContent = options[1].trim();
+                            }
+                        }
                         html +=
-                            `<td style="padding:3px 8px;border:1px solid #ddd;text-align:center;">${row.cells[i].innerHTML}</td>`;
+                            `<td style="padding:3px 8px;border:1px solid #ddd;text-align:center;">${displayContent}</td>`;
                     }
                     html += `</tr>`;
                 }
@@ -6019,7 +6179,7 @@
               </div>`;
             const win = window.open('', '_blank');
             win.document.write(`<html><head><title>Student Attendance Report</title><style>
-              body{font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#fff;}
+              body{font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#fff;font-size:12px;}
               @media print{body{padding:10px;}}
             </style></head><body>${html}</body></html>`);
             win.document.close();
@@ -6027,7 +6187,7 @@
         }
 
         // ================================================================
-        // ★ NEW: EMPLOYEE ATTENDANCE FUNCTIONS
+        // EMPLOYEE ATTENDANCE FUNCTIONS
         // ================================================================
         function loadEmployeeAttendanceList() {
             const date = document.getElementById('empAttDate').value;
@@ -6111,7 +6271,7 @@
             const tbody = document.getElementById('employeeAttendanceBody');
             const summary = document.getElementById('employeeAttendanceSummary').textContent;
             let html = `
-              <div style="font-family:Georgia,'Times New Roman',Times,serif;padding:15px;max-width:100%;background:#fff;">
+              <div style="font-family:Georgia,'Times New Roman',Times,serif;padding:15px;max-width:100%;background:#fff;font-size:12px;">
                 <div style="text-align:center;border-bottom:3px double #0066b3;padding-bottom:8px;margin-bottom:12px;">
                   <div style="display:flex;align-items:center;justify-content:center;gap:12px;">
                     <img src="school-logo.png" style="height:36px;width:36px;border-radius:50%;object-fit:contain;border:2px solid #0066b3;padding:2px;">
@@ -6124,7 +6284,7 @@
                   <h2 style="color:#c8960c;font-size:13px;margin-top:4px;">Employee Attendance Report</h2>
                   <p style="color:#666;font-size:11px;">${summary}</p>
                 </div>
-                <table style="width:100%;border-collapse:collapse;font-size:10px;border:1px solid #0066b3;">
+                <table style="width:100%;border-collapse:collapse;font-size:12px;border:1px solid #0066b3;">
                   <thead><tr style="background:#0066b3;color:#c8960c;">
                     <th style="padding:4px 8px;border:1px solid #0066b3;">#</th>
                     <th style="padding:4px 8px;border:1px solid #0066b3;">Employee ID</th>
@@ -6138,7 +6298,6 @@
                     html += `<tr>`;
                     for (let i = 0; i < row.cells.length; i++) {
                         const cellContent = row.cells[i].innerHTML;
-                        // Simplify status display for print
                         let displayContent = cellContent;
                         if (i === 4) {
                             const selectMatch = cellContent.match(/<select[^>]*>([\s\S]*?)<\/select>/);
@@ -6159,7 +6318,7 @@
               </div>`;
             const win = window.open('', '_blank');
             win.document.write(`<html><head><title>Employee Attendance Report</title><style>
-              body{font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#fff;}
+              body{font-family:Georgia,'Times New Roman',Times,serif;padding:15px;background:#fff;font-size:12px;}
               @media print{body{padding:10px;}}
             </style></head><body>${html}</body></html>`);
             win.document.close();
@@ -6167,12 +6326,11 @@
         }
 
         // ================================================================
-        // ★ NEW: EXPENDITURE FUNCTIONS
+        // EXPENDITURE FUNCTIONS - With Save Button
         // ================================================================
         function addExpenditureRow(data) {
             const container = document.getElementById('expenditureContainer');
 
-            // If there's a "No records" message, remove it
             if (container.querySelector('div[style*="text-align:center"]')) {
                 container.innerHTML = '';
             }
@@ -6264,6 +6422,9 @@
                 }
             });
             saveData();
+            updateExpenditureStats();
+            updateExpenditureTotal();
+            showToast('💾 Expenditure data saved!');
         }
 
         function renderExpenditure() {
@@ -6313,7 +6474,7 @@
 
             let totalAmount = 0;
             let html = `
-              <div style="font-family:Georgia,'Times New Roman',Times,serif;padding:20px;max-width:100%;background:#fff;">
+              <div style="font-family:Georgia,'Times New Roman',Times,serif;padding:20px;max-width:100%;background:#fff;font-size:12px;">
                 <div style="text-align:center;border-bottom:3px double #0066b3;padding-bottom:10px;margin-bottom:14px;">
                   <div style="display:flex;align-items:center;justify-content:center;gap:12px;">
                     <img src="school-logo.png" alt="Logo" style="height:40px;width:40px;border-radius:50%;object-fit:contain;border:2px solid #0066b3;padding:2px;">
@@ -6326,7 +6487,7 @@
                   <h2 style="color:#c8960c;font-size:14px;margin-top:4px;">Expenditure Report</h2>
                   <p style="color:#666;font-size:11px;">Generated: ${new Date().toLocaleString()} | Total Items: ${rows.length}</p>
                 </div>
-                <table style="width:100%;border-collapse:collapse;font-size:11px;border:1px solid #0066b3;">
+                <table style="width:100%;border-collapse:collapse;font-size:12px;border:1px solid #0066b3;">
                   <thead><tr style="background:#0066b3;color:#c8960c;">
                     <th style="padding:4px 8px;border:1px solid #0066b3;">#</th>
                     <th style="padding:4px 8px;border:1px solid #0066b3;">Item Name</th>
@@ -6362,7 +6523,7 @@
 
             const win = window.open('', '_blank');
             win.document.write(`<html><head><title>Expenditure Report</title><style>
-              body { font-family: Georgia, 'Times New Roman', Times, serif; padding: 20px; background: #fff; }
+              body { font-family: Georgia, 'Times New Roman', Times, serif; padding: 20px; background: #fff; font-size: 12px; }
               @media print { body { padding: 10px; } }
             </style></head><body>${html}</body></html>`);
             win.document.close();
@@ -6370,7 +6531,7 @@
         }
 
         // ================================================================
-        // ACCOUNTS (Updated to include expenditure)
+        // ACCOUNTS
         // ================================================================
         function updateAccounts() {
             const month = document.getElementById('accMonth')?.value || currentMonth;
@@ -6388,7 +6549,6 @@
             let expTotal = 0,
                 salaryTotal = 0;
 
-            // Add expenditure for this month/year
             expenditureRecords.forEach(exp => {
                 if (exp.date) {
                     const expDate = new Date(exp.date);
@@ -6418,7 +6578,7 @@
         }
 
         // ================================================================
-        // ADD MONTH (Existing)
+        // ADD MONTH
         // ================================================================
         function openAddMonthModal(studentId) {
             const s = getStudent(studentId);
@@ -6587,24 +6747,25 @@
         console.log('✅ Features:');
         console.log('  📊 Dashboard with Class Report');
         console.log('  👨‍🎓 Students Management with Fee Tracking');
-        console.log('  📝 Admission Form with Photo Upload');
+        console.log('  📝 Admission Form (Balanced Rows) with Photo Upload');
         console.log('  💾 Saved Admissions');
         console.log('  📱 Phone Directory with WhatsApp');
         console.log('  🧾 Fee Voucher Generation');
         console.log('  ⚠️ Due Fee Report');
         console.log('  📜 Transaction History');
-        console.log('  📝 Result/Marksheet System');
+        console.log('  📝 Result/Marksheet System (With Position: 1st, 2nd, 3rd, 4th...)');
         console.log('  📜 Certificates (Leaving, Character, Experience)');
         console.log('  🪪 ID Cards (Student & Teacher)');
         console.log('  📈 Student Promotion (Class-wise)');
-        console.log('  👨‍🏫 Employee Management');
+        console.log('  👨‍🏫 Employee Management (Balanced Rows)');
         console.log('  💳 Payroll System');
-        console.log('  ✅ Student Attendance with date/class filter');
+        console.log('  ✅ Student Attendance with status (Present/Absent/Late) - Like Employee Attendance');
         console.log('  ✅ Employee Attendance with status (Present/Absent/Late/Leave)');
-        console.log('  💰 Expenditure Tracking with Add/Delete/Print');
+        console.log('  💰 Expenditure Tracking with Add/Delete/Save/Print');
         console.log('  🏦 Accounts with Income/Outcome/Profit-Loss');
         console.log('  📊 Reports (Monthly, Defaulter, Class, Full, Admissions)');
         console.log('  💾 Backup & Restore');
+        console.log('  🔤 All fonts set to 12px (15px in topbar) with bold printing');
         console.log('✅ System Loaded Successfully!');
     </script>
 </body>
