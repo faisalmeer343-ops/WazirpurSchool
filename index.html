@@ -2936,6 +2936,7 @@
                             <button class="btn btn-pdf" onclick="printResultMarksheet()">🖨️ Print Individual</button>
                             <button class="btn btn-warning" onclick="editResult()">✏️ Edit</button>
                             <button class="btn btn-info" onclick="calculatePositions()">🏆 Calculate Positions</button>
+                            <button class="btn btn-pdf" onclick="printAllMarksheets()">📄 Print All Marksheets</button>
                         </div>
                     </div>
                     <div class="card">
@@ -2945,6 +2946,7 @@
                             <div class="attendance-checkbox-group" style="flex:1;">
                                 <label><input type="checkbox" id="selectAllResults" onchange="toggleAllResults()"> Select All</label>
                                 <button class="btn btn-pdf" onclick="printCombinedMarksheet()">🖨️ Print Selected (Combined)</button>
+                                <button class="btn btn-success" onclick="printAllMarksheets()">📄 Print All (All Students)</button>
                             </div>
                         </div>
                         <div class="table-wrap" style="max-height:300px;">
@@ -7254,6 +7256,124 @@ This is a notification from school.</textarea>
             showToast('🖨️ Printing combined marksheet...', 'info');
         }
 
+        // ================================================================
+        // PRINT ALL MARKSHEETS
+        // ================================================================
+        function printAllMarksheets() {
+            if (!resultRecords.length) { showToast('⚠️ No results found to print!', 'error'); return; }
+            
+            let html = `
+                <div style="font-family:'Times New Roman',Times,serif;padding:20px;max-width:100%;background:#fff;">
+                    <div style="display:flex;align-items:center;gap:14px;border-bottom:3px double #2b6cb0;padding-bottom:10px;margin-bottom:14px;">
+                        <img src="school-logo.png" alt="School Logo" style="height:48px;width:48px;border-radius:50%;object-fit:contain;background:#fff;padding:4px;border:2px solid #2b6cb0;flex-shrink:0;">
+                        <div style="flex:1;text-align:center;">
+                            <div style="font-size:18px;font-weight:900;color:#2b6cb0;letter-spacing:4px;line-height:1.2;">ELAF LYCEUM
+</div>
+                            <div style="font-size:11px;color:#2b6cb0;letter-spacing:3px;font-weight:700;">WAZIRPUR SHIGAR</div>
+                            <div style="font-size:9px;color:#666;letter-spacing:2px;font-style:italic;">SUCCESS WITH WISDOM</div>
+                            <div style="display:inline-block;background:#2b6cb0;color:#d69e2e;font-size:12px;font-weight:900;padding:2px 14px;border-radius:4px;letter-spacing:3px;margin-bottom:4px;">ELAF</div>
+                            <h2 style="color:#d69e2e;font-size:14px;margin-top:4px;">Complete Marksheet - All Students</h2>
+                            <p style="color:#666;font-size:11px;">Generated: ${new Date().toLocaleString()} | Total: ${resultRecords.length} results</p>
+                        </div>
+                    </div>`;
+            
+            // Group results by student
+            const studentResults = {};
+            resultRecords.forEach(r => {
+                if (!studentResults[r.student_id]) {
+                    studentResults[r.student_id] = [];
+                }
+                studentResults[r.student_id].push(r);
+            });
+            
+            // For each student, get the latest result
+            for (const [studentId, results] of Object.entries(studentResults)) {
+                const latestResult = results.reduce((a, b) => {
+                    return new Date(a.date || a.saved_date) > new Date(b.date || b.saved_date) ? a : b;
+                });
+                const student = getStudent(studentId);
+                if (!student) continue;
+                
+                const classResults = resultRecords.filter(rr => rr.class === latestResult.class).sort((a, b) => b.percentage - a.percentage);
+                const classPosition = classResults.findIndex(rr => rr.student_id === studentId) + 1;
+                const classPositionText = classPosition > 0 ? `${classPosition}${getPositionSuffix(classPosition)}` : '—';
+                
+                const schoolResults = resultRecords.slice().sort((a, b) => b.percentage - a.percentage);
+                const schoolPosition = schoolResults.findIndex(rr => rr.student_id === studentId) + 1;
+                const schoolPositionText = schoolPosition > 0 ? `${schoolPosition}${getPositionSuffix(schoolPosition)}` : '—';
+                
+                html += `
+                    <div style="border:4px double #2b6cb0;border-radius:10px;padding:20px;margin:20px auto;max-width:700px;position:relative;">
+                        <div style="position:absolute;top:4px;left:4px;right:4px;bottom:4px;border:2px solid #d69e2e;border-radius:6px;pointer-events:none;"></div>
+                        <div style="text-align:center;border-bottom:2px double #2b6cb0;padding-bottom:8px;margin-bottom:10px;">
+                            <h3 style="color:#2b6cb0;font-size:16px;margin:0;">ELAF LYCEUM WAZIRPUR SHIGAR</h3>
+                            <p style="margin:0;font-size:11px;color:#666;">MARKSHEET - ${latestResult.exam} Examination</p>
+                        </div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 15px;font-size:12px;margin-bottom:8px;">
+                            <div><strong>Name:</strong> ${student.name}</div>
+                            <div><strong>ID:</strong> ${student.id}</div>
+                            <div><strong>Father:</strong> ${student.father}</div>
+                            <div><strong>Class:</strong> ${student.class} (${student.section || 'A'})</div>
+                            <div><strong>Exam:</strong> ${latestResult.exam}</div>
+                            <div><strong>Seat No:</strong> ${latestResult.seat_no || 'N/A'}</div>
+                            <div><strong>Class Position:</strong> ${classPositionText}</div>
+                            <div><strong>School Position:</strong> ${schoolPositionText}</div>
+                        </div>
+                        <table style="width:100%;border-collapse:collapse;font-size:11px;border:1px solid #2b6cb0;">
+                            <thead><tr style="background:#2b6cb0;color:#fff;">
+                                <th style="padding:3px 8px;border:1px solid #2b6cb0;font-weight:900;">Subject</th>
+                                <th style="padding:3px 8px;border:1px solid #2b6cb0;font-weight:900;">Total</th>
+                                <th style="padding:3px 8px;border:1px solid #2b6cb0;font-weight:900;">Obtained</th>
+                                <th style="padding:3px 8px;border:1px solid #2b6cb0;font-weight:900;">Status</th>
+                            </tr></thead>
+                            <tbody>`;
+                
+                for (const [name, marks] of Object.entries(latestResult.subjects || {})) {
+                    const passThreshold = (marks.total * (latestResult.passing_marks || 33)) / 100;
+                    const statusText = marks.obtained >= passThreshold ? '✅ Pass' : '❌ Fail';
+                    html += `<tr>
+                        <td style="padding:3px 8px;border:1px solid #ddd;font-weight:600;">${name}</td>
+                        <td style="padding:3px 8px;border:1px solid #ddd;text-align:center;font-weight:600;">${marks.total}</td>
+                        <td style="padding:3px 8px;border:1px solid #ddd;text-align:center;font-weight:600;">${marks.obtained}</td>
+                        <td style="padding:3px 8px;border:1px solid #ddd;text-align:center;color:${marks.obtained >= passThreshold ? '#2e7d32' : '#c62828'};font-weight:700;">${statusText}</td>
+                    </tr>`;
+                }
+                
+                html += `
+                            </tbody>
+                            <tfoot>
+                                <tr style="background:#f5f3ef;border-top:2px solid #2b6cb0;">
+                                    <td style="padding:4px 8px;font-weight:800;">Total</td>
+                                    <td style="padding:4px 8px;text-align:center;font-weight:800;">${latestResult.total_marks}</td>
+                                    <td style="padding:4px 8px;text-align:center;font-weight:800;">${latestResult.obtained_marks}</td>
+                                    <td style="padding:4px 8px;text-align:center;font-weight:800;">${latestResult.percentage.toFixed(1)}%</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="padding:4px 8px;font-weight:700;">Grade: ${latestResult.grade}</td>
+                                    <td style="padding:4px 8px;text-align:center;font-weight:700;color:${latestResult.status === 'Pass' ? '#2e7d32' : '#c62828'};">${latestResult.status}</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div style="text-align:center;color:#888;font-size:9px;margin-top:8px;border-top:1px solid #ddd;padding-top:4px;">🎓 Success with Wisdom!</div>
+                    </div>
+                    <div style="page-break-after:always;"></div>
+                `;
+            }
+            
+            html += `</div>`;
+            
+            const win = window.open('', '_blank');
+            win.document.write(`<html><head><title>All Marksheets</title><style>
+                body { font-family: 'Times New Roman', Times, serif; padding: 10px; background: #fff; }
+                @media print { body { padding: 0; } }
+                table td { font-weight: 600 !important; }
+                table th { font-weight: 900 !important; }
+            </style></head><body>${html}</body></html>`);
+            win.document.close();
+            setTimeout(() => win.print(), 500);
+            showToast('🖨️ Printing all marksheets...', 'info');
+        }
+
         function viewResult(index) {
             const r = resultRecords[index];
             if (!r) { showToast('⚠️ Result not found!', 'error'); return; }
@@ -7457,7 +7577,7 @@ This is a notification from school.</textarea>
         }
 
         // ================================================================
-        // CERTIFICATES
+        // CERTIFICATES (continued)
         // ================================================================
         function populateCertificateStudents() {
             const lcClass = document.getElementById('lcClassFilter').value;
@@ -7496,7 +7616,7 @@ This is a notification from school.</textarea>
             if (!studentId) { showToast('⚠️ Please select a student!', 'error'); return; }
             const s = getStudent(studentId);
             if (!s) { showToast('⚠️ Student not found!', 'error'); return; }
-            const photoSrc = getStudentPhoto(studentId);
+            const photoSrc = getStudentPhoto(s.id);
             const display = document.getElementById('leavingCertificateDisplay');
             const dobDisplay = formatDateWords(s.dob);
 
@@ -7585,7 +7705,7 @@ This is a notification from school.</textarea>
             if (!studentId) { showToast('⚠️ Please select a student!', 'error'); return; }
             const s = getStudent(studentId);
             if (!s) { showToast('⚠️ Student not found!', 'error'); return; }
-            const photoSrc = getStudentPhoto(studentId);
+            const photoSrc = getStudentPhoto(s.id);
             const display = document.getElementById('characterCertificateDisplay');
             const dobDisplay = formatDateWords(s.dob);
 
@@ -7924,7 +8044,7 @@ This is a notification from school.</textarea>
         }
 
         // ================================================================
-        // EMPLOYEES
+        // EMPLOYEES (continued)
         // ================================================================
         async function saveEmployee() {
             const name = document.getElementById('empName').value.trim();
@@ -8082,7 +8202,7 @@ This is a notification from school.</textarea>
         }
 
         // ================================================================
-        // PAYROLL
+        // PAYROLL (continued)
         // ================================================================
         function populatePayrollEmployees() {
             const sel = document.getElementById('payrollEmployee');
@@ -9441,6 +9561,9 @@ For any queries, contact the school office.
         console.log('✅ Print styles bold and clean');
         console.log('✅ Expenditure management with Daily/Monthly reports');
         console.log('✅ Photo upload with compression');
+        console.log('✅ Print All Marksheets feature added');
+        console.log('✅ Date format: dd/mm/yyyy');
+        console.log('✅ Photo clears after save');
     </script>
 </body>
 </html>
