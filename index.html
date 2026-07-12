@@ -3217,7 +3217,7 @@
                             <div><label>Experience</label><input id="empExperience" placeholder="Experience"></div>
                             <div><label>Department</label><select id="empDepartment"><option>Teacher</option><option>Admin</option><option>Accountant</option><option>Librarian</option><option>Peon</option><option>Driver</option><option>Other</option></select></div>
                             <div><label>NIC</label><input id="empNic" placeholder="CNIC Number"></div>
-                            <div><label>Qualification</label><input id="empQualification" placeholder="Qualification"></div>
+                            <div><label>Qualification/Professional Qualification</label><input id="empQualification" placeholder="Qualification/Professional Qualification"</div>
                             <div><label>Salary</label><input id="empSalary" type="number" value="0"></div>
                             <!-- TEACHER PHOTO UPLOAD -->
                             <div class="full-width">
@@ -3929,37 +3929,69 @@ This is a notification from school.</textarea>
         
         // Format date to dd Month yyyy (e.g., 15 January 2026)
         function formatDateWords(dateStr) {
-            if (!dateStr) return 'N/A';
-            
-            // If already in dd/mm/yyyy format with words, return as is
-            if (dateStr.match(/^\d{1,2}\s+\w+\s+\d{4}$/)) return dateStr;
-            
-            // Try to parse YYYY-MM-DD format
-            const parts = dateStr.split('-');
-            if (parts.length === 3) {
-                const year = parts[0];
-                const month = parseInt(parts[1]);
-                const day = parseInt(parts[2]);
-                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
-                                   'July', 'August', 'September', 'October', 'November', 'December'];
-                const monthWord = monthNames[month - 1] || '';
-                return `${parseInt(day)} ${monthWord} ${year}`;
-            }
-            
-            // Try to parse dd/mm/yyyy format
-            const parts2 = dateStr.split('/');
-            if (parts2.length === 3) {
-                const day = parseInt(parts2[0]);
-                const month = parseInt(parts2[1]);
-                const year = parts2[2];
-                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
-                                   'July', 'August', 'September', 'October', 'November', 'December'];
-                const monthWord = monthNames[month - 1] || '';
-                return `${day} ${monthWord} ${year}`;
-            }
-            
-            return dateStr;
+    if (!dateStr) return 'N/A';
+
+    let day, month, year;
+
+    // YYYY-MM-DD
+    if (dateStr.includes('-')) {
+        const parts = dateStr.split('-');
+        year = parseInt(parts[0]);
+        month = parseInt(parts[1]);
+        day = parseInt(parts[2]);
+    }
+    // DD/MM/YYYY
+    else if (dateStr.includes('/')) {
+        const parts = dateStr.split('/');
+        day = parseInt(parts[0]);
+        month = parseInt(parts[1]);
+        year = parseInt(parts[2]);
+    } else {
+        return dateStr;
+    }
+
+    const dayWords = [
+        "", "First","Second","Third","Fourth","Fifth","Sixth","Seventh","Eighth","Ninth","Tenth",
+        "Eleventh","Twelfth","Thirteenth","Fourteenth","Fifteenth","Sixteenth","Seventeenth",
+        "Eighteenth","Nineteenth","Twentieth","Twenty First","Twenty Second","Twenty Third",
+        "Twenty Fourth","Twenty Fifth","Twenty Sixth","Twenty Seventh","Twenty Eighth",
+        "Twenty Ninth","Thirtieth","Thirty First"
+    ];
+
+    const monthWords = [
+        "January","February","March","April","May","June",
+        "July","August","September","October","November","December"
+    ];
+
+    function numberToWords(num) {
+        const ones = ["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine",
+            "Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
+        const tens = ["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
+
+        if (num < 20) return ones[num];
+        if (num < 100)
+            return tens[Math.floor(num / 10)] + (num % 10 ? " " + ones[num % 10] : "");
+        if (num < 1000)
+            return ones[Math.floor(num / 100)] + " Hundred" +
+                   (num % 100 ? " " + numberToWords(num % 100) : "");
+
+        return "";
+    }
+
+    function yearToWords(y) {
+        if (y >= 2000 && y <= 2099) {
+            return "Two Thousand" + (y % 100 ? " " + numberToWords(y % 100) : "");
         }
+
+        const first = Math.floor(y / 100);
+        const last = y % 100;
+
+        return numberToWords(first) + (last ? " " + numberToWords(last) : " Hundred");
+    }
+
+    return `${String(day).padStart(2,'0')}-${String(month).padStart(2,'0')}-${year} (${dayWords[day]} ${monthWords[month - 1]} ${yearToWords(year)})`;
+}
+    
 
         // Format date to dd/mm/yyyy format (for display)
         function formatDateDisplay(dateStr) {
@@ -7857,7 +7889,7 @@ This is a notification from school.</textarea>
                   <div class="field"><span class="label">Name of Student:</span><span class="value">${s.name}</span></div>
                   <div class="field"><span class="label">Father Name:</span><span class="value">${s.father}</span></div>
                   <div class="field"><span class="label">Date of Birth:</span><span class="value">${dobDisplay}</span></div>
-                  <div class="field"><span class="label">Date of Admission:</span><span class="value">${admDateDisplay}</span></div>
+                 <div class="field"><span class="label">Date of Admission:</span><span class="value">${admDateDisplay}</span></div>
                   <div class="field"><span class="label">Class-Admitted:</span><span class="value">${s.prevClass || s.class || 'N/A'}</span></div>
                   <div class="field"><span class="label">Class-Attending/Promoted to:</span><span class="value">${s.class} (${s.section || 'A'})</span></div>
                   <div class="field"><span class="label">Date of Leaving School:</span><span class="value">${getTodayWithMonthName()}</span></div>
@@ -8021,28 +8053,27 @@ This is a notification from school.</textarea>
                 <div class="doc-header">
                   <div class="block-letter"></div>
                   <h1>Experience Certificate</h1>
-                </div>
-                <div class="doc-body">
-                  <div class="field"><span class="label">Name:</span><span class="value">${e.name}</span></div>
-                  <div class="field"><span class="label">Father Name:</span><span class="value">${e.father || 'N/A'}</span></div>
-                  <div class="field"><span class="label">Designation:</span><span class="value">${e.designation || 'N/A'}</span></div>
-                  <div class="field"><span class="label">Experience:</span><span class="value">${e.experience || 'N/A'}</span></div>
-                  <div class="field"><span class="label">Department:</span><span class="value">${e.department || 'Teaching'}</span></div>
-                  <div class="field"><span class="label">Date of Joining:</span><span class="value">${formatDateWords(e.hired_date)}</span></div>
-                  <div class="field"><span class="label">Date of Leaving:</span><span class="value">${getTodayWithMonthName()}</span></div>
-                  <div class="field"><span class="label">Total Experience:</span><span class="value">${calculateExperience(e.hired_date)}</span></div>
-                  <div class="field" style="margin-top:8px;border-bottom:none;">
-                    <span class="label">Remarks:</span>
-                    <span class="value" style="border-bottom:1px solid #ccc;min-height:36px;font-weight:600;">The employee has worked with us diligently and has proven to be a valuable asset. We wish them all the best for their future endeavors.</span>
-                  </div>
-                </div>
-                <div class="doc-footer">
-                  <div style="display:flex;justify-content:center;margin-top:10px;">
-                    <div class="signature"><div class="line"></div>Sign of Principal</div>
-                  </div>
-                  🎓 Success with Wisdom!
-                </div>
-              </div>
+</div>
+<div class="doc-body">
+    <div class="field"><span class="label">Name:</span><span class="value">${e.name}</span></div>
+    <div class="field"><span class="label">Father Name:</span><span class="value">${e.father || 'N/A'}</span></div>
+    <div class="field"><span class="label">Designation:</span><span class="value">${e.designation || 'N/A'}</span></div>
+    <div class="field"><span class="label">Experience:</span><span class="value">${e.experience || 'N/A'}</span></div>
+    <div class="field"><span class="label">Department:</span><span class="value">${e.department || 'Teaching'}</span></div>
+    <div class="field"><span class="label">Date of Joining:</span><span class="value">${formatDateWords(e.doj)}</span></div>
+    <div class="field"><span class="label">Date of Leaving:</span><span class="value">${getTodayWithMonthName()}</span></div>
+    <div class="field"><span class="label">Total Experience:</span><span class="value">${calculateExperience(e.doj)}</span></div>
+    <div class="field" style="margin-top:8px;border-bottom:none;">
+        <span class="label">Remarks:</span>
+        <span class="value" style="border-bottom:1px solid #ccc;min-height:36px;font-weight:600;">The employee has worked with us diligently and has proven to be a valuable asset. We wish them all the best for their future endeavors.</span>
+    </div>
+</div>
+<div class="doc-footer">
+    <div style="display:flex;justify-content:center;margin-top:10px;">
+        <div class="signature"><div class="line"></div>Sign of Principal</div>
+    </div>
+    🎓 Success with Wisdom!
+</div>
             `;
             showToast('📄 Experience certificate generated!', 'success');
         }
@@ -8216,7 +8247,7 @@ This is a notification from school.</textarea>
                   <div class="row"><span class="label">Experience:</span><span class="value">${e.experience || '0'}</span></div>
                   <div class="row"><span class="label">Department:</span><span class="value">${e.department || 'Teaching'}</span></div>
                   <div class="row"><span class="label">Phone:</span><span class="value">${e.mobile || 'N/A'}</span></div>
-                  <div class="row"><span class="label">Qualification:</span><span class="value" style="font-size:9px;">${e.qualification || 'N/A'}</span></div>
+                  <div class="row"><span class="label">Qualification/Professional Qualification:</span><span class="value" style="font-size:9px;">${e.qualification || 'N/A'}</span></div>
                 </div>
                 <div class="id-footer">🎓 Success with Wisdom! • Valid: ${getTodayWithMonthName()}</div>
               </div>
@@ -8272,20 +8303,21 @@ This is a notification from school.</textarea>
             }
             
             const employeeData = {
-                name: name,
-                gender: document.getElementById('empGender').value,
-                dob: document.getElementById('empDob').value || '',
-                doj: document.getElementById('empDoj').value || '',
-                mobile: document.getElementById('empMobile').value.trim(),
-                designation: document.getElementById('empDesignation').value.trim(),
-                experience: document.getElementById('empExperience').value.trim(),
-                department: document.getElementById('empDepartment').value,
-                nic: document.getElementById('empNic').value.trim(),
-                qualification: document.getElementById('empQualification').value.trim(),
-                salary: parseFloat(document.getElementById('empSalary').value) || 0,
-                hired_date: getTodayDate(),
-                photo: photoData
-            };
+             name: name,
+             gender: document.getElementById('empGender').value,
+             dob: document.getElementById('empDob').value || '',
+             doj: document.getElementById('empDoj').value || '',
+             mobile: document.getElementById('empMobile').value.trim(),
+             designation: document.getElementById('empDesignation').value.trim(),
+             experience: document.getElementById('empExperience').value.trim(),
+            department: document.getElementById('empDepartment').value,
+            nic: document.getElementById('empNic').value.trim(),
+            qualification: document.getElementById('empQualification').value.trim(),
+            salary: parseFloat(document.getElementById('empSalary').value) || 0,
+            date_of_joining: document.getElementById('empDoj').value || '', // ✅ YEH LINE SAHI HAI
+            photo: photoData
+};
+        
 
             const result = await apiCall('save_employee', 'POST', employeeData);
             if (result && result.success) {
@@ -8346,7 +8378,7 @@ This is a notification from school.</textarea>
             let msg = '═══════════════════════════════════════\n';
             msg += `  👨‍🏫 ELAF LYCEUM WAZIRPUR SHIGAR - EMPLOYEE DETAIL\n`;
             msg += '═══════════════════════════════════════\n\n';
-            msg += `ID: ${e.id}\nName: ${e.name}\nGender: ${e.gender || 'N/A'}\nDOB: ${formatDateWords(e.dob)}\nDate of Joining: ${formatDateWords(e.doj)}\nMobile: ${e.mobile || 'N/A'}\nDesignation: ${e.designation || 'N/A'}\nExperience: ${e.experience || 'N/A'}\nDepartment: ${e.department || 'N/A'}\nNIC: ${e.nic || 'N/A'}\nQualification: ${e.qualification || 'N/A'}\nSalary: ${formatCurrency(e.salary || 0)}\nHired: ${formatDateWords(e.hired_date)}\n`;
+           msg += `ID: ${e.id}\nName: ${e.name}\nGender: ${e.gender || 'N/A'}\nDOB: ${formatDateWords(e.dob)}\nDate of Joining: ${formatDateWords(e.doj)}\nMobile: ${e.mobile || 'N/A'}\nDesignation: ${e.designation || 'N/A'}\nExperience: ${e.experience || 'N/A'}\nDepartment: ${e.department || 'N/A'}\nNIC: ${e.nic || 'N/A'}\nQualification/Professional Qualification: ${e.qualification || 'N/A'}\nSalary: ${formatCurrency(e.salary || 0)}\n`;
             if (e.photo) msg += `📷 Photo: ✓ Uploaded\n`;
             msg += '\n═══════════════════════════════════════\n🎓 Success with Wisdom!';
             alert(msg);
@@ -8366,68 +8398,176 @@ This is a notification from school.</textarea>
         }
 
         function printEmployeeProfile() {
-            const rows = document.querySelectorAll('#employeeBody tr');
-            let empIndex = -1;
-            for (let i = 0; i < rows.length; i++) {
-                if (rows[i].querySelector('td')) {
-                    empIndex = i;
-                    break;
-                }
-            }
-            if (empIndex < 0 || empIndex >= employees.length) {
-                showToast('⚠️ Please select an employee from the list!', 'error');
-                return;
-            }
-            const e = employees[empIndex];
-            if (!e) return;
-            const photoHtml = e.photo ? `<img src="${e.photo}" style="width:80px;height:80px;border:3px double #2b6cb0;border-radius:50%;object-fit:cover;margin:0 auto 8px;display:block;background:#f5f3ef;">` : '';
-            let html = `
-              <div style="font-family:var(--doc-font-family, 'Times New Roman', Times, serif);padding:20px;max-width:650px;margin:auto;background:var(--doc-bg, #ffffff);border:4px var(--doc-border-style, double) var(--doc-border-color, #2b6cb0);border-radius:10px;position:relative;">
-                <div style="position:absolute;top:4px;left:4px;right:4px;bottom:4px;border:2px solid var(--doc-accent-color, #d69e2e);border-radius:6px;pointer-events:none;"></div>
-                <div class="doc-top" style="display:flex;align-items:center;gap:16px;border-bottom:3px var(--doc-border-style, double) var(--doc-border-color, #2b6cb0);padding-bottom:10px;margin-bottom:14px;">
-                  <img src="school-logo.png" alt="School Logo" style="height:48px;width:48px;border-radius:50%;object-fit:contain;background:#fff;padding:4px;border:2px solid var(--doc-border-color, #2b6cb0);flex-shrink:0;">
-                  <div class="doc-title" style="flex:1;text-align:center;">
-                    <div class="line1">ELAF LYCEUM</div>
-                    <div class="line2">WAZIRPUR SHIGAR</div>
-                    <div class="line3">SUCCESS WITH WISDOM</div>
-                  </div>
-                </div>
-                <div style="text-align:center;border-bottom:2px var(--doc-border-style, double) var(--doc-border-color, #2b6cb0);padding-bottom:8px;margin-bottom:12px;">
-                  <div style="display:inline-block;background:var(--doc-border-color, #2b6cb0);color:var(--doc-accent-color, #d69e2e);font-size:12px;font-weight:900;padding:2px 14px;border-radius:4px;letter-spacing:3px;margin-bottom:4px;">ELAF</div>
-                  <h2 style="color:var(--doc-accent-color, #d69e2e);font-size:14px;margin-top:4px;">Employee Profile</h2>
-                </div>
-                ${photoHtml}
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;font-size:13px;padding:6px 0;">
-                  <div><strong>ID:</strong> ${e.id}</div>
-                  <div><strong>Name:</strong> ${e.name}</div>
-                  <div><strong>Gender:</strong> ${e.gender || 'N/A'}</div>
-                  <div><strong>DOB:</strong> ${formatDateWords(e.dob)}</div>
-                  <div><strong>Date of Joining:</strong> ${formatDateWords(e.doj)}</div>
-                  <div><strong>Mobile:</strong> ${e.mobile || 'N/A'}</div>
-                  <div><strong>Designation:</strong> ${e.designation || 'N/A'}</div>
-                  <div><strong>Experience:</strong> ${e.experience || 'N/A'}</div>
-                  <div><strong>Department:</strong> ${e.department || 'N/A'}</div>
-                  <div><strong>NIC:</strong> ${e.nic || 'N/A'}</div>
-                  <div><strong>Qualification:</strong> ${e.qualification || 'N/A'}</div>
-                  <div><strong>Salary:</strong> ${formatCurrency(e.salary || 0)}</div>
-                  <div style="grid-column:1/-1;"><strong>Hired Date:</strong> ${formatDateWords(e.hired_date)}</div>
-                </div>
-                <div style="margin-top:14px;padding-top:8px;border-top:2px solid var(--doc-border-color, #2b6cb0);text-align:center;color:#888;font-size:10px;letter-spacing:1px;">🎓 Success with Wisdom! | Generated: ${getTodayWithMonthName()}</div>
-              </div>
-            `;
-            const win = window.open('', '_blank');
-            win.document.write(`<html><head><title>Employee Profile - ${e.name}</title><style>
-              body{font-family:var(--doc-font-family, 'Times New Roman', Times, serif);padding:15px;background:#f0ede8;}
-              @media print{body{background:#fff;padding:10px;}
-              .doc-body .field .label{font-weight:900!important;}
-              .doc-body .field .value{font-weight:800!important;}
-              }
-            </style></head><body>${html}</body></html>`);
-            win.document.close();
-            setTimeout(() => win.print(), 500);
-            showToast('🖨️ Printing employee profile...', 'info');
+    const rows = document.querySelectorAll('#employeeBody tr');
+    let empIndex = -1;
+    for (let i = 0; i < rows.length; i++) {
+        if (rows[i].querySelector('td')) {
+            empIndex = i;
+            break;
         }
-
+    }
+    if (empIndex < 0 || empIndex >= employees.length) {
+        showToast('⚠️ Please select an employee from the list!', 'error');
+        return;
+    }
+    const e = employees[empIndex];
+    if (!e) return;
+    
+    const photoHtml = e.photo ? `<img src="${e.photo}" style="width:80px;height:80px;border:3px double #2b6cb0;border-radius:50%;object-fit:cover;margin:0 auto 10px;display:block;background:#f5f3ef;">` : '';
+    
+    let html = `
+    <div style="font-family: 'Times New Roman', Times, serif; padding: 25px; max-width: 720px; margin: auto; background: #ffffff; border: 5px double #1a365d; border-radius: 12px; position: relative; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+        
+        <!-- Inner Decorative Border -->
+        <div style="position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px; border: 2px solid #d69e2e; border-radius: 8px; pointer-events: none;"></div>
+        
+        <!-- ============ HEADER ============ -->
+        <div style="display: flex; align-items: center; gap: 16px; border-bottom: 4px double #1a365d; padding-bottom: 12px; margin-bottom: 16px; position: relative;">
+            <img src="school-logo.png" alt="School Logo" style="height: 55px; width: 55px; border-radius: 50%; object-fit: contain; background: #fff; padding: 4px; border: 2px solid #1a365d; flex-shrink: 0;">
+            <div style="flex: 1; text-align: center;">
+                <div style="font-size: 20px; font-weight: 900; color: #1a365d; letter-spacing: 3px;">ELAF LYCEUM</div>
+                <div style="font-size: 13px; font-weight: 700; color: #2d3748; letter-spacing: 1px;">WAZIRPUR SHIGAR</div>
+                <div style="font-size: 11px; font-weight: 600; color: #d69e2e; letter-spacing: 2px; font-style: italic;">SUCCESS WITH WISDOM</div>
+            </div>
+        </div>
+        
+        <!-- ============ TITLE ============ -->
+        <div style="text-align: center; border-bottom: 3px double #1a365d; padding-bottom: 10px; margin-bottom: 15px;">
+            <div style="display: inline-block; background: #1a365d; color: #d69e2e; font-size: 12px; font-weight: 900; padding: 3px 18px; border-radius: 4px; letter-spacing: 4px; margin-bottom: 6px;">EMPLOYEE</div>
+            <h2 style="color: #1a365d; font-size: 18px; margin: 2px 0 0 0; font-weight: 900; letter-spacing: 1px;">PROFILE CERTIFICATE</h2>
+        </div>
+        
+        <!-- ============ PHOTO ============ -->
+        ${photoHtml}
+        
+        <!-- ============ TABLE - IMPROVED (No Background, Bold Dark Font) ============ -->
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 10px;">
+            
+            <tr>
+                <td style="padding: 8px 12px; font-weight: 700; color: #1a202c; width: 32%; border-bottom: 1.5px solid #cbd5e0; letter-spacing: 0.5px;">Employee ID</td>
+                <td style="padding: 8px 12px; font-weight: 700; color: #2d3748; width: 68%; border-bottom: 1.5px solid #cbd5e0;">${e.id}</td>
+            </tr>
+            
+            <tr>
+                <td style="padding: 8px 12px; font-weight: 700; color: #1a202c; border-bottom: 1.5px solid #cbd5e0; letter-spacing: 0.5px;">Full Name</td>
+                <td style="padding: 8px 12px; font-weight: 700; color: #2d3748; border-bottom: 1.5px solid #cbd5e0;">${e.name}</td>
+            </tr>
+            
+            <tr>
+                <td style="padding: 8px 12px; font-weight: 700; color: #1a202c; border-bottom: 1.5px solid #cbd5e0; letter-spacing: 0.5px;">Gender</td>
+                <td style="padding: 8px 12px; font-weight: 700; color: #2d3748; border-bottom: 1.5px solid #cbd5e0;">${e.gender || 'N/A'}</td>
+            </tr>
+            
+            <tr>
+                <td style="padding: 8px 12px; font-weight: 700; color: #1a202c; border-bottom: 1.5px solid #cbd5e0; letter-spacing: 0.5px;">Date of Birth</td>
+                <td style="padding: 8px 12px; font-weight: 700; color: #2d3748; border-bottom: 1.5px solid #cbd5e0;">${formatDateWords(e.dob)}</td>
+            </tr>
+            
+            <tr>
+                <td style="padding: 8px 12px; font-weight: 700; color: #1a202c; border-bottom: 1.5px solid #cbd5e0; letter-spacing: 0.5px;">Date of Joining</td>
+                <td style="padding: 8px 12px; font-weight: 700; color: #2d3748; border-bottom: 1.5px solid #cbd5e0;">${formatDateWords(e.doj)}</td>
+            </tr>
+            
+            <tr>
+                <td style="padding: 8px 12px; font-weight: 700; color: #1a202c; border-bottom: 1.5px solid #cbd5e0; letter-spacing: 0.5px;">Mobile Number</td>
+                <td style="padding: 8px 12px; font-weight: 700; color: #2d3748; border-bottom: 1.5px solid #cbd5e0;">${e.mobile || 'N/A'}</td>
+            </tr>
+            
+            <tr>
+                <td style="padding: 8px 12px; font-weight: 700; color: #1a202c; border-bottom: 1.5px solid #cbd5e0; letter-spacing: 0.5px;">Designation</td>
+                <td style="padding: 8px 12px; font-weight: 700; color: #2d3748; border-bottom: 1.5px solid #cbd5e0;">${e.designation || 'N/A'}</td>
+            </tr>
+            
+            <tr>
+                <td style="padding: 8px 12px; font-weight: 700; color: #1a202c; border-bottom: 1.5px solid #cbd5e0; letter-spacing: 0.5px;">Experience</td>
+                <td style="padding: 8px 12px; font-weight: 700; color: #2d3748; border-bottom: 1.5px solid #cbd5e0;">${e.experience || 'N/A'}</td>
+            </tr>
+            
+            <tr>
+                <td style="padding: 8px 12px; font-weight: 700; color: #1a202c; border-bottom: 1.5px solid #cbd5e0; letter-spacing: 0.5px;">Department</td>
+                <td style="padding: 8px 12px; font-weight: 700; color: #2d3748; border-bottom: 1.5px solid #cbd5e0;">${e.department || 'N/A'}</td>
+            </tr>
+            
+            <tr>
+                <td style="padding: 8px 12px; font-weight: 700; color: #1a202c; border-bottom: 1.5px solid #cbd5e0; letter-spacing: 0.5px;">NIC / CNIC</td>
+                <td style="padding: 8px 12px; font-weight: 700; color: #2d3748; border-bottom: 1.5px solid #cbd5e0;">${e.nic || 'N/A'}</td>
+            </tr>
+            
+            <tr>
+                <td style="padding: 8px 12px; font-weight: 700; color: #1a202c; border-bottom: 1.5px solid #cbd5e0; letter-spacing: 0.5px;">Qualification</td>
+                <td style="padding: 8px 12px; font-weight: 700; color: #2d3748; border-bottom: 1.5px solid #cbd5e0;">${e.qualification || 'N/A'}</td>
+            </tr>
+            
+            <tr>
+                <td style="padding: 8px 12px; font-weight: 700; color: #1a202c; border-bottom: 1.5px solid #cbd5e0; letter-spacing: 0.5px;">Salary</td>
+                <td style="padding: 8px 12px; font-weight: 700; color: #2d3748; border-bottom: 1.5px solid #cbd5e0;">${formatCurrency(e.salary || 0)}</td>
+            </tr>
+            
+        </table>
+        
+        <!-- ============ SIGNATURE & FOOTER ============ -->
+        <div style="margin-top: 20px; padding-top: 12px; border-top: 3px double #1a365d; display: flex; justify-content: space-between; align-items: center;">
+            <div style="text-align: left;">
+                <div style="font-size: 11px; color: #4a5568; font-weight: 600;">Authorized Signature</div>
+                <div style="width: 160px; border-bottom: 2px solid #1a365d; margin-top: 4px;"></div>
+                <div style="font-size: 12px; font-weight: 700; color: #1a365d; margin-top: 2px;">(Principal)</div>
+            </div>
+            
+            <div style="text-align: center; font-size: 11px; color: #4a5568; font-weight: 600;">
+                <div>🎓 Success with Wisdom!</div>
+                <div style="font-size: 10px; color: #718096;">Generated: ${getTodayWithMonthName()}</div>
+            </div>
+            
+            <div style="text-align: right;">
+                <div style="font-size: 11px; color: #4a5568; font-weight: 600;">Employee Signature</div>
+                <div style="width: 160px; border-bottom: 2px solid #1a365d; margin-top: 4px;"></div>
+                <div style="font-size: 12px; font-weight: 700; color: #1a365d; margin-top: 2px;">(Employee)</div>
+            </div>
+        </div>
+        
+        <!-- ============ WATERMARK / BADGE ============ -->
+        <div style="text-align: center; margin-top: 10px; font-size: 9px; color: #a0aec0; letter-spacing: 2px; border-top: 1px solid #e2e8f0; padding-top: 8px;">
+            � This is a computer-generated certificate � | Verifiable at: ELAF LYCEUM Office
+        </div>
+        
+    </div>
+    `;
+    
+    const win = window.open('', '_blank');
+    win.document.write(`<html><head><title>Employee Profile - ${e.name}</title>
+    <style>
+        body { 
+            font-family: 'Times New Roman', Times, serif; 
+            padding: 20px; 
+            background: #f7f5f0; 
+        }
+        @media print {
+            body { 
+                background: #ffffff; 
+                padding: 10px; 
+            }
+            .no-print { 
+                display: none; 
+            }
+        }
+        /* Print optimization for dark bold text */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            table td {
+                font-weight: 700 !important;
+                color: #000000 !important;
+            }
+        }
+    </style>
+    </head><body>${html}</body></html>`);
+    win.document.close();
+    setTimeout(() => win.print(), 500);
+    showToast('🖨️ Printing employee profile...', 'info');
+}
         // ================================================================
         // PAYROLL
         // ================================================================
