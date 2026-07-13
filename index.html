@@ -60,26 +60,76 @@
         }
 
         /* INCREASED FONT SIZE */
-        body, .content, .card, .form-row, table, .sidebar button, .top-bar, .auth-box {
+        body,
+        .content,
+        .card,
+        .form-row,
+        table,
+        .sidebar button,
+        .top-bar,
+        .auth-box {
             font-size: 16px !important;
         }
-        .card-title { font-size: 20px !important; }
-        .form-row label { font-size: 15px !important; }
-        .form-row input, .form-row select, .form-row textarea { font-size: 15px !important; padding: 8px 14px !important; }
-        table td { font-size: 15px !important; padding: 8px 14px !important; }
-        table th { font-size: 14px !important; padding: 8px 14px !important; }
-        .btn { font-size: 15px !important; padding: 8px 20px !important; }
-        .stat-card .value { font-size: 26px !important; }
-        .stat-card .label { font-size: 13px !important; }
-        .sidebar button { font-size: 16px !important; padding: 10px 18px !important; }
-        .top-bar .title { font-size: 20px !important; }
-        .modal-content { font-size: 16px !important; }
-        .modal-header h2 { font-size: 22px !important; }
-        input, select, textarea { font-size: 15px !important; }
-        .voucher-box { font-size: 15px !important; }
-        .doc-classic { font-size: 16px !important; }
-        .admit-card-box { font-size: 15px !important; }
-        .id-card-box { font-size: 14px !important; }
+        .card-title {
+            font-size: 20px !important;
+        }
+        .form-row label {
+            font-size: 15px !important;
+        }
+        .form-row input,
+        .form-row select,
+        .form-row textarea {
+            font-size: 15px !important;
+            padding: 8px 14px !important;
+        }
+        table td {
+            font-size: 15px !important;
+            padding: 8px 14px !important;
+        }
+        table th {
+            font-size: 14px !important;
+            padding: 8px 14px !important;
+        }
+        .btn {
+            font-size: 15px !important;
+            padding: 8px 20px !important;
+        }
+        .stat-card .value {
+            font-size: 26px !important;
+        }
+        .stat-card .label {
+            font-size: 13px !important;
+        }
+        .sidebar button {
+            font-size: 16px !important;
+            padding: 10px 18px !important;
+        }
+        .top-bar .title {
+            font-size: 20px !important;
+        }
+        .modal-content {
+            font-size: 16px !important;
+        }
+        .modal-header h2 {
+            font-size: 22px !important;
+        }
+        input,
+        select,
+        textarea {
+            font-size: 15px !important;
+        }
+        .voucher-box {
+            font-size: 15px !important;
+        }
+        .doc-classic {
+            font-size: 16px !important;
+        }
+        .admit-card-box {
+            font-size: 15px !important;
+        }
+        .id-card-box {
+            font-size: 14px !important;
+        }
 
         ::-webkit-scrollbar {
             width: 6px;
@@ -2124,10 +2174,18 @@
             animation: bellRing 0.3s ease-in-out 2;
         }
         @keyframes bellRing {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(3deg); }
-            75% { transform: rotate(-3deg); }
-            100% { transform: rotate(0deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(3deg);
+            }
+            75% {
+                transform: rotate(-3deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
         }
 
         /* WHATSAPP NOTIFICATION STYLES */
@@ -2864,7 +2922,7 @@
                                 </div>
                             </div>
                             <div class="full-width" style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap;">
-                                <button class="btn btn-success" onclick="saveAdmission()">💾 Save Student</button>
+                                <button class="btn btn-success" id="admissionSaveBtn" onclick="saveAdmission()">💾 Save Student</button>
                                 <button class="btn btn-pdf" onclick="printAdmissionPDF()">📄 Print PDF</button>
                                 <button class="btn btn-secondary" onclick="clearAdmissionForm()">❌ Cancel</button>
                             </div>
@@ -3138,6 +3196,7 @@
                             <label>Student:</label><select id="lcStudent"><option value="">Select Student</option></select>
                             <button class="btn btn-primary" onclick="generateLeavingCertificate()">📄 Generate</button>
                             <button class="btn btn-pdf" onclick="printLeavingCertificate()">🖨️ Print</button>
+                            <button class="btn btn-warning" onclick="editLeavingCertificate()">✏️ Edit</button>
                         </div>
                         <div id="leavingCertificateDisplay"></div>
                     </div>
@@ -3155,6 +3214,7 @@
                             <label>Student:</label><select id="ccStudent"><option value="">Select Student</option></select>
                             <button class="btn btn-primary" onclick="generateCharacterCertificate()">📄 Generate</button>
                             <button class="btn btn-pdf" onclick="printCharacterCertificate()">🖨️ Print</button>
+                            <button class="btn btn-warning" onclick="editCharacterCertificate()">✏️ Edit</button>
                         </div>
                         <div id="characterCertificateDisplay"></div>
                     </div>
@@ -3164,6 +3224,7 @@
                             <label>Employee:</label><select id="ecEmployee"><option value="">Select Employee</option></select>
                             <button class="btn btn-primary" onclick="generateExperienceCertificate()">📄 Generate</button>
                             <button class="btn btn-pdf" onclick="printExperienceCertificate()">🖨️ Print</button>
+                            <button class="btn btn-warning" onclick="editExperienceCertificate()">✏️ Edit</button>
                         </div>
                         <div id="experienceCertificateDisplay"></div>
                     </div>
@@ -3187,6 +3248,7 @@
                             <label>Student:</label><select id="idStudent"><option value="">Select Student</option></select>
                             <button class="btn btn-primary" onclick="generateStudentIDCard()">📄 Generate</button>
                             <button class="btn btn-pdf" onclick="printStudentIDCard()">🖨️ Print</button>
+                            <button class="btn btn-warning" onclick="editStudentIDCard()">✏️ Edit</button>
                         </div>
                         <div id="studentIDCardDisplay"></div>
                     </div>
@@ -3196,6 +3258,7 @@
                             <label>Employee:</label><select id="teacherIDEmployee"><option value="">Select Employee</option></select>
                             <button class="btn btn-primary" onclick="generateTeacherIDCard()">📄 Generate</button>
                             <button class="btn btn-pdf" onclick="printTeacherIDCard()">🖨️ Print</button>
+                            <button class="btn btn-warning" onclick="editTeacherIDCard()">✏️ Edit</button>
                         </div>
                         <div id="teacherIDCardDisplay"></div>
                     </div>
@@ -3293,7 +3356,7 @@
                     <div class="card">
                         <div class="card-title"><span class="prompt">&gt;&gt;&gt;</span> Student Attendance <span class="badge">Tick Boxes</span></div>
                         <div class="form-row">
-                            <label>Date:</label><input id="attDate" type="date" value="2026-07-10">
+                            <label>Date:</label><input id="attDate" type="date" value="10-07-2026">
                             <label>Class:</label><select id="attClass"><option>All</option><option>Playgroup</option><option>Nursery</option><option>Prep</option><option>1st</option><option>2nd</option><option>3rd</option><option>4th</option><option>5th</option><option>6th</option><option>7th</option><option>8th</option><option>9th</option><option>10th</option></select>
                             <button class="btn btn-success" onclick="markAllAttendanceCheckbox('present')">✅ All Present</button>
                             <button class="btn btn-danger" onclick="markAllAttendanceCheckbox('absent')">❌ All Absent</button>
@@ -3328,7 +3391,7 @@
                     <div class="card">
                         <div class="card-title"><span class="prompt">&gt;&gt;&gt;</span> Staff Attendance <span class="badge">Tick Boxes</span></div>
                         <div class="form-row">
-                            <label>Date:</label><input id="empAttDate" type="date" value="2026-07-10">
+                            <label>Date:</label><input id="empAttDate" type="date" value="10-07-2026">
                             <label>Department:</label>
                             <select id="empAttDepartment">
                                 <option value="All">All</option>
@@ -3408,7 +3471,7 @@
                     <div class="card">
                         <div class="card-title"><span class="prompt">&gt;&gt;&gt;</span> Expenditure Management <span class="badge">Daily/Monthly</span></div>
                         <div class="form-row">
-                            <label>Date:</label><input id="expDate" type="date" value="2026-07-10">
+                            <label>Date:</label><input id="expDate" type="date" value="10-07-2026">
                             <label>Period:</label>
                             <select id="expPeriod" onchange="loadExpenditure()">
                                 <option value="daily">📅 Daily</option>
@@ -5160,6 +5223,8 @@ This is a notification from school.</textarea>
             document.getElementById('balanceFee').value = balance;
         }
 
+        let admissionEditIndex = -1;
+
         async function saveAdmission() {
             const name = document.getElementById('admName').value.trim();
             const father = document.getElementById('admFather').value.trim();
@@ -5224,6 +5289,34 @@ This is a notification from school.</textarea>
                 created_at: getTodayDate(), from_admission: true
             };
 
+            if (admissionEditIndex >= 0) {
+                // Update existing admission
+                const oldRecord = savedAdmissions[admissionEditIndex];
+                const updateData = { ...studentData, id: oldRecord.id };
+                const result = await apiCall('update_admission_record', 'POST', updateData);
+                if (result && result.success) {
+                    savedAdmissions[admissionEditIndex] = updateData;
+                    const studentIndex = students.findIndex(s => s.id === oldRecord.id);
+                    if (studentIndex >= 0) {
+                        students[studentIndex] = { ...students[studentIndex], ...updateData };
+                        localStorage.setItem('students', JSON.stringify(students));
+                    }
+                    admissionEditIndex = -1;
+                    const saveBtn = document.getElementById('admissionSaveBtn');
+                    saveBtn.textContent = '💾 Save Student';
+                    saveBtn.onclick = saveAdmission;
+                    clearAdmissionForm();
+                    renderSavedAdmissions();
+                    loadStudents();
+                    updateDashboard();
+                    showToast(`✅ Admission record for ${name} updated!`, 'success');
+                } else {
+                    showToast('❌ Error updating admission record!', 'error');
+                }
+                return;
+            }
+
+            // New admission
             const result = await apiCall('save_student', 'POST', studentData);
             if (result && result.success) {
                 const id = result.id;
@@ -5297,6 +5390,10 @@ This is a notification from school.</textarea>
             document.getElementById('photoName').textContent = 'No file chosen';
             currentPhotoDataURL = null;
             document.getElementById('totalFeeDisplay').textContent = 'Rs. 0';
+            admissionEditIndex = -1;
+            const saveBtn = document.getElementById('admissionSaveBtn');
+            saveBtn.textContent = '💾 Save Student';
+            saveBtn.onclick = saveAdmission;
             showToast('🔄 Form cleared!', 'info');
         }
 
@@ -5452,91 +5549,17 @@ This is a notification from school.</textarea>
             document.getElementById('recFee').value = a.received_fee || 0;
             calculateAdmissionTotal();
 
-            document.getElementById('admEditIndex').value = index;
+            admissionEditIndex = index;
+            const saveBtn = document.getElementById('admissionSaveBtn');
+            saveBtn.textContent = '💾 Update Student';
+            saveBtn.onclick = saveAdmission;
 
             document.querySelectorAll('.sidebar button').forEach(b => b.classList.remove('active'));
             document.querySelector('[data-tab="admission"]').classList.add('active');
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.getElementById('tab-admission').classList.add('active');
 
-            const saveBtn = document.querySelector('#tab-admission .btn-success');
-            saveBtn.textContent = '💾 Update Student';
-            saveBtn.onclick = updateSavedAdmission;
-
             showToast('✏️ Edit mode activated', 'info');
-        }
-
-        async function updateSavedAdmission() {
-            const index = parseInt(document.getElementById('admEditIndex').value) || -1;
-            if (index < 0 || index >= savedAdmissions.length) {
-                showToast('⚠️ No record to update!', 'error');
-                return;
-            }
-
-            const oldRecord = savedAdmissions[index];
-            const name = document.getElementById('admName').value.trim();
-            const father = document.getElementById('admFather').value.trim();
-            if (!name || !father) { showToast('⚠️ Name and Father required!', 'error'); return; }
-
-            const cls = document.getElementById('admClass').value;
-            let dobValue = document.getElementById('admDob').value;
-            if (dobValue && dobValue.includes('-')) {
-                const parts = dobValue.split('-');
-                dobValue = `${parts[2]}/${parts[1]}/${parts[0]}`;
-            }
-            const ageCheck = checkAgeEligibility(dobValue, cls);
-            if (!ageCheck.valid) {
-                showToast('⚠️ ' + ageCheck.message, 'error');
-                return;
-            }
-
-            const updatedData = {
-                id: oldRecord.id, name, father,
-                Guardian: document.getElementById('admGuardian').value.trim(),
-                class: cls, section: document.getElementById('admSection').value,
-                phone: document.getElementById('admPhone').value.trim(),
-                address: document.getElementById('admAddress').value.trim(),
-                dob: dobValue, gender: document.getElementById('admGender').value,
-                bForm: document.getElementById('admBForm').value.trim(),
-                nic: document.getElementById('admNic').value.trim(),
-                roll: document.getElementById('admRoll').value.trim(),
-                admissionDate: document.getElementById('admDate').value,
-                prevClass: document.getElementById('admPrevClass').value.trim(),
-                prevSchool: document.getElementById('admPrevSchool').value.trim(),
-                admission_fee: parseFloat(document.getElementById('admFee').value) || 0,
-                monthly_fee: parseFloat(document.getElementById('monthlyFee').value) || 0,
-                exam_fee: parseFloat(document.getElementById('examFee').value) || 0,
-                other_fee: parseFloat(document.getElementById('otherFee').value) || 0,
-                lab_fee: parseFloat(document.getElementById('admLabFee').value) || 0,
-                total_fee: parseFloat(document.getElementById('totalFeeDisplay').textContent.replace(/[^0-9]/g, '')) || 0,
-                received_fee: parseFloat(document.getElementById('recFee').value) || 0,
-                balance_fee: parseFloat(document.getElementById('balanceFee').value) || 0,
-                status: document.getElementById('admStatus').value,
-                discount: parseFloat(document.getElementById('admDiscount').value) || 0,
-                saved_date: getTodayDate()
-            };
-
-            const result = await apiCall('update_admission_record', 'POST', updatedData);
-            if (result && result.success) {
-                savedAdmissions[index] = updatedData;
-
-                const studentIndex = students.findIndex(s => s.id === oldRecord.id);
-                if (studentIndex >= 0) {
-                    students[studentIndex] = { ...students[studentIndex], ...updatedData };
-                    localStorage.setItem('students', JSON.stringify(students));
-                }
-
-                renderSavedAdmissions();
-                clearAdmissionForm();
-
-                const saveBtn = document.querySelector('#tab-admission .btn-success');
-                saveBtn.textContent = '💾 Save Student';
-                saveBtn.onclick = saveAdmission;
-
-                showToast(`✅ Admission record for ${name} updated!`, 'success');
-            } else {
-                showToast('❌ Error updating record!', 'error');
-            }
         }
 
         function viewSavedAdmission(index) {
@@ -7598,7 +7621,7 @@ This is a notification from school.</textarea>
                         <div style="text-align:center;border-bottom:2px double #2b6cb0;padding-bottom:8px;margin-bottom:10px;">
                             <h3 style="color:#2b6cb0;font-size:16px;margin:0;">ELAF LYCEUM WAZIRPUR SHIGAR</h3>
                             <p style="margin:0;font-size:11px;color:#666;">MARKSHEET - ${latestResult.exam} Examination</p>
-                            <p style="margin:0;font-size:10px;color:#666;">Date: ${formatDateWords(latestResult.date)}</p>
+                            <p style="margin:0;font-size:10px;color:#666;">Date: ${(latestResult.date)}</p>
                         </div>
                         <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 15px;font-size:12px;margin-bottom:8px;">
                             <div><strong>Name:</strong> ${student.name}</div>
@@ -7679,7 +7702,7 @@ This is a notification from school.</textarea>
             let msg = '═══════════════════════════════════════\n';
             msg += `  📝 ELAF LYCEUM WAZIRPUR SHIGAR - RESULT CARD\n`;
             msg += '═══════════════════════════════════════\n\n';
-            msg += `👤 ${r.student_name} (${r.student_id})\n👨 Father: ${r.father || 'N/A'}\n📚 Class: ${r.class} (${r.section || 'A'})\n📝 Exam: ${r.exam}\n📅 Date: ${formatDateWords(r.date)}\n🎫 Seat No: ${r.seat_no || 'N/A'}\n`;
+            msg += `👤 ${r.student_name} (${r.student_id})\n👨 Father: ${r.father || 'N/A'}\n📚 Class: ${r.class} (${r.section || 'A'})\n📝 Exam: ${r.exam}\n🎫 Seat No: ${r.seat_no || 'N/A'}\n`;
             msg += `🎯 Passing Marks: ${r.passing_marks || 33}%\n`;
             msg += `🏆 Class Position: ${classPositionText}\n`;
             msg += `🏆 School Position: ${schoolPositionText}\n\n`;
@@ -7923,10 +7946,10 @@ This is a notification from school.</textarea>
                   <div class="field"><span class="label">Name of Student:</span><span class="value">${s.name}</span></div>
                   <div class="field"><span class="label">Father Name:</span><span class="value">${s.father}</span></div>
                   <div class="field"><span class="label">Date of Birth:</span><span class="value">${dobDisplay}</span></div>
-                 <div class="field"><span class="label">Date of Admission:</span><span class="value">${admDateDisplay}</span></div>
+                  <div class="field"><span class="label">Date of Admission:</span><span class="value">${admDateDisplay}</span></div>
                   <div class="field"><span class="label">Class-Admitted:</span><span class="value">${s.prevClass || s.class || 'N/A'}</span></div>
                   <div class="field"><span class="label">Class-Attending/Promoted to:</span><span class="value">${s.class} (${s.section || 'A'})</span></div>
-                  <div class="field"><span class="label">Date of Leaving School:</span><span class="value">${getTodayWithMonthName()}</span></div>
+                  <div class="field"><span class="label">Date of Leaving School:</span><span class="value">___________________________________</span></div>
                   <div class="field"><span class="label">Conduct:</span><span class="value">Good</span></div>
                   <div class="field"><span class="label">Progress:</span><span class="value">Satisfactory</span></div>
                   <div class="field"><span class="label">Dated:</span><span class="value">${getTodayWithMonthName()}</span></div>
@@ -7942,6 +7965,31 @@ This is a notification from school.</textarea>
               </div>
             `;
             showToast('📄 Leaving certificate generated!', 'success');
+        }
+
+        function editLeavingCertificate() {
+            const display = document.getElementById('leavingCertificateDisplay');
+            const content = display.innerHTML;
+            if (!content || content.includes('Select a student')) {
+                showToast('⚠️ Generate the certificate first!', 'error');
+                return;
+            }
+            const currentText = content.match(/<div class="doc-body">([\s\S]*?)<\/div>/);
+            if (!currentText) { showToast('⚠️ Could not extract text!', 'error'); return; }
+            const newText = prompt('Edit certificate details (plain text):', currentText[1].replace(/<[^>]*>/g, ''));
+            if (newText !== null) {
+                const newLines = newText.split('\n').map(line => {
+                    const parts = line.split(':');
+                    if (parts.length >= 2) {
+                        const label = parts[0].trim();
+                        const value = parts.slice(1).join(':').trim();
+                        return `<div class="field"><span class="label">${label}:</span><span class="value">${value}</span></div>`;
+                    }
+                    return `<div>${line}</div>`;
+                }).join('');
+                display.innerHTML = display.innerHTML.replace(/<div class="doc-body">[\s\S]*?<\/div>/, `<div class="doc-body">${newLines}</div>`);
+                showToast('✏️ Certificate updated!', 'success');
+            }
         }
 
         function printLeavingCertificate() {
@@ -8030,6 +8078,31 @@ This is a notification from school.</textarea>
             showToast('📄 Character certificate generated!', 'success');
         }
 
+        function editCharacterCertificate() {
+            const display = document.getElementById('characterCertificateDisplay');
+            const content = display.innerHTML;
+            if (!content || content.includes('Select a student')) {
+                showToast('⚠️ Generate the certificate first!', 'error');
+                return;
+            }
+            const currentText = content.match(/<div class="doc-body">([\s\S]*?)<\/div>/);
+            if (!currentText) { showToast('⚠️ Could not extract text!', 'error'); return; }
+            const newText = prompt('Edit certificate details (plain text):', currentText[1].replace(/<[^>]*>/g, ''));
+            if (newText !== null) {
+                const newLines = newText.split('\n').map(line => {
+                    const parts = line.split(':');
+                    if (parts.length >= 2) {
+                        const label = parts[0].trim();
+                        const value = parts.slice(1).join(':').trim();
+                        return `<div class="field"><span class="label">${label}:</span><span class="value">${value}</span></div>`;
+                    }
+                    return `<div>${line}</div>`;
+                }).join('');
+                display.innerHTML = display.innerHTML.replace(/<div class="doc-body">[\s\S]*?<\/div>/, `<div class="doc-body">${newLines}</div>`);
+                showToast('✏️ Certificate updated!', 'success');
+            }
+        }
+
         function printCharacterCertificate() {
             const content = document.getElementById('characterCertificateDisplay').innerHTML;
             if (!content || content.includes('Select a student')) {
@@ -8111,6 +8184,31 @@ This is a notification from school.</textarea>
               </div>
             `;
             showToast('📄 Experience certificate generated!', 'success');
+        }
+
+        function editExperienceCertificate() {
+            const display = document.getElementById('experienceCertificateDisplay');
+            const content = display.innerHTML;
+            if (!content || content.includes('Select an employee')) {
+                showToast('⚠️ Generate the certificate first!', 'error');
+                return;
+            }
+            const currentText = content.match(/<div class="doc-body">([\s\S]*?)<\/div>/);
+            if (!currentText) { showToast('⚠️ Could not extract text!', 'error'); return; }
+            const newText = prompt('Edit certificate details (plain text):', currentText[1].replace(/<[^>]*>/g, ''));
+            if (newText !== null) {
+                const newLines = newText.split('\n').map(line => {
+                    const parts = line.split(':');
+                    if (parts.length >= 2) {
+                        const label = parts[0].trim();
+                        const value = parts.slice(1).join(':').trim();
+                        return `<div class="field"><span class="label">${label}:</span><span class="value">${value}</span></div>`;
+                    }
+                    return `<div>${line}</div>`;
+                }).join('');
+                display.innerHTML = display.innerHTML.replace(/<div class="doc-body">[\s\S]*?<\/div>/, `<div class="doc-body">${newLines}</div>`);
+                showToast('✏️ Certificate updated!', 'success');
+            }
         }
 
         function calculateExperience(hiredDate) {
@@ -8220,6 +8318,31 @@ This is a notification from school.</textarea>
             showToast('🪪 Student ID card generated!', 'success');
         }
 
+        function editStudentIDCard() {
+            const display = document.getElementById('studentIDCardDisplay');
+            const content = display.innerHTML;
+            if (!content || content.includes('Select a student')) {
+                showToast('⚠️ Generate the ID card first!', 'error');
+                return;
+            }
+            const currentText = content.match(/<div class="id-details">([\s\S]*?)<\/div>/);
+            if (!currentText) { showToast('⚠️ Could not extract text!', 'error'); return; }
+            const newText = prompt('Edit ID card details (plain text):', currentText[1].replace(/<[^>]*>/g, ''));
+            if (newText !== null) {
+                const newLines = newText.split('\n').map(line => {
+                    const parts = line.split(':');
+                    if (parts.length >= 2) {
+                        const label = parts[0].trim();
+                        const value = parts.slice(1).join(':').trim();
+                        return `<div class="row"><span class="label">${label}:</span><span class="value">${value}</span></div>`;
+                    }
+                    return `<div>${line}</div>`;
+                }).join('');
+                display.innerHTML = display.innerHTML.replace(/<div class="id-details">[\s\S]*?<\/div>/, `<div class="id-details">${newLines}</div>`);
+                showToast('✏️ ID card updated!', 'success');
+            }
+        }
+
         function printStudentIDCard() {
             const content = document.getElementById('studentIDCardDisplay').innerHTML;
             if (!content || content.includes('Select a student')) {
@@ -8288,6 +8411,31 @@ This is a notification from school.</textarea>
               </div>
             `;
             showToast('🪪 Teacher ID card generated!', 'success');
+        }
+
+        function editTeacherIDCard() {
+            const display = document.getElementById('teacherIDCardDisplay');
+            const content = display.innerHTML;
+            if (!content || content.includes('Select an employee')) {
+                showToast('⚠️ Generate the ID card first!', 'error');
+                return;
+            }
+            const currentText = content.match(/<div class="id-details">([\s\S]*?)<\/div>/);
+            if (!currentText) { showToast('⚠️ Could not extract text!', 'error'); return; }
+            const newText = prompt('Edit ID card details (plain text):', currentText[1].replace(/<[^>]*>/g, ''));
+            if (newText !== null) {
+                const newLines = newText.split('\n').map(line => {
+                    const parts = line.split(':');
+                    if (parts.length >= 2) {
+                        const label = parts[0].trim();
+                        const value = parts.slice(1).join(':').trim();
+                        return `<div class="row"><span class="label">${label}:</span><span class="value">${value}</span></div>`;
+                    }
+                    return `<div>${line}</div>`;
+                }).join('');
+                display.innerHTML = display.innerHTML.replace(/<div class="id-details">[\s\S]*?<\/div>/, `<div class="id-details">${newLines}</div>`);
+                showToast('✏️ ID card updated!', 'success');
+            }
         }
 
         function printTeacherIDCard() {
