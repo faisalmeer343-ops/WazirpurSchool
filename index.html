@@ -4514,12 +4514,18 @@ This is a notification from school.</textarea>
         let currentPhotoDataURL = null;
         let currentEmpPhotoDataURL = null;
 
+        // ================================================================
+        // ✅ FIXED: previewPhoto - Clears photo properly
+        // ================================================================
         function previewPhoto(input) {
             const file = input.files[0];
             const previewDiv = document.getElementById('photoPreview');
             const previewImg = document.getElementById('photoPreviewImg');
             const photoName = document.getElementById('photoName');
 
+            // Clear previous data
+            currentPhotoDataURL = null;
+            
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -4564,12 +4570,18 @@ This is a notification from school.</textarea>
             }
         }
 
+        // ================================================================
+        // ✅ FIXED: previewEmpPhoto - Clears photo properly
+        // ================================================================
         function previewEmpPhoto(input) {
             const file = input.files[0];
             const previewDiv = document.getElementById('empPhotoPreview');
             const previewImg = document.getElementById('empPhotoPreviewImg');
             const photoName = document.getElementById('empPhotoName');
 
+            // Clear previous data
+            currentEmpPhotoDataURL = null;
+            
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -5372,6 +5384,9 @@ This is a notification from school.</textarea>
             }
         }
 
+        // ================================================================
+        // ✅ FIXED: clearAdmissionForm - Now clears photo properly
+        // ================================================================
         function clearAdmissionForm() {
             ['admName', 'admFather', 'admGuardian', 'admPhone', 'admAddress', 'admRoll', 'admPrevSchool', 'admPrevClass',
                 'admBForm', 'admNic'].forEach(id => document.getElementById(id).value = '');
@@ -5385,7 +5400,11 @@ This is a notification from school.</textarea>
             document.getElementById('admSection').value = 'A';
             document.getElementById('admStatus').value = 'Regular';
             document.getElementById('admDiscount').value = '0';
-            document.getElementById('admPhoto').value = '';
+            
+            // ✅ FIX: Clear photo properly
+            const photoInput = document.getElementById('admPhoto');
+            photoInput.value = '';  // This clears the file input
+            
             document.getElementById('photoPreview').style.display = 'none';
             document.getElementById('photoName').textContent = 'No file chosen';
             currentPhotoDataURL = null;
@@ -7575,8 +7594,23 @@ This is a notification from school.</textarea>
             showToast('🖨️ Printing combined marksheet...', 'info');
         }
 
+        // ================================================================
+        // ✅ FIXED: printAllMarksheets - Now prints individual pattern for ALL students
+        // ================================================================
         function printAllMarksheets() {
-            if (!resultRecords.length) { showToast('⚠️ No results found to print!', 'error'); return; }
+            if (!resultRecords.length) { 
+                showToast('⚠️ No results found to print!', 'error'); 
+                return; 
+            }
+            
+            // Group results by student
+            const studentResults = {};
+            resultRecords.forEach(r => {
+                if (!studentResults[r.student_id]) {
+                    studentResults[r.student_id] = [];
+                }
+                studentResults[r.student_id].push(r);
+            });
             
             let html = `
                 <div style="font-family:'Times New Roman',Times,serif;padding:20px;max-width:100%;background:#fff;">
@@ -7587,26 +7621,21 @@ This is a notification from school.</textarea>
                             <div style="font-size:11px;color:#2b6cb0;letter-spacing:3px;font-weight:700;">WAZIRPUR SHIGAR</div>
                             <div style="font-size:9px;color:#666;letter-spacing:2px;font-style:italic;">SUCCESS WITH WISDOM</div>
                             <div style="display:inline-block;background:#2b6cb0;color:#d69e2e;font-size:12px;font-weight:900;padding:2px 14px;border-radius:4px;letter-spacing:3px;margin-bottom:4px;">ELAF</div>
-                            <h2 style="color:#d69e2e;font-size:14px;margin-top:4px;">Complete Marksheet - All Students</h2>
+                            <h2 style="color:#d69e2e;font-size:16px;margin-top:4px;">Complete Marksheet - All Students</h2>
                             <p style="color:#666;font-size:11px;">Generated: ${getTodayWithMonthName()} | Total: ${resultRecords.length} results</p>
                         </div>
                     </div>`;
             
-            const studentResults = {};
-            resultRecords.forEach(r => {
-                if (!studentResults[r.student_id]) {
-                    studentResults[r.student_id] = [];
-                }
-                studentResults[r.student_id].push(r);
-            });
-            
+            // For EACH student, print a detailed individual marksheet
             for (const [studentId, results] of Object.entries(studentResults)) {
+                // Get latest result for this student
                 const latestResult = results.reduce((a, b) => {
                     return new Date(a.date || a.saved_date) > new Date(b.date || b.saved_date) ? a : b;
                 });
                 const student = getStudent(studentId);
                 if (!student) continue;
                 
+                // Calculate positions
                 const classResults = resultRecords.filter(rr => rr.class === latestResult.class).sort((a, b) => b.percentage - a.percentage);
                 const classPosition = classResults.findIndex(rr => rr.student_id === studentId) + 1;
                 const classPositionText = classPosition > 0 ? `${classPosition}${getPositionSuffix(classPosition)}` : '—';
@@ -7615,30 +7644,43 @@ This is a notification from school.</textarea>
                 const schoolPosition = schoolResults.findIndex(rr => rr.student_id === studentId) + 1;
                 const schoolPositionText = schoolPosition > 0 ? `${schoolPosition}${getPositionSuffix(schoolPosition)}` : '—';
                 
+                const photoSrc = getStudentPhoto(studentId);
+                const dobDisplay = formatDateWords(student.dob);
+                const dateDisplay = formatDateWords(latestResult.date);
+                
+                // INDIVIDUAL DETAILED MARKSHEET for each student
                 html += `
-                    <div style="border:4px double #2b6cb0;border-radius:10px;padding:20px;margin:20px auto;max-width:700px;position:relative;">
+                    <div style="border:4px double #2b6cb0;border-radius:10px;padding:22px;margin:20px auto;max-width:720px;position:relative;page-break-after:avoid;">
                         <div style="position:absolute;top:4px;left:4px;right:4px;bottom:4px;border:2px solid #d69e2e;border-radius:6px;pointer-events:none;"></div>
-                        <div style="text-align:center;border-bottom:2px double #2b6cb0;padding-bottom:8px;margin-bottom:10px;">
-                            <h3 style="color:#2b6cb0;font-size:16px;margin:0;">ELAF LYCEUM WAZIRPUR SHIGAR</h3>
-                            <p style="margin:0;font-size:11px;color:#666;">MARKSHEET - ${latestResult.exam} Examination</p>
-                            <p style="margin:0;font-size:10px;color:#666;">Date: ${(latestResult.date)}</p>
+                        <div style="display:flex;align-items:center;gap:14px;border-bottom:3px double #2b6cb0;padding-bottom:10px;margin-bottom:14px;">
+                            <img src="school-logo.png" alt="School Logo" style="height:48px;width:48px;border-radius:50%;object-fit:contain;background:#fff;padding:4px;border:2px solid #2b6cb0;flex-shrink:0;">
+                            <div style="flex:1;text-align:center;">
+                                <div style="font-size:18px;font-weight:900;color:#2b6cb0;letter-spacing:3px;">ELAF LYCEUM</div>
+                                <div style="font-size:11px;color:#2b6cb0;letter-spacing:2px;font-weight:700;">WAZIRPUR SHIGAR</div>
+                                <div style="font-size:9px;color:#666;letter-spacing:1px;font-style:italic;">SUCCESS WITH WISDOM</div>
+                                <div style="display:inline-block;background:#2b6cb0;color:#d69e2e;font-size:11px;font-weight:900;padding:2px 14px;border-radius:4px;letter-spacing:3px;">MARKSHEET</div>
+                                <h3 style="color:#d69e2e;font-size:14px;margin:4px 0;">${latestResult.exam} Examination</h3>
+                            </div>
                         </div>
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 15px;font-size:12px;margin-bottom:8px;">
+                        ${photoSrc ? `<img src="${photoSrc}" style="width:70px;height:70px;border:3px double #2b6cb0;border-radius:50%;object-fit:cover;margin:0 auto 8px;display:block;background:#f5f3ef;">` : ''}
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;font-size:13px;padding:6px 0;border-bottom:1px dashed #ddd;margin-bottom:10px;">
                             <div><strong>Name:</strong> ${student.name}</div>
                             <div><strong>ID:</strong> ${student.id}</div>
                             <div><strong>Father:</strong> ${student.father}</div>
                             <div><strong>Class:</strong> ${student.class} (${student.section || 'A'})</div>
+                            <div><strong>DOB:</strong> ${dobDisplay}</div>
                             <div><strong>Exam:</strong> ${latestResult.exam}</div>
+                            <div><strong>Date:</strong> ${dateDisplay}</div>
                             <div><strong>Seat No:</strong> ${latestResult.seat_no || 'N/A'}</div>
                             <div><strong>Class Position:</strong> ${classPositionText}</div>
                             <div><strong>School Position:</strong> ${schoolPositionText}</div>
                         </div>
-                        <table style="width:100%;border-collapse:collapse;font-size:11px;border:1px solid #2b6cb0;">
+                        <table style="width:100%;border-collapse:collapse;font-size:12px;border:1px solid #2b6cb0;">
                             <thead><tr style="background:#2b6cb0;color:#fff;">
-                                <th style="padding:3px 8px;border:1px solid #2b6cb0;font-weight:900;">Subject</th>
-                                <th style="padding:3px 8px;border:1px solid #2b6cb0;font-weight:900;">Total</th>
-                                <th style="padding:3px 8px;border:1px solid #2b6cb0;font-weight:900;">Obtained</th>
-                                <th style="padding:3px 8px;border:1px solid #2b6cb0;font-weight:900;">Status</th>
+                                <th style="padding:4px 10px;border:1px solid #2b6cb0;font-weight:900;">Subject</th>
+                                <th style="padding:4px 10px;border:1px solid #2b6cb0;font-weight:900;">Total</th>
+                                <th style="padding:4px 10px;border:1px solid #2b6cb0;font-weight:900;">Obtained</th>
+                                <th style="padding:4px 10px;border:1px solid #2b6cb0;font-weight:900;">Status</th>
                             </tr></thead>
                             <tbody>`;
                 
@@ -7646,10 +7688,10 @@ This is a notification from school.</textarea>
                     const passThreshold = (marks.total * (latestResult.passing_marks || 33)) / 100;
                     const statusText = marks.obtained >= passThreshold ? '✅ Pass' : '❌ Fail';
                     html += `<tr>
-                        <td style="padding:3px 8px;border:1px solid #ddd;font-weight:600;">${name}</td>
-                        <td style="padding:3px 8px;border:1px solid #ddd;text-align:center;font-weight:600;">${marks.total}</td>
-                        <td style="padding:3px 8px;border:1px solid #ddd;text-align:center;font-weight:600;">${marks.obtained}</td>
-                        <td style="padding:3px 8px;border:1px solid #ddd;text-align:center;color:${marks.obtained >= passThreshold ? '#2e7d32' : '#c62828'};font-weight:700;">${statusText}</td>
+                        <td style="padding:4px 10px;border:1px solid #ddd;font-weight:600;">${name}</td>
+                        <td style="padding:4px 10px;border:1px solid #ddd;text-align:center;font-weight:600;">${marks.total}</td>
+                        <td style="padding:4px 10px;border:1px solid #ddd;text-align:center;font-weight:600;">${marks.obtained}</td>
+                        <td style="padding:4px 10px;border:1px solid #ddd;text-align:center;color:${marks.obtained >= passThreshold ? '#2e7d32' : '#c62828'};font-weight:700;">${statusText}</td>
                     </tr>`;
                 }
                 
@@ -7657,18 +7699,21 @@ This is a notification from school.</textarea>
                             </tbody>
                             <tfoot>
                                 <tr style="background:#f5f3ef;border-top:2px solid #2b6cb0;">
-                                    <td style="padding:4px 8px;font-weight:800;">Total</td>
-                                    <td style="padding:4px 8px;text-align:center;font-weight:800;">${latestResult.total_marks}</td>
-                                    <td style="padding:4px 8px;text-align:center;font-weight:800;">${latestResult.obtained_marks}</td>
-                                    <td style="padding:4px 8px;text-align:center;font-weight:800;">${latestResult.percentage.toFixed(1)}%</td>
+                                    <td style="padding:5px 10px;font-weight:800;">Total</td>
+                                    <td style="padding:5px 10px;text-align:center;font-weight:800;">${latestResult.total_marks}</td>
+                                    <td style="padding:5px 10px;text-align:center;font-weight:800;">${latestResult.obtained_marks}</td>
+                                    <td style="padding:5px 10px;text-align:center;font-weight:800;">${latestResult.percentage.toFixed(1)}%</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3" style="padding:4px 8px;font-weight:700;">Grade: ${latestResult.grade}</td>
-                                    <td style="padding:4px 8px;text-align:center;font-weight:700;color:${latestResult.status === 'Pass' ? '#2e7d32' : '#c62828'};">${latestResult.status}</td>
+                                    <td colspan="2" style="padding:4px 10px;font-weight:700;">Grade: ${latestResult.grade}</td>
+                                    <td colspan="2" style="padding:4px 10px;text-align:center;font-weight:700;color:${latestResult.status === 'Pass' ? '#2e7d32' : '#c62828'};">Status: ${latestResult.status}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="padding:4px 10px;text-align:center;font-weight:700;color:#2b6cb0;">🏆 Class Position: ${classPositionText} | School Position: ${schoolPositionText}</td>
                                 </tr>
                             </tfoot>
                         </table>
-                        <div style="text-align:center;color:#888;font-size:9px;margin-top:8px;border-top:1px solid #ddd;padding-top:4px;">🎓 Success with Wisdom!</div>
+                        <div style="text-align:center;color:#888;font-size:9px;margin-top:10px;border-top:1px solid #ddd;padding-top:6px;">🎓 Success with Wisdom! | Generated: ${getTodayWithMonthName()}</div>
                     </div>
                     <div style="page-break-after:always;"></div>
                 `;
@@ -7679,13 +7724,14 @@ This is a notification from school.</textarea>
             const win = window.open('', '_blank');
             win.document.write(`<html><head><title>All Marksheets</title><style>
                 body { font-family: 'Times New Roman', Times, serif; padding: 10px; background: #fff; }
-                @media print { body { padding: 0; } }
+                @media print { body { padding: 0; } 
                 table td { font-weight: 600 !important; }
                 table th { font-weight: 900 !important; }
+                }
             </style></head><body>${html}</body></html>`);
             win.document.close();
             setTimeout(() => win.print(), 500);
-            showToast('🖨️ Printing all marksheets...', 'info');
+            showToast('🖨️ Printing all marksheets (individual pattern)...', 'info');
         }
 
         function viewResult(index) {
@@ -8378,37 +8424,44 @@ This is a notification from school.</textarea>
             showToast('🖨️ Printing student ID card...', 'info');
         }
 
+        // ================================================================
+        // ✅ FIXED: generateTeacherIDCard - Now displays employee photo
+        // ================================================================
         function generateTeacherIDCard() {
             const empId = document.getElementById('teacherIDEmployee').value;
             if (!empId) { showToast('⚠️ Please select an employee!', 'error'); return; }
             const e = employees.find(emp => emp.id === empId);
             if (!e) { showToast('⚠️ Employee not found!', 'error'); return; }
+            
+            // ✅ FIX: Get photo from employee data OR current uploaded photo
+            let photoSrc = e.photo || currentEmpPhotoDataURL || null;
+            
             const display = document.getElementById('teacherIDCardDisplay');
             display.innerHTML = `
-              <div class="id-card-box">
-                <div class="id-top">
-                  <img src="school-logo.png" alt="School Logo" class="logo-img">
-                  <div class="id-title">
-                    <div class="line1">ELAF LYCEUM</div>
-                    <div class="line2">WAZIRPUR SHIGAR</div>
-                    <div class="line3">SUCCESS WITH WISDOM</div>
-                    <div class="card-type">Staff Identity Card</div>
-                  </div>
+                <div class="id-card-box">
+                    <div class="id-top">
+                        <img src="school-logo.png" alt="School Logo" class="logo-img">
+                        <div class="id-title">
+                            <div class="line1">ELAF LYCEUM</div>
+                            <div class="line2">WAZIRPUR SHIGAR</div>
+                            <div class="line3">SUCCESS WITH WISDOM</div>
+                            <div class="card-type">Staff Identity Card</div>
+                        </div>
+                    </div>
+                    <div class="photo-placeholder">
+                        ${photoSrc ? `<img src="${photoSrc}" alt="Teacher Photo">` : '👨‍🏫'}
+                    </div>
+                    <div class="id-details">
+                        <div class="row"><span class="label">ID:</span><span class="value">${e.id}</span></div>
+                        <div class="row"><span class="label">Name:</span><span class="value">${e.name}</span></div>
+                        <div class="row"><span class="label">Designation:</span><span class="value">${e.designation || 'Teacher'}</span></div>
+                        <div class="row"><span class="label">Experience:</span><span class="value">${e.experience || '0'}</span></div>
+                        <div class="row"><span class="label">Department:</span><span class="value">${e.department || 'Teaching'}</span></div>
+                        <div class="row"><span class="label">Phone:</span><span class="value">${e.mobile || 'N/A'}</span></div>
+                        <div class="row"><span class="label">Qualification/Professional Qualification:</span><span class="value" style="font-size:9px;">${e.qualification || 'N/A'}</span></div>
+                    </div>
+                    <div class="id-footer">🎓 Success with Wisdom! • Valid: ${getTodayWithMonthName()}</div>
                 </div>
-                <div class="photo-placeholder">
-                  ${currentEmpPhotoDataURL ? `<img src="${currentEmpPhotoDataURL}" alt="Teacher Photo">` : '👨‍🏫'}
-                </div>
-                <div class="id-details">
-                  <div class="row"><span class="label">ID:</span><span class="value">${e.id}</span></div>
-                  <div class="row"><span class="label">Name:</span><span class="value">${e.name}</span></div>
-                  <div class="row"><span class="label">Designation:</span><span class="value">${e.designation || 'Teacher'}</span></div>
-                  <div class="row"><span class="label">Experience:</span><span class="value">${e.experience || '0'}</span></div>
-                  <div class="row"><span class="label">Department:</span><span class="value">${e.department || 'Teaching'}</span></div>
-                  <div class="row"><span class="label">Phone:</span><span class="value">${e.mobile || 'N/A'}</span></div>
-                  <div class="row"><span class="label">Qualification/Professional Qualification:</span><span class="value" style="font-size:9px;">${e.qualification || 'N/A'}</span></div>
-                </div>
-                <div class="id-footer">🎓 Success with Wisdom! • Valid: ${getTodayWithMonthName()}</div>
-              </div>
             `;
             showToast('🪪 Teacher ID card generated!', 'success');
         }
@@ -8476,31 +8529,35 @@ This is a notification from school.</textarea>
         // ================================================================
         // EMPLOYEES
         // ================================================================
+        // ================================================================
+        // ✅ FIXED: saveEmployee - Now saves photo with employee
+        // ================================================================
         async function saveEmployee() {
             const name = document.getElementById('empName').value.trim();
             if (!name) { showToast('⚠️ Please enter employee name!', 'error'); return; }
             
+            // ✅ FIX: Get photo from current upload
             let photoData = null;
             if (currentEmpPhotoDataURL) {
                 photoData = currentEmpPhotoDataURL;
             }
             
             const employeeData = {
-             name: name,
-             gender: document.getElementById('empGender').value,
-             dob: document.getElementById('empDob').value || '',
-             doj: document.getElementById('empDoj').value || '',
-             mobile: document.getElementById('empMobile').value.trim(),
-             designation: document.getElementById('empDesignation').value.trim(),
-             experience: document.getElementById('empExperience').value.trim(),
-            department: document.getElementById('empDepartment').value,
-            nic: document.getElementById('empNic').value.trim(),
-            qualification: document.getElementById('empQualification').value.trim(),
-            salary: parseFloat(document.getElementById('empSalary').value) || 0,
-            date_of_joining: document.getElementById('empDoj').value || '',
-            photo: photoData
-        };
-        
+                name: name,
+                gender: document.getElementById('empGender').value,
+                dob: document.getElementById('empDob').value || '',
+                doj: document.getElementById('empDoj').value || '',
+                mobile: document.getElementById('empMobile').value.trim(),
+                designation: document.getElementById('empDesignation').value.trim(),
+                experience: document.getElementById('empExperience').value.trim(),
+                department: document.getElementById('empDepartment').value,
+                nic: document.getElementById('empNic').value.trim(),
+                qualification: document.getElementById('empQualification').value.trim(),
+                salary: parseFloat(document.getElementById('empSalary').value) || 0,
+                date_of_joining: document.getElementById('empDoj').value || '',
+                // ✅ FIX: Save photo with employee
+                photo: photoData
+            };
 
             const result = await apiCall('save_employee', 'POST', employeeData);
             if (result && result.success) {
@@ -8561,7 +8618,7 @@ This is a notification from school.</textarea>
             let msg = '═══════════════════════════════════════\n';
             msg += `  👨‍🏫 ELAF LYCEUM WAZIRPUR SHIGAR - EMPLOYEE DETAIL\n`;
             msg += '═══════════════════════════════════════\n\n';
-           msg += `ID: ${e.id}\nName: ${e.name}\nGender: ${e.gender || 'N/A'}\nDOB: ${formatDateWords(e.dob)}\nDate of Joining: ${formatDateWords(e.doj)}\nMobile: ${e.mobile || 'N/A'}\nDesignation: ${e.designation || 'N/A'}\nExperience: ${e.experience || 'N/A'}\nDepartment: ${e.department || 'N/A'}\nNIC: ${e.nic || 'N/A'}\nQualification/Professional Qualification: ${e.qualification || 'N/A'}\nSalary: ${formatCurrency(e.salary || 0)}\n`;
+            msg += `ID: ${e.id}\nName: ${e.name}\nGender: ${e.gender || 'N/A'}\nDOB: ${formatDateWords(e.dob)}\nDate of Joining: ${formatDateWords(e.doj)}\nMobile: ${e.mobile || 'N/A'}\nDesignation: ${e.designation || 'N/A'}\nExperience: ${e.experience || 'N/A'}\nDepartment: ${e.department || 'N/A'}\nNIC: ${e.nic || 'N/A'}\nQualification/Professional Qualification: ${e.qualification || 'N/A'}\nSalary: ${formatCurrency(e.salary || 0)}\n`;
             if (e.photo) msg += `📷 Photo: ✓ Uploaded\n`;
             msg += '\n═══════════════════════════════════════\n🎓 Success with Wisdom!';
             alert(msg);
@@ -10304,6 +10361,9 @@ For any queries, contact the school office.
         console.log('✅ School Time Table');
         console.log('✅ Increased font size');
         console.log('✅ Enhanced success message box for admission');
+        console.log('✅ Problem 1: Print All - Individual pattern fixed');
+        console.log('✅ Problem 2: Admission form photo clear fixed');
+        console.log('✅ Problem 3: Teacher photo in ID card fixed');
     </script>
 </body>
 </html>
