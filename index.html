@@ -2489,6 +2489,208 @@
             color: #a0aec0
         }
 
+        /* ===== MARKSHEET STYLES ===== */
+        .marksheet-wrapper {
+            background: #fff;
+            padding: 25px;
+            border: 4px double #2b6cb0;
+            border-radius: 10px;
+            max-width: 850px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .marksheet-wrapper .ms-border {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            right: 6px;
+            bottom: 6px;
+            border: 2px solid #d69e2e;
+            border-radius: 6px;
+            pointer-events: none;
+        }
+        .marksheet-wrapper .ms-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 3px double #2b6cb0;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .marksheet-wrapper .ms-logo {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #2b6cb0;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ebf4ff;
+        }
+        .marksheet-wrapper .ms-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .marksheet-wrapper .ms-logo-text {
+            font-size: 10px;
+            font-weight: 700;
+            color: #2b6cb0;
+            text-align: center;
+            line-height: 1.2;
+            padding: 2px;
+        }
+        .marksheet-wrapper .ms-school-name {
+            font-size: 22px;
+            font-weight: 900;
+            color: #2b6cb0;
+            letter-spacing: 3px;
+        }
+        .marksheet-wrapper .ms-school-sub {
+            font-size: 12px;
+            color: #2b6cb0;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+        .marksheet-wrapper .ms-motto {
+            font-size: 11px;
+            color: #d69e2e;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+        .marksheet-wrapper .ms-title-badge {
+            display: inline-block;
+            background: #2b6cb0;
+            color: #d69e2e;
+            font-size: 13px;
+            font-weight: 900;
+            padding: 2px 20px;
+            border-radius: 4px;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+        .marksheet-wrapper .ms-student-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 20px;
+            font-size: 14px;
+            padding: 6px 0;
+            border-bottom: 1px dashed #ddd;
+            margin-bottom: 12px;
+        }
+        .marksheet-wrapper .ms-student-info .ms-field {
+            display: flex;
+            padding: 2px 0;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        .marksheet-wrapper .ms-student-info .ms-field .ms-label {
+            font-weight: 700;
+            color: #2b6cb0;
+            min-width: 100px;
+        }
+        .marksheet-wrapper .ms-student-info .ms-field .ms-value {
+            font-weight: 700;
+        }
+        .marksheet-wrapper .ms-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            border: 2px solid #2b6cb0;
+            margin: 10px 0;
+        }
+        .marksheet-wrapper .ms-table thead tr {
+            background: #2b6cb0;
+            color: #fff;
+        }
+        .marksheet-wrapper .ms-table th {
+            padding: 6px 12px;
+            border: 1px solid #2b6cb0;
+            font-weight: 900;
+            text-align: center;
+        }
+        .marksheet-wrapper .ms-table td {
+            padding: 4px 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-weight: 600;
+        }
+        .marksheet-wrapper .ms-table tfoot tr {
+            background: #ebf4ff;
+            font-weight: 900;
+            border-top: 2px solid #2b6cb0;
+        }
+        .marksheet-wrapper .ms-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            gap: 6px;
+            background: #ebf4ff;
+            padding: 10px 14px;
+            border: 2px solid #2b6cb0;
+            border-radius: 4px;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 13px;
+        }
+        .marksheet-wrapper .ms-summary .ms-s-label {
+            font-size: 10px;
+            color: #4a5568;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .marksheet-wrapper .ms-summary .ms-s-value {
+            font-size: 18px;
+            font-weight: 900;
+        }
+        .marksheet-wrapper .ms-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 3px double #2b6cb0;
+        }
+        .marksheet-wrapper .ms-footer .ms-sign {
+            text-align: center;
+        }
+        .marksheet-wrapper .ms-footer .ms-sign .ms-line {
+            width: 130px;
+            border-top: 3px solid #1a202c;
+            margin: 4px auto;
+        }
+        .marksheet-wrapper .ms-footer .ms-sign .ms-label {
+            font-weight: 700;
+            color: #2b6cb0;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @media print {
+            .marksheet-wrapper {
+                border: 4px double #2b6cb0 !important;
+                box-shadow: none !important;
+                margin: 0 auto !important;
+            }
+            .marksheet-wrapper .ms-border {
+                border: 2px solid #d69e2e !important;
+            }
+            .marksheet-wrapper .ms-table td {
+                font-weight: 600 !important;
+            }
+            .marksheet-wrapper .ms-table th {
+                font-weight: 900 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background: #fff !important;
+                padding: 10px !important;
+            }
+        }
+
         /* ===== RESPONSIVE ===== */
         @media(max-width:992px) {
             .sidebar {
@@ -2543,6 +2745,12 @@
             .expenditure-item .info {
                 gap: 8px
             }
+            .marksheet-wrapper .ms-student-info {
+                grid-template-columns: 1fr;
+            }
+            .marksheet-wrapper .ms-summary {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
         }
 
         @media(max-width:576px) {
@@ -2590,6 +2798,19 @@
             .expenditure-item .info {
                 gap: 4px;
                 font-size: 12px
+            }
+            .marksheet-wrapper .ms-summary {
+                grid-template-columns: 1fr 1fr;
+            }
+            .marksheet-wrapper .ms-school-name {
+                font-size: 16px;
+            }
+            .marksheet-wrapper .ms-table {
+                font-size: 11px;
+            }
+            .marksheet-wrapper .ms-table th,
+            .marksheet-wrapper .ms-table td {
+                padding: 3px 6px;
             }
         }
 
@@ -2740,39 +2961,39 @@
 
                 <div class="section-label">📝 Academics</div>
                 <button data-tab="result"><span class="emoji">📝</span> Result <span class="key">F9</span></button>
-                <button data-tab="certificates"><span class="emoji">📜</span> Certificates <span class="key">F10</span></button>
-                <button data-tab="id-cards"><span class="emoji">🪪</span> ID Cards <span class="key">F11</span></button>
+                <button data-tab="marksheet"><span class="emoji">📊</span> Marksheet <span class="key">F10</span></button>
+                <button data-tab="certificates"><span class="emoji">📜</span> Certificates <span class="key">F11</span></button>
+                <button data-tab="id-cards"><span class="emoji">🪪</span> ID Cards <span class="key">F12</span></button>
 
                 <div class="section-label">🎫 Exams</div>
-                <button data-tab="admit-card"><span class="emoji">🎫</span> Admit Card <span class="key">F12</span></button>
-                <button data-tab="exam-block"><span class="emoji">📋</span> Exam Block <span class="key">F13</span></button>
+                <button data-tab="admit-card"><span class="emoji">🎫</span> Admit Card <span class="key">F13</span></button>
+                <button data-tab="exam-block"><span class="emoji">📋</span> Exam Block <span class="key">F14</span></button>
 
                 <div class="section-label">👨‍💼 Staff</div>
-                <button data-tab="employees"><span class="emoji">👨‍🏫</span> Employees <span class="key">F14</span></button>
+                <button data-tab="employees"><span class="emoji">👨‍🏫</span> Employees <span class="key">F15</span></button>
                 <button data-tab="payroll"><span class="emoji">💳</span> Payroll <span class="key">Ctrl+P</span></button>
 
-                <!-- ===== PROMOTION TAB ===== -->
                 <div class="section-label">🎓 Promotion</div>
-                <button data-tab="promotion"><span class="emoji">🎓</span> Promotion <span class="key">F24</span></button>
+                <button data-tab="promotion"><span class="emoji">🎓</span> Promotion <span class="key">F16</span></button>
 
                 <div class="section-label">📋 Attendance</div>
-                <button data-tab="attendance"><span class="emoji">✅</span> Attendance <span class="key">F15</span></button>
-                <button data-tab="employee-attendance"><span class="emoji">👨‍🏫</span> Staff Attendance <span class="key">F16</span></button>
+                <button data-tab="attendance"><span class="emoji">✅</span> Attendance <span class="key">F17</span></button>
+                <button data-tab="employee-attendance"><span class="emoji">👨‍🏫</span> Staff Attendance <span class="key">F18</span></button>
 
                 <div class="section-label">💰 Accounts</div>
-                <button data-tab="accounts"><span class="emoji">🏦</span> Accounts <span class="key">F17</span></button>
-                <button data-tab="expenditure"><span class="emoji">📊</span> Expenditure <span class="key">F18</span></button>
-                <button data-tab="reports"><span class="emoji">📈</span> Reports <span class="key">F19</span></button>
-                <button data-tab="backup"><span class="emoji">💾</span> Backup <span class="key">F20</span></button>
+                <button data-tab="accounts"><span class="emoji">🏦</span> Accounts <span class="key">F19</span></button>
+                <button data-tab="expenditure"><span class="emoji">📊</span> Expenditure <span class="key">F20</span></button>
+                <button data-tab="reports"><span class="emoji">📈</span> Reports <span class="key">F21</span></button>
+                <button data-tab="backup"><span class="emoji">💾</span> Backup <span class="key">F22</span></button>
 
                 <div class="section-label">🔔 Bell</div>
-                <button data-tab="bell"><span class="emoji">🔔</span> Smart Bell <span class="key">F21</span></button>
+                <button data-tab="bell"><span class="emoji">🔔</span> Smart Bell <span class="key">F23</span></button>
 
                 <div class="section-label">📱 WhatsApp</div>
-                <button data-tab="whatsapp"><span class="emoji">💬</span> WhatsApp <span class="key">F22</span></button>
+                <button data-tab="whatsapp"><span class="emoji">💬</span> WhatsApp <span class="key">F24</span></button>
 
                 <div class="section-label">📚 Time Table</div>
-                <button data-tab="timetable"><span class="emoji">📅</span> Time Table <span class="key">F23</span></button>
+                <button data-tab="timetable"><span class="emoji">📅</span> Time Table <span class="key">F25</span></button>
             </div>
 
             <!-- ========================================================== -->
@@ -3085,6 +3306,169 @@
                                 <thead><tr><th><input type="checkbox" id="selectAllResultsTable" onchange="toggleAllResultsTable()" /></th><th>ID</th><th>Name</th><th>Exam</th><th>Seat No</th><th>Obtained</th><th>%</th><th>Grade</th><th>Class Position</th><th>School Position</th><th>Actions</th></tr></thead>
                                 <tbody id="resultBody"><tr><td colspan="11" style="padding:14px;color:var(--text-muted);">No results saved</td></tr></tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================================== -->
+                <!-- TAB: MARKSHEET -->
+                <!-- ========================================================== -->
+                <div class="tab" id="tab-marksheet">
+                    <!-- Marksheet Preview Area -->
+                    <div class="card">
+                        <div class="card-title">
+                            <span class="prompt">&gt;&gt;&gt;</span> Marksheet Generator 
+                            <span class="badge">Student Report Card</span>
+                        </div>
+                        
+                        <div id="marksheetPreview" style="margin-top:15px;">
+                            <!-- Marksheet will be generated here -->
+                            <div id="marksheetContainer" style="display:none;">
+                                <div class="marksheet-wrapper">
+                                    <div class="ms-border"></div>
+                                    
+                                    <!-- Header -->
+                                    <div class="ms-header">
+                                        <div class="ms-logo" id="msLogo">
+                                            <span class="ms-logo-text">ELAF<br>LYCEUM</span>
+                                        </div>
+                                        <div style="flex:1; text-align:center;">
+                                            <div class="ms-school-name">ELAF LYCEUM</div>
+                                            <div class="ms-school-sub">WAZIRPUR SHIGAR</div>
+                                            <div class="ms-motto">✨ Success with Wisdom ✨</div>
+                                            <div class="ms-title-badge">MARKSHEET</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Student Info -->
+                                    <div class="ms-student-info">
+                                        <div class="ms-field"><span class="ms-label">Student Name</span><span class="ms-value" id="msName">—</span></div>
+                                        <div class="ms-field"><span class="ms-label">Roll No</span><span class="ms-value" id="msRoll">—</span></div>
+                                        <div class="ms-field"><span class="ms-label">Father Name</span><span class="ms-value" id="msFather">—</span></div>
+                                        <div class="ms-field"><span class="ms-label">Class</span><span class="ms-value" id="msClass">—</span></div>
+                                        <div class="ms-field"><span class="ms-label">Exam</span><span class="ms-value" id="msExam">—</span></div>
+                                        <div class="ms-field"><span class="ms-label">Date</span><span class="ms-value" id="msDate">—</span></div>
+                                    </div>
+
+                                    <!-- Marks Table -->
+                                    <table class="ms-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:8%;">S.No</th>
+                                                <th style="width:30%; text-align:left;">Subject</th>
+                                                <th style="width:15%;">Total</th>
+                                                <th style="width:15%;">Obtained</th>
+                                                <th style="width:15%;">Grade</th>
+                                                <th style="width:17%;">Remarks</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="msMarksBody">
+                                            <tr>
+                                                <td colspan="6" style="padding:20px; color:#a0aec0;">No marks entered</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr style="background:#ebf4ff; font-weight:900; border-top:2px solid #2b6cb0;">
+                                                <td colspan="2" style="text-align:right; color:#2b6cb0; padding:6px 12px;">TOTAL</td>
+                                                <td id="msTotalMarks" style="text-align:center; color:#2b6cb0; padding:6px 12px;">0</td>
+                                                <td id="msObtainedMarks" style="text-align:center; color:#2b6cb0; padding:6px 12px;">0</td>
+                                                <td id="msGrade" style="text-align:center; color:#d69e2e; font-size:16px; padding:6px 12px;">—</td>
+                                                <td id="msStatus" style="text-align:center; color:#38a169; padding:6px 12px;">—</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+
+                                    <!-- Summary Row -->
+                                    <div class="ms-summary">
+                                        <div><div class="ms-s-label">Percentage</div><div class="ms-s-value" id="msPercentage" style="color:#d69e2e;">0%</div></div>
+                                        <div><div class="ms-s-label">Grade</div><div class="ms-s-value" id="msGrade2" style="color:#38a169;">—</div></div>
+                                        <div><div class="ms-s-label">Class Position</div><div class="ms-s-value" id="msClassPosition" style="color:#2b6cb0;">—</div></div>
+                                        <div><div class="ms-s-label">School Position</div><div class="ms-s-value" id="msSchoolPosition" style="color:#2b6cb0;">—</div></div>
+                                        <div><div class="ms-s-label">Result</div><div class="ms-s-value" id="msResult" style="color:#38a169;">—</div></div>
+                                    </div>
+
+                                    <!-- Footer -->
+                                    <div class="ms-footer">
+                                        <div class="ms-sign">
+                                            <div class="ms-line"></div>
+                                            <div class="ms-label">Sign. of Principal</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="msEmptyState" style="text-align:center; padding:40px 20px; color:var(--text-muted); border:1px dashed var(--border-color); border-radius:8px;">
+                                <div style="font-size:40px; margin-bottom:10px;">📊</div>
+                                <h3 style="color:var(--accent-blue);">No Marksheet Generated</h3>
+                                <p>Select a student and enter marks below, then click "Generate Marksheet"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Marksheet Input Form -->
+                    <div class="card">
+                        <div class="card-title">
+                            <span class="prompt">&gt;&gt;&gt;</span> Enter Marks 
+                            <span class="badge">Student-wise</span>
+                        </div>
+                        
+                        <div class="form-row">
+                            <label>Student:</label>
+                            <select id="msStudent" style="flex:2; padding:6px 12px; border:1px solid var(--border-color); border-radius:4px;">
+                                <option value="">-- Select Student --</option>
+                            </select>
+                            <label>Exam:</label>
+                            <select id="msExamSelect" style="padding:6px 12px; border:1px solid var(--border-color); border-radius:4px;">
+                                <option>Monthly</option>
+                                <option>Mid-Term</option>
+                                <option>Annual</option>
+                                <option>Test</option>
+                            </select>
+                            <label>Date:</label>
+                            <input id="msDateInput" type="date" style="padding:6px 12px; border:1px solid var(--border-color); border-radius:4px;">
+                        </div>
+                        
+                        <div class="form-row">
+                            <label>Roll No:</label>
+                            <input id="msRollInput" placeholder="Roll Number" style="padding:6px 12px; border:1px solid var(--border-color); border-radius:4px; max-width:150px;">
+                            <label>Passing %:</label>
+                            <input id="msPassingMarks" type="number" value="33" style="padding:6px 12px; border:1px solid var(--border-color); border-radius:4px; max-width:80px;">
+                            <button class="btn btn-success" onclick="generateMarksheet()">📄 Generate</button>
+                            <button class="btn btn-pdf" onclick="printMarksheet()">🖨️ Print</button>
+                            <button class="btn btn-info" onclick="addMarksheetSubject()">➕ Add Subject</button>
+                            <button class="btn btn-warning" onclick="clearMarksheetForm()">🔄 Clear</button>
+                        </div>
+                        
+                        <div id="msSubjectsContainer" style="margin-top:10px;">
+                            <!-- Default Subjects -->
+                            <div class="form-row" style="flex-wrap:wrap;">
+                                <label style="min-width:70px;">English</label>
+                                <input type="number" value="100" style="max-width:70px; padding:4px 8px; border:1px solid var(--border-color); border-radius:4px;" class="ms-total">
+                                <input type="number" value="0" style="max-width:70px; padding:4px 8px; border:1px solid var(--border-color); border-radius:4px;" class="ms-obtained">
+                                <span style="font-weight:700; color:var(--accent-green); margin:0 5px;">✓</span>
+                                <button class="btn btn-danger btn-xs" onclick="removeSubject(this)">✕</button>
+                            </div>
+                            <div class="form-row" style="flex-wrap:wrap;">
+                                <label style="min-width:70px;">Urdu</label>
+                                <input type="number" value="100" style="max-width:70px; padding:4px 8px; border:1px solid var(--border-color); border-radius:4px;" class="ms-total">
+                                <input type="number" value="0" style="max-width:70px; padding:4px 8px; border:1px solid var(--border-color); border-radius:4px;" class="ms-obtained">
+                                <span style="font-weight:700; color:var(--accent-green); margin:0 5px;">✓</span>
+                                <button class="btn btn-danger btn-xs" onclick="removeSubject(this)">✕</button>
+                            </div>
+                            <div class="form-row" style="flex-wrap:wrap;">
+                                <label style="min-width:70px;">Math</label>
+                                <input type="number" value="100" style="max-width:70px; padding:4px 8px; border:1px solid var(--border-color); border-radius:4px;" class="ms-total">
+                                <input type="number" value="0" style="max-width:70px; padding:4px 8px; border:1px solid var(--border-color); border-radius:4px;" class="ms-obtained">
+                                <span style="font-weight:700; color:var(--accent-green); margin:0 5px;">✓</span>
+                                <button class="btn btn-danger btn-xs" onclick="removeSubject(this)">✕</button>
+                            </div>
+                            <div class="form-row" style="flex-wrap:wrap;">
+                                <label style="min-width:70px;">Science</label>
+                                <input type="number" value="100" style="max-width:70px; padding:4px 8px; border:1px solid var(--border-color); border-radius:4px;" class="ms-total">
+                                <input type="number" value="0" style="max-width:70px; padding:4px 8px; border:1px solid var(--border-color); border-radius:4px;" class="ms-obtained">
+                                <span style="font-weight:700; color:var(--accent-green); margin:0 5px;">✓</span>
+                                <button class="btn btn-danger btn-xs" onclick="removeSubject(this)">✕</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -3839,6 +4223,15 @@
                     noLogo.style.display = 'none' } else { settingsImg.style.display = 'none';
                     noLogo.style.display = 'block' }
             }
+            // Update marksheet logo
+            const msLogo = document.getElementById('msLogo');
+            if (msLogo) {
+                if (data) {
+                    msLogo.innerHTML = '<img src="' + data + '" style="width:100%;height:100%;object-fit:cover;">';
+                } else {
+                    msLogo.innerHTML = '<span class="ms-logo-text">ELAF<br>LYCEUM</span>';
+                }
+            }
         }
 
         function getLogoHTML() {
@@ -3941,6 +4334,11 @@
             return String(today.getDate()).padStart(2, '0') + "-" + String(today.getMonth() + 1).padStart(2,
                 '0') +
                 "-" + today.getFullYear();
+        }
+
+        function getTodayDateForFile() {
+            const today = new Date();
+            return today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
         }
 
         function updateDobWords() {
@@ -4188,7 +4586,8 @@
                         () } else if (
                         tabId === 'whatsapp') { populateWhatsAppStudents() } else if (tabId === 'timetable') { initTimeTable
                         () } else if (
-                        tabId === 'promotion') { loadPromotionStudents() }
+                        tabId === 'promotion') { loadPromotionStudents() } else if (tabId === 'marksheet') { initMarksheet
+                        () }
                 });
             });
         }
@@ -4340,6 +4739,7 @@
             loadEmpAttendanceListCheckbox();
             initTimeTable();
             loadPromotionStudents();
+            initMarksheet();
             console.log('🏫 ELAF LYCEUM WAZIRPUR SHIGAR - v3.0 Loaded!');
         }
 
@@ -6637,7 +7037,7 @@
                 { label: 'Class-Attending/Promoted to', value: s.class + ' (' + (s
                         .section ||
                         'A') + ')' },
-                { label: 'Date of Leaving School', value: todayDate },
+                { label: 'Date of Leaving School', value: '___________________' },
                 { label: 'Conduct', value: 'Good' },
                 { label: 'Progress', value: 'Satisfactory' },
                 { label: 'Dated', value: todayDate },
@@ -8301,6 +8701,283 @@
         }
 
         // ================================================================
+        // MARKSHEET GENERATOR FUNCTIONS
+        // ================================================================
+
+        function initMarksheet() {
+            populateMarksheetStudents();
+            const dateInput = document.getElementById('msDateInput');
+            if (dateInput) {
+                dateInput.value = new Date().toISOString().split('T')[0];
+            }
+            
+            // Add event listeners for subject marks
+            document.querySelectorAll('#msSubjectsContainer .ms-total, #msSubjectsContainer .ms-obtained').forEach(el => {
+                el.addEventListener('input', function() {
+                    updateSubjectStatus(this);
+                });
+            });
+        }
+
+        function populateMarksheetStudents() {
+            const sel = document.getElementById('msStudent');
+            if (!sel) return;
+            sel.innerHTML = '<option value="">-- Select Student --</option>';
+            students.forEach(s => {
+                sel.innerHTML += '<option value="' + s.id + '">' + s.id + ' - ' + s.name + ' (' + s.father + ') - ' + s.class + '</option>';
+            });
+        }
+
+        function updateSubjectStatus(input) {
+            const row = input.closest('.form-row');
+            if (!row) return;
+            const total = parseFloat(row.querySelector('.ms-total')?.value) || 0;
+            const obtained = parseFloat(row.querySelector('.ms-obtained')?.value) || 0;
+            const passing = parseFloat(document.getElementById('msPassingMarks').value) || 33;
+            const passThreshold = total * passing / 100;
+            const statusSpan = row.querySelector('span');
+            if (statusSpan) {
+                if (obtained >= passThreshold && obtained <= total && total > 0) {
+                    statusSpan.textContent = '✓';
+                    statusSpan.style.color = '#38a169';
+                } else if (obtained > 0) {
+                    statusSpan.textContent = '✕';
+                    statusSpan.style.color = '#e53e3e';
+                } else {
+                    statusSpan.textContent = '✓';
+                    statusSpan.style.color = '#38a169';
+                }
+            }
+        }
+
+        function addMarksheetSubject() {
+            const container = document.getElementById('msSubjectsContainer');
+            const subjectName = prompt('Enter subject name:');
+            if (!subjectName) return;
+            const div = document.createElement('div');
+            div.className = 'form-row';
+            div.style.flexWrap = 'wrap';
+            div.innerHTML = `
+                <label style="min-width:70px;">${subjectName}</label>
+                <input type="number" value="100" style="max-width:70px; padding:4px 8px; border:1px solid var(--border-color); border-radius:4px;" class="ms-total">
+                <input type="number" value="0" style="max-width:70px; padding:4px 8px; border:1px solid var(--border-color); border-radius:4px;" class="ms-obtained">
+                <span style="font-weight:700; color:var(--accent-green); margin:0 5px;">✓</span>
+                <button class="btn btn-danger btn-xs" onclick="removeSubject(this)">✕</button>
+            `;
+            container.appendChild(div);
+            
+            // Add event listeners
+            div.querySelectorAll('.ms-total, .ms-obtained').forEach(el => {
+                el.addEventListener('input', function() {
+                    updateSubjectStatus(this);
+                });
+            });
+            
+            showToast('➕ Subject added!', 'success');
+        }
+
+        function removeSubject(btn) {
+            const row = btn.closest('.form-row');
+            if (document.querySelectorAll('#msSubjectsContainer .form-row').length <= 1) {
+                showToast('⚠️ At least one subject is required!', 'error');
+                return;
+            }
+            row.remove();
+        }
+
+        function clearMarksheetForm() {
+            document.getElementById('msStudent').value = '';
+            document.getElementById('msRollInput').value = '';
+            const container = document.getElementById('msSubjectsContainer');
+            container.innerHTML = '';
+            // Add default subjects
+            ['English', 'Urdu', 'Math', 'Science'].forEach(sub => {
+                const div = document.createElement('div');
+                div.className = 'form-row';
+                div.style.flexWrap = 'wrap';
+                div.innerHTML = `
+                    <label style="min-width:70px;">${sub}</label>
+                    <input type="number" value="100" style="max-width:70px; padding:4px 8px; border:1px solid var(--border-color); border-radius:4px;" class="ms-total">
+                    <input type="number" value="0" style="max-width:70px; padding:4px 8px; border:1px solid var(--border-color); border-radius:4px;" class="ms-obtained">
+                    <span style="font-weight:700; color:var(--accent-green); margin:0 5px;">✓</span>
+                    <button class="btn btn-danger btn-xs" onclick="removeSubject(this)">✕</button>
+                `;
+                container.appendChild(div);
+                
+                // Add event listeners
+                div.querySelectorAll('.ms-total, .ms-obtained').forEach(el => {
+                    el.addEventListener('input', function() {
+                        updateSubjectStatus(this);
+                    });
+                });
+            });
+            document.getElementById('msDateInput').value = new Date().toISOString().split('T')[0];
+            document.getElementById('msExamSelect').value = 'Annual';
+            document.getElementById('msPassingMarks').value = '33';
+            document.getElementById('msEmptyState').style.display = 'block';
+            document.getElementById('marksheetContainer').style.display = 'none';
+            showToast('🔄 Marksheet form cleared!', 'info');
+        }
+
+        function generateMarksheet() {
+            const studentId = document.getElementById('msStudent').value;
+            if (!studentId) { showToast('⚠️ Please select a student!', 'error'); return }
+            
+            const student = getStudent(studentId);
+            if (!student) { showToast('⚠️ Student not found!', 'error'); return }
+            
+            const exam = document.getElementById('msExamSelect').value;
+            const date = document.getElementById('msDateInput').value || new Date().toISOString().split('T')[0];
+            const rollNo = document.getElementById('msRollInput').value.trim() || student.roll || student.id || 'N/A';
+            const passingMarks = parseFloat(document.getElementById('msPassingMarks').value) || 33;
+            
+            // Collect subjects
+            const subjects = [];
+            const rows = document.querySelectorAll('#msSubjectsContainer .form-row');
+            let totalMarks = 0, obtainedMarks = 0;
+            let allPass = true;
+            
+            rows.forEach((row, index) => {
+                const label = row.querySelector('label')?.textContent || 'Subject ' + (index + 1);
+                const total = parseFloat(row.querySelector('.ms-total')?.value) || 0;
+                const obtained = parseFloat(row.querySelector('.ms-obtained')?.value) || 0;
+                const passThreshold = total * passingMarks / 100;
+                const status = obtained >= passThreshold && obtained <= total ? 'Pass' : 'Fail';
+                const grade = getGrade(obtained / total * 100);
+                if (status === 'Fail') allPass = false;
+                subjects.push({ name: label, total, obtained, status, grade });
+                totalMarks += total;
+                obtainedMarks += obtained;
+            });
+            
+            if (totalMarks === 0) { showToast('⚠️ Please enter valid marks!', 'error'); return }
+            
+            const percentage = (obtainedMarks / totalMarks) * 100;
+            const overallGrade = getGrade(percentage);
+            const resultStatus = allPass && percentage >= passingMarks ? '✅ PASS' : '❌ FAIL';
+            const resultColor = allPass && percentage >= passingMarks ? '#38a169' : '#e53e3e';
+            
+            // Calculate positions
+            const classResults = resultRecords.filter(r => r.class === student.class);
+            const classPosition = classResults.length > 0 ? classResults.filter(r => r.percentage > percentage).length + 1 : '—';
+            const schoolResults = resultRecords.slice();
+            const schoolPosition = schoolResults.length > 0 ? schoolResults.filter(r => r.percentage > percentage).length + 1 : '—';
+            
+            // Update display
+            document.getElementById('msName').textContent = student.name;
+            document.getElementById('msRoll').textContent = rollNo;
+            document.getElementById('msFather').textContent = student.father;
+            document.getElementById('msClass').textContent = student.class + ' (' + (student.section || 'A') + ')';
+            document.getElementById('msExam').textContent = exam;
+            document.getElementById('msDate').textContent = formatDateOnly(date);
+            
+            // Update marks table
+            const tbody = document.getElementById('msMarksBody');
+            tbody.innerHTML = '';
+            subjects.forEach((sub, idx) => {
+                const tr = document.createElement('tr');
+                const passColor = sub.status === 'Pass' ? '#38a169' : '#e53e3e';
+                tr.innerHTML = `
+                    <td style="padding:4px 10px; border:1px solid #ddd; text-align:center; font-weight:600;">${idx + 1}</td>
+                    <td style="padding:4px 10px; border:1px solid #ddd; font-weight:600; color:#2b6cb0; text-align:left;">${sub.name}</td>
+                    <td style="padding:4px 10px; border:1px solid #ddd; text-align:center; font-weight:600;">${sub.total}</td>
+                    <td style="padding:4px 10px; border:1px solid #ddd; text-align:center; font-weight:600;">${sub.obtained}</td>
+                    <td style="padding:4px 10px; border:1px solid #ddd; text-align:center; font-weight:700; color:${passColor};">${sub.grade}</td>
+                    <td style="padding:4px 10px; border:1px solid #ddd; text-align:center; font-weight:600; color:${passColor};">${sub.status}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+            
+            document.getElementById('msTotalMarks').textContent = totalMarks;
+            document.getElementById('msObtainedMarks').textContent = obtainedMarks;
+            document.getElementById('msGrade').textContent = overallGrade;
+            document.getElementById('msStatus').textContent = resultStatus;
+            document.getElementById('msStatus').style.color = resultColor;
+            
+            document.getElementById('msPercentage').textContent = percentage.toFixed(2) + '%';
+            document.getElementById('msGrade2').textContent = overallGrade;
+            document.getElementById('msClassPosition').textContent = classPosition;
+            document.getElementById('msSchoolPosition').textContent = schoolPosition;
+            document.getElementById('msResult').textContent = resultStatus;
+            document.getElementById('msResult').style.color = resultColor;
+            
+            // Show marksheet
+            document.getElementById('msEmptyState').style.display = 'none';
+            document.getElementById('marksheetContainer').style.display = 'block';
+            
+            // Save result
+            const resultData = {
+                student_id: studentId,
+                student_name: student.name,
+                father: student.father,
+                class: student.class,
+                section: student.section || 'A',
+                exam: exam,
+                date: date,
+                seat_no: rollNo,
+                passing_marks: passingMarks,
+                subjects: subjects.reduce((acc, sub) => { acc[sub.name] = { total: sub.total, obtained: sub.obtained }; return acc; }, {}),
+                total_marks: totalMarks,
+                obtained_marks: obtainedMarks,
+                percentage: percentage,
+                grade: overallGrade,
+                status: allPass && percentage >= passingMarks ? 'Pass' : 'Fail',
+                saved_date: getTodayDate()
+            };
+            resultRecords.push(resultData);
+            localStorage.setItem('results', JSON.stringify(resultRecords));
+            loadResults();
+            
+            showToast('✅ Marksheet generated for ' + student.name + '!', 'success');
+        }
+
+        function printMarksheet() {
+            const container = document.getElementById('marksheetContainer');
+            if (!container || container.style.display === 'none') {
+                showToast('⚠️ Please generate a marksheet first!', 'error');
+                return;
+            }
+            
+            const content = container.innerHTML;
+            const win = window.open('', '_blank', 'width=800,height=600');
+            win.document.write(`
+                <html>
+                <head>
+                    <title>Marksheet</title>
+                    <style>
+                        * { margin:0; padding:0; box-sizing:border-box; }
+                        body { font-family: 'Arial', 'Helvetica', sans-serif; padding:20px; background:#fff; }
+                        ${document.querySelector('style').textContent}
+                        @media print {
+                            body { padding:10px; background:#fff; }
+                            .marksheet-wrapper { border:4px double #2b6cb0 !important; box-shadow:none !important; margin:0 auto !important; }
+                            .marksheet-wrapper .ms-border { border:2px solid #d69e2e !important; }
+                            .marksheet-wrapper .ms-table td { font-weight:600 !important; }
+                            .marksheet-wrapper .ms-table th { font-weight:900 !important; }
+                            .no-print { display:none !important; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="marksheet-wrapper">
+                        ${content}
+                    </div>
+                    <script>
+                        window.onload = function() {
+                            setTimeout(function() {
+                                window.print();
+                                setTimeout(function() { window.close(); }, 1000);
+                            }, 500);
+                        };
+                    <\/script>
+                </body>
+                </html>
+            `);
+            win.document.close();
+            showToast('🖨️ Printing marksheet...', 'info');
+        }
+
+        // ================================================================
         // OTHER FUNCTIONS (Placeholders for full functionality)
         // ================================================================
         function populateIDStudents() {
@@ -8697,6 +9374,7 @@
                         loadExpenditure();
                         updateAccounts();
                         loadPromotionStudents();
+                        populateMarksheetStudents();
                         showToast('✅ Data restored from backup!', 'success');
                     } catch (err) { showToast('❌ Error: ' + err.message, 'error') }
                 };
@@ -8906,6 +9584,7 @@
 
         console.log('🏫 ELAF LYCEUM WAZIRPUR SHIGAR - v3.0 FULLY LOADED!');
         console.log('✅ All functions working properly!');
+        console.log('✅ Marksheet added with table format');
         console.log('✅ Certificates - student select fixed');
         console.log('✅ Promotion - 1st to 2nd working');
         console.log('✅ Pay Slip - generate working with photo');
