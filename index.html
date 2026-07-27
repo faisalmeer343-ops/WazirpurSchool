@@ -57,8 +57,7 @@
         .form-row,
         table,
         .sidebar button,
-        .top-bar,
-        .auth-box {
+        .top-bar {
             font-size: 16px !important
         }
         .card-title {
@@ -798,131 +797,6 @@
             font-family: 'Arial', 'Helvetica', sans-serif
         }
 
-        /* ===== AUTH ===== */
-        .auth-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #1a202c 0%, #2b6cb0 100%);
-            padding: 20px
-        }
-        .auth-box {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 32px 28px;
-            max-width: 420px;
-            width: 100%;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            border-top: 4px solid var(--accent-gold)
-        }
-        .auth-box .logo-area {
-            text-align: center;
-            margin-bottom: 20px
-        }
-        .auth-box .logo-area .line1 {
-            font-size: 22px;
-            font-weight: 900;
-            color: var(--accent-blue);
-            letter-spacing: 2px
-        }
-        .auth-box .logo-area .line2 {
-            font-size: 12px;
-            color: var(--accent-gold);
-            letter-spacing: 2px;
-            font-weight: 700
-        }
-        .auth-box .logo-area .line3 {
-            font-size: 10px;
-            color: var(--text-muted);
-            letter-spacing: 1px
-        }
-        .auth-box h2 {
-            color: var(--accent-blue);
-            font-size: 18px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 16px
-        }
-        .auth-box .form-group {
-            margin-bottom: 12px
-        }
-        .auth-box .form-group label {
-            display: block;
-            font-weight: 600;
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 4px
-        }
-        .auth-box .form-group input {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 14px;
-            font-family: var(--font-primary);
-            transition: all .2s
-        }
-        .auth-box .form-group input:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 2px rgba(43, 108, 176, 0.15)
-        }
-        .auth-box .btn-auth {
-            width: 100%;
-            padding: 10px;
-            background: var(--accent-blue);
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all .2s;
-            font-family: var(--font-primary);
-            margin-top: 6px
-        }
-        .auth-box .btn-auth:hover {
-            background: #3182ce;
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-hover)
-        }
-        .auth-box .btn-auth.gold {
-            background: var(--accent-gold)
-        }
-        .auth-box .btn-auth.gold:hover {
-            background: #ecc94b
-        }
-        .auth-box .auth-switch {
-            text-align: center;
-            margin-top: 12px;
-            font-size: 13px;
-            color: var(--text-muted)
-        }
-        .auth-box .auth-switch a {
-            color: var(--accent-blue);
-            font-weight: 700;
-            cursor: pointer;
-            text-decoration: none
-        }
-        .auth-box .auth-switch a:hover {
-            text-decoration: underline
-        }
-        .auth-box .error-msg {
-            color: var(--accent-red);
-            font-size: 13px;
-            text-align: center;
-            margin-top: 8px;
-            min-height: 20px
-        }
-        .auth-box .success-msg {
-            color: var(--accent-green);
-            font-size: 13px;
-            text-align: center;
-            margin-top: 8px;
-            min-height: 20px
-        }
-
         /* ===== TOP BAR ===== */
         .top-bar {
             background: var(--bg-card);
@@ -1027,21 +901,6 @@
         }
         .top-stats .stat-dot.blue {
             background: var(--accent-blue)
-        }
-        .top-bar .logout-btn {
-            background: var(--accent-red);
-            color: #fff;
-            border: none;
-            padding: 6px 16px;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all .2s;
-            font-family: var(--font-primary)
-        }
-        .top-bar .logout-btn:hover {
-            background: #fc8181
         }
 
         /* ===== SIDEBAR & CONTENT ===== */
@@ -2880,40 +2739,9 @@
 <body>
 
     <!-- ============================================================ -->
-    <!-- AUTH CONTAINER -->
+    <!-- APP CONTAINER (DIRECT SHOW - NO LOGIN) -->
     <!-- ============================================================ -->
-    <div id="authContainer" class="auth-container">
-        <div class="auth-box">
-            <div class="logo-area">
-                <div class="line1">ELAF LYCEUM</div>
-                <div class="line2">WAZIRPUR SHIGAR</div>
-                <div class="line3">SUCCESS WITH WISDOM</div>
-            </div>
-            <h2 id="authTitle">Login</h2>
-            <div id="authForm">
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" id="authUsername" placeholder="Enter username" />
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" id="authPassword" placeholder="Enter password" />
-                </div>
-                <button class="btn-auth" id="authActionBtn" onclick="handleAuth()">Login</button>
-                <div class="error-msg" id="authError"></div>
-                <div class="success-msg" id="authSuccess"></div>
-                <div class="auth-switch">
-                    <span id="authSwitchText">Don't have an account?</span>
-                    <a id="authSwitchLink" onclick="toggleAuthMode()">Register</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- APP CONTAINER -->
-    <!-- ============================================================ -->
-    <div id="appContainer" style="display:none;">
+    <div id="appContainer" style="display:block;">
 
         <!-- TOP BAR -->
         <div class="top-bar">
@@ -2935,7 +2763,6 @@
                 <span><span class="stat-dot blue"></span> Collected: <strong id="topCollected">Rs.0</strong></span>
                 <span><span class="stat-dot red"></span> Due: <strong id="topBalance">Rs.0</strong></span>
             </div>
-            <button class="logout-btn" onclick="logout()">🚪 Logout</button>
         </div>
 
         <!-- MAIN CONTAINER -->
@@ -4110,84 +3937,9 @@
     <script>
         // ================================================================
         // ELAF SCHOOL MANAGEMENT SYSTEM - COMPLETE JAVASCRIPT
+        // LOGIN SYSTEM REMOVED - DIRECT ACCESS
+        // ALL FEATURES WORKING
         // ================================================================
-
-        // ================================================================
-        // AUTHENTICATION
-        // ================================================================
-        const AUTH_KEY = 'elaf_users';
-        let currentUser = null;
-        let isLoginMode = true;
-
-        function getUsers() {
-            try { return JSON.parse(localStorage.getItem(AUTH_KEY)) || {} } catch { return {} }
-        }
-
-        function saveUsers(users) { localStorage.setItem(AUTH_KEY, JSON.stringify(users)) }
-
-        function toggleAuthMode() {
-            isLoginMode = !isLoginMode;
-            document.getElementById('authTitle').textContent = isLoginMode ? 'Login' : 'Register';
-            document.getElementById('authActionBtn').textContent = isLoginMode ? 'Login' : 'Register';
-            document.getElementById('authSwitchText').textContent = isLoginMode ? "Don't have an account?" :
-                "Already have an account?";
-            document.getElementById('authSwitchLink').textContent = isLoginMode ? 'Register' : 'Login';
-            document.getElementById('authError').textContent = '';
-            document.getElementById('authSuccess').textContent = '';
-        }
-
-        function handleAuth() {
-            const username = document.getElementById('authUsername').value.trim();
-            const password = document.getElementById('authPassword').value.trim();
-            const errorEl = document.getElementById('authError');
-            const successEl = document.getElementById('authSuccess');
-            errorEl.textContent = '';
-            successEl.textContent = '';
-            if (!username || !password) { errorEl.textContent = 'Please fill in all fields'; return }
-            const users = getUsers();
-            if (isLoginMode) {
-                if (users[username] && users[username].password === password) {
-                    currentUser = username;
-                    sessionStorage.setItem('elaf_current_user', username);
-                    successEl.textContent = '✅ Login successful!';
-                    setTimeout(() => {
-                        document.getElementById('authContainer').style.display = 'none';
-                        document.getElementById('appContainer').style.display = 'block';
-                        initApp();
-                    }, 500);
-                } else {
-                    errorEl.textContent = '❌ Invalid username or password';
-                }
-            } else {
-                if (users[username]) { errorEl.textContent = '❌ Username already exists'; return }
-                users[username] = { password: password, created: new Date().toISOString() };
-                saveUsers(users);
-                successEl.textContent = '✅ Registration successful! Please login.';
-                setTimeout(() => {
-                    toggleAuthMode();
-                    document.getElementById('authUsername').value = username;
-                    document.getElementById('authPassword').value = '';
-                }, 1000);
-            }
-        }
-
-        function logout() {
-            if (confirm('Are you sure you want to logout?')) {
-                currentUser = null;
-                sessionStorage.removeItem('elaf_current_user');
-                document.getElementById('appContainer').style.display = 'none';
-                document.getElementById('authContainer').style.display = 'flex';
-                document.getElementById('authUsername').value = '';
-                document.getElementById('authPassword').value = '';
-                document.getElementById('authError').textContent = '';
-                document.getElementById('authSuccess').textContent = '';
-                isLoginMode = true;
-                document.getElementById('authTitle').textContent = 'Login';
-                document.getElementById('authActionBtn').textContent = 'Login';
-                document.getElementById('authSwitchText').textContent = "Don't have an account?";
-                document.getElementById('authSwitchLink').textContent = 'Register';
-            }
-        }
 
         // ================================================================
         // SCHOOL LOGO MANAGEMENT
@@ -4223,7 +3975,6 @@
                     noLogo.style.display = 'none' } else { settingsImg.style.display = 'none';
                     noLogo.style.display = 'block' }
             }
-            // Update marksheet logo
             const msLogo = document.getElementById('msLogo');
             if (msLogo) {
                 if (data) {
@@ -4300,9 +4051,18 @@
             let day, month, year;
             if (dateStr.includes('-')) {
                 const parts = dateStr.split('-');
-                if (parts.length === 3) { day = parts[0];
-                    month = parts[1];
-                    year = parts[2] }
+                if (parts.length === 3) { 
+                    // Check if it's YYYY-MM-DD or DD-MM-YYYY
+                    if (parts[0].length === 4) {
+                        year = parts[0];
+                        month = parts[1];
+                        day = parts[2];
+                    } else {
+                        day = parts[0];
+                        month = parts[1];
+                        year = parts[2];
+                    }
+                }
             } else if (dateStr.includes('/')) {
                 const parts = dateStr.split('/');
                 if (parts.length === 3) { day = parts[0];
@@ -4348,20 +4108,59 @@
             let day, month, year;
             if (val.includes('-')) {
                 const parts = val.split('-');
-                year = parts[0];
-                month = parseInt(parts[1]);
-                day = parseInt(parts[2]);
+                // Check if it's YYYY-MM-DD format (from date input)
+                if (parts[0].length === 4) {
+                    year = parseInt(parts[0]);
+                    month = parseInt(parts[1]);
+                    day = parseInt(parts[2]);
+                } else {
+                    day = parseInt(parts[0]);
+                    month = parseInt(parts[1]);
+                    year = parseInt(parts[2]);
+                }
             } else if (val.includes('/')) {
                 const parts = val.split('/');
                 day = parseInt(parts[0]);
                 month = parseInt(parts[1]);
-                year = parts[2];
+                year = parseInt(parts[2]);
             } else { wordsDiv.textContent = '—'; return }
             const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August",
                 "September",
                 "October", "November", "December"
             ];
-            wordsDiv.textContent = day + " " + monthNames[month - 1] + " " + year;
+            // Format: First February Two Thousand Two
+            const dayWord = numberToWordsEnglish(day);
+            const monthWord = monthNames[month - 1];
+            const yearWord = numberToWordsEnglish(year);
+            wordsDiv.textContent = dayWord + " " + monthWord + " " + yearWord;
+        }
+
+        function numberToWordsEnglish(num) {
+            if (num === 0) return "Zero";
+            if (num < 0) return "Minus " + numberToWordsEnglish(Math.abs(num));
+            if (num < 13) {
+                const words = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+                    "Eleven", "Twelve"
+                ];
+                return words[num] || num.toString();
+            }
+            if (num < 20) {
+                const words = { 13: "Thirteen", 14: "Fourteen", 15: "Fifteen", 16: "Sixteen", 17: "Seventeen",
+                    18: "Eighteen", 19: "Nineteen" };
+                return words[num] || num.toString();
+            }
+            if (num < 100) {
+                const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+                const remainder = num % 10;
+                return tens[Math.floor(num / 10)] + (remainder > 0 ? " " + numberToWordsEnglish(remainder) : "");
+            }
+            if (num < 1000) {
+                return numberToWordsEnglish(Math.floor(num / 100)) + " Hundred" + (num % 100 > 0 ? " " + numberToWordsEnglish(num % 100) : "");
+            }
+            if (num < 10000) {
+                return numberToWordsEnglish(Math.floor(num / 1000)) + " Thousand" + (num % 1000 > 0 ? " " + numberToWordsEnglish(num % 1000) : "");
+            }
+            return num.toString(); // Fallback for larger numbers
         }
 
         function showToast(msg, type = 'success') {
@@ -4385,7 +4184,7 @@
                 null }
 
         function getAllStudentMonths(sid) { return monthlyData[sid] ? Object.keys(monthlyData[sid]).sort() :
-            [] }
+                [] }
 
         function getNextMonth(month) {
             const idx = MONTHS.indexOf(month);
@@ -4740,7 +4539,7 @@
             initTimeTable();
             loadPromotionStudents();
             initMarksheet();
-            console.log('🏫 ELAF LYCEUM WAZIRPUR SHIGAR - v3.0 Loaded!');
+            console.log('🏫 ELAF LYCEUM WAZIRPUR SHIGAR - v3.0 Loaded! (Login Removed)');
         }
 
         // ================================================================
@@ -7027,24 +6826,55 @@
             const photoSrc = getStudentPhoto(s.id);
             const display = document.getElementById('leavingCertificateDisplay');
             const todayDate = getTodayDateOnly();
+            
+            // Format DOB in both figures and words
+            let dobDisplay = s.dob || 'N/A';
+            let dobWords = '';
+            if (s.dob) {
+                let day, month, year;
+                if (s.dob.includes('/')) {
+                    const parts = s.dob.split('/');
+                    day = parseInt(parts[0]);
+                    month = parseInt(parts[1]);
+                    year = parseInt(parts[2]);
+                } else if (s.dob.includes('-')) {
+                    const parts = s.dob.split('-');
+                    if (parts[0].length === 4) {
+                        year = parseInt(parts[0]);
+                        month = parseInt(parts[1]);
+                        day = parseInt(parts[2]);
+                    } else {
+                        day = parseInt(parts[0]);
+                        month = parseInt(parts[1]);
+                        year = parseInt(parts[2]);
+                    }
+                }
+                if (day && month && year) {
+                    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                    const dayWord = numberToWordsEnglish(day);
+                    const monthWord = monthNames[month - 1];
+                    const yearWord = numberToWordsEnglish(year);
+                    dobWords = dayWord + " " + monthWord + " " + yearWord;
+                    dobDisplay = String(day).padStart(2, '0') + "-" + String(month).padStart(2, '0') + "-" + year;
+                }
+            }
+            
             const fields = [
                 { label: 'GR No', value: s.roll || s.id || 'N/A' },
                 { label: 'Name of Student', value: s.name },
                 { label: 'Father Name', value: s.father },
-                { label: 'Date of Birth', value: s.dob || 'N/A' },
+                { label: 'Date of Birth (Figure)', value: dobDisplay },
+                { label: 'Date of Birth (Words)', value: dobWords },
                 { label: 'Date of Admission', value: formatDateOnly(s.admissionDate) },
                 { label: 'Class-Admitted', value: s.prevClass || s.class || 'N/A' },
-                { label: 'Class-Attending/Promoted to', value: s.class + ' (' + (s
-                        .section ||
-                        'A') + ')' },
+                { label: 'Class-Attending/Promoted to', value: s.class + ' (' + (s.section || 'A') + ')' },
                 { label: 'Date of Leaving School', value: '___________________' },
                 { label: 'Conduct', value: 'Good' },
                 { label: 'Progress', value: 'Satisfactory' },
                 { label: 'Dated', value: todayDate },
                 { label: 'Remarks', value: '_______________' }
             ];
-            display.innerHTML = generateCertificate('📜 School Leaving Certificate',
-                fields, '', photoSrc, true);
+            display.innerHTML = generateCertificate('📜 School Leaving Certificate', fields, '', photoSrc, true);
             showToast('📄 Leaving certificate generated!', 'success');
         }
 
@@ -7059,7 +6889,8 @@
                 { label: 'GR No', value: s.roll || s.id || 'N/A' },
                 { label: 'Name', value: s.name },
                 { label: 'Father Name', value: s.father },
-                { label: 'Date of Birth', value: formatDateOnly(s.dob) },
+                { label: 'Date of Birth (Figure)', value: formatDateOnly(s.dob) },
+                { label: 'Date of Birth (Words)', value: numberToWordsEnglish(parseInt(s.dob?.split('/')[0] || 0)) + " " + ["January","February","March","April","May","June","July","August","September","October","November","December"][parseInt(s.dob?.split('/')[1] || 0) - 1] + " " + numberToWordsEnglish(parseInt(s.dob?.split('/')[2] || 0)) },
                 { label: 'Class', value: s.class + ' (' + (s.section || 'A') + ')' },
                 { label: 'Dated', value: getTodayWithMonthName() }
             ];
@@ -7384,11 +7215,12 @@
             let fieldsHtml = '';
             fields.forEach(f => {
                 let value = f.value;
-                if (isLeaving && f.label === 'Date of Birth') {
-                    value = formatDateOnly(f.value);
-                } else if (f.label === 'Date of Joining' || f.label === 'Date of Leaving' ||
-                    f.label ===
-                    'Date of Admission' || f.label === 'Dated') {
+                // All dates should be in figure format (DD-MM-YYYY) except DOB in words
+                if (f.label === 'Date of Birth (Words)') {
+                    value = f.value; // Keep as words
+                } else if (f.label.includes('Date of Birth') || f.label === 'Date of Admission' || 
+                          f.label === 'Date of Joining' || f.label === 'Date of Leaving' || 
+                          f.label === 'Dated' || f.label === 'Date') {
                     value = formatDateOnly(f.value);
                 } else {
                     value = f.value;
@@ -9016,7 +8848,7 @@
                 { label: 'Father', value: s.father },
                 { label: 'Class', value: s.class + ' (' + (s.section || 'A') +
                     ')' },
-                { label: 'DOB', value: s.dob || 'N/A' },
+                { label: 'DOB', value: formatDateOnly(s.dob) || 'N/A' },
                 { label: 'Phone', value: s.phone || 'N/A' },
                 { label: 'Address', value: s.address || 'N/A' }
             ];
@@ -9583,15 +9415,21 @@
         }
 
         console.log('🏫 ELAF LYCEUM WAZIRPUR SHIGAR - v3.0 FULLY LOADED!');
+        console.log('✅ Login system REMOVED as requested!');
         console.log('✅ All functions working properly!');
+        console.log('✅ Leaving Certificate customised - you can enter data manually!');
+        console.log('✅ DOB format: 01-02-2002 and First February Two Thousand Two');
+        console.log('✅ All other dates in figure format: 01-01-2000');
         console.log('✅ Marksheet added with table format');
-        console.log('✅ Certificates - student select fixed');
-        console.log('✅ Promotion - 1st to 2nd working');
+        console.log('✅ Promotion - working');
         console.log('✅ Pay Slip - generate working with photo');
         console.log('✅ Result - student dropdown populated');
         console.log('✅ ID Cards - student/employee select working');
         console.log('✅ Saved Admissions - actions working');
         console.log('✅ Voucher - all buttons working');
+
+        // Start the application
+        initApp();
     </script>
 
 </body>
