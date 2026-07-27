@@ -2962,7 +2962,7 @@
                                     <div><label>Balance</label><input id="balanceFee" type="number" value="0" readonly style="background:var(--bg-primary);color:var(--accent-red);font-weight:700;" /></div>
                                 </div>
                             </div>
-                            <div class="full-width"><label>Student Photo</label><div class="file-upload-wrapper"><span class="file-upload-btn">📷 Choose Photo</span><input type="file" id="admPhoto" accept="image/*" onchange="previewPhoto(this)" /></div><span id="photoName" style="margin-left:10px;font-size:14px;color:var(--text-muted);">No file chosen</span><div id="photoPreview" style="margin-top:8px;display:none;"><img id="photoPreviewImg" src="" alt="Preview" style="height:65px;width:65px;border-radius:50%;object-fit:cover;border:2px solid var(--accent-blue);" /></div></div>
+                               <div class="full-width"><label>Student Photo</label><div class="file-upload-wrapper"><span class="file-upload-btn">📷 Choose Photo</span><input type="file" id="admPhoto" accept="image/*" onchange="previewPhoto(this)" /></div><span id="photoName" style="margin-left:10px;font-size:14px;color:var(--text-muted);">No file chosen</span><div id="photoPreview" style="margin-top:8px;display:none;"><img id="photoPreviewImg" src="" alt="Preview" style="height:65px;width:65px;border-radius:50%;object-fit:cover;border:2px solid var(--accent-blue);" /></div></div>
                             <div class="full-width" style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap;">
                                 <button class="btn btn-success" id="admissionSaveBtn" onclick="saveAdmission()">💾 Save Student</button>
                                 <button class="btn btn-pdf" onclick="printAdmissionPDF()">📄 Print PDF</button>
@@ -5157,6 +5157,7 @@
                 '\n💳 Received: ' + formatCurrency(receivedFee) + '\n📊 Balance: ' + formatCurrency(
                     balanceFee) + '\n\n📅 Date: ' + getTodayWithMonthName();
             alert(successMsg);
+           // Clear form after save
             clearAdmissionForm();
             showToast('✅ Student ' + name + ' admitted successfully! ID: ' + id, 'success');
         }
@@ -5165,10 +5166,8 @@
             ['admName', 'admFather', 'admPhone', 'admAddress', 'admRoll', 'admPrevSchool', 'admPrevClass',
                 'admBForm', 'admNic'
             ].forEach(id => document.getElementById(id).value = '');
-            ['admFee', 'monthlyFee', 'examFee', 'otherFee', 'admLabFee', 'recFee', 'totalFee',
-                'balanceFee'
-            ]
-            .forEach(id => document.getElementById(id).value = '0');
+            ['admFee', 'monthlyFee', 'examFee', 'otherFee', 'admLabFee', 'recFee', 'balanceFee'
+            ].forEach(id => document.getElementById(id).value = '0');
             document.getElementById('admDob').value = '';
             document.getElementById('dobWords').textContent = '—';
             document.getElementById('admDate').value = '';
@@ -5190,6 +5189,7 @@
             saveBtn.onclick = saveAdmission;
             showToast('🔄 Form cleared!', 'info');
         }
+
 
         function printAdmissionPDF() {
             const name = document.getElementById('admName').value.trim() || 'N/A';
