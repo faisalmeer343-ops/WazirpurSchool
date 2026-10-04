@@ -4347,7 +4347,7 @@
                 const parts = s.dob.split('/');
                 if (parts.length === 3) { const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"]; dobWords = numberToWordsEnglish(parseInt(parts[0])) + ' ' + monthNames[parseInt(parts[1]) - 1] + ' ' + numberToWordsEnglish(parseInt(parts[2])); }
             }
-            const fields = [{ label: 'GR No', value: s.roll || s.id || 'N/A' }, { label: 'Name of Student', value: s.name }, { label: 'Father Name', value: s.father }, { label: 'Date of Birth (Figure)', value: formatDateOnly(s.dob) }, { label: 'Date of Birth (Words)', value: dobWords }, { label: 'Date of Admission', value: formatDateOnly(s.admissionDate) }, { label: 'Class-Admitted', value: s.prevClass || s.class || 'N/A' }, { label: 'Class-Attending', value: s.class + ' (' + (s.section || 'A') + ')' }, { label: 'Date of Leaving', value: getTodayDateOnly() }, { label: 'Conduct', value: 'Good' }, { label: 'Progress', value: 'Satisfactory' }, { label: 'Dated', value: getTodayDateOnly() }, { label: 'Remarks', value: '_______________' }];
+            const fields = [{ label: 'GR No', value: s.roll || s.id || 'N/A' }, { label: 'Name of Student', value: s.name }, { label: 'Father Name', value: s.father }, { label: 'Date of Birth (Figure)', value: formatDateOnly(s.dob) }, { label: 'Date of Birth (Words)', value: dobWords }, { label: 'Date of Admission', value: formatDateOnly(s.admissionDate) }, { label: 'Class-Admitted', value: s.prevClass || s.class || 'N/A' }, { label: 'Class-Attending', value: s.class + ' (' + (s.section || 'A') + ')' }, { label: 'Date of Leaving', value: '_______________' }, { label: 'Conduct', value: 'Good' }, { label: 'Progress', value: 'Satisfactory' }, { label: 'Dated', value: getTodayDateOnly() }, { label: 'Remarks', value: '_______________' }];
             display.innerHTML = generateCertificate('📜 School Leaving Certificate', fields, '', photoSrc, true);
             showToast('📄 Generated!', 'success');
         }
@@ -4370,7 +4370,7 @@
             const e = employees.find(emp => emp.id === empId);
             if (!e) return;
             const display = document.getElementById('experienceCertificateDisplay');
-            const fields = [{ label: 'Name', value: e.name }, { label: 'Designation', value: e.designation || 'N/A' }, { label: 'Experience', value: e.experience || 'N/A' }, { label: 'Department', value: e.department || 'Teaching' }, { label: 'Date of Joining', value: formatDateOnly(e.doj) }, { label: 'Date of Leaving', value: getTodayWithMonthName() }];
+            const fields = [{ label: 'Name', value: e.name }, { label: 'Designation', value: e.designation || 'N/A' }, { label: 'Experience', value: e.experience || 'N/A' }, { label: 'Department', value: e.department || 'Teaching' }, { label: 'Date of Joining', value: formatDateOnly(e.doj) }, { label: 'Date of Leaving', value: '_______________' }];
             display.innerHTML = generateCertificate('📜 Experience Certificate', fields, 'The employee has worked with us diligently and has proven to be a valuable asset.', null, false);
             showToast('📄 Generated!', 'success');
         }
